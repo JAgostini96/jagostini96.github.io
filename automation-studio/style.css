@@ -1,83 +1,128 @@
+/* ===========================
+   Automation Studio Demo
+   style.css
+=========================== */
 
-/* ===================================
-   AUTOMATION STUDIO DEMO PAGE
-   =================================== */
 
+/* ===========================
+   Reset
+=========================== */
 
-body {
-    background: #0b0b0f;
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
 }
 
 
+html{
 
+    scroll-behavior:smooth;
 
-/* HEADER */
-
-.demo-header {
-    padding: 120px 0 60px;
-    text-align: center;
 }
 
 
-.demo-header h1 {
-    font-size: 56px;
-    margin: 20px 0;
-    color: #f5f5f7;
-}
+body{
 
+    font-family:'Inter',sans-serif;
 
-.demo-header .subtitle {
-    max-width: 700px;
-    margin: auto;
-}
+    background:#0f172a;
 
+    color:#f8fafc;
 
-
-
-
-/* DEMO SECTION */
-
-.demo-section {
-
-    padding: 40px 0 100px;
+    line-height:1.7;
 
 }
 
 
 
+/* ===========================
+   Demo Header
+=========================== */
 
 
-/* MAIN APP WINDOW */
+.demo-header{
 
-.automation-window {
+    min-height:60vh;
 
-    width: 900px;
-    max-width: 95%;
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.demo-header h1{
+
+    font-size:4rem;
+
+    line-height:1.1;
+
+    margin:20px 0;
+
+}
+
+
+
+.demo-header .subtitle{
+
+    max-width:700px;
+
+}
+
+
+
+/* ===========================
+   Demo Section
+=========================== */
+
+
+.demo-section{
+
+    padding:80px 0;
+
+}
+
+
+
+/* ===========================
+   Automation Window
+=========================== */
+
+
+.automation-window{
+
+    width:min(1100px,95%);
 
     margin:auto;
 
-    background:#151519;
-
-    border:1px solid #232329;
+    background:#111827;
 
     border-radius:20px;
 
     overflow:hidden;
 
+    border:1px solid rgba(255,255,255,.08);
+
     box-shadow:
-    0 30px 80px rgba(0,0,0,.45);
+
+        0 20px 50px rgba(0,0,0,.35);
 
 }
 
 
 
+/* ===========================
+   Window Header
+=========================== */
 
 
-
-
-/* WINDOW HEADER */
-
-.window-header {
+.window-header{
 
     display:flex;
 
@@ -85,122 +130,56 @@ body {
 
     align-items:center;
 
-    padding:22px 28px;
+    padding:25px 30px;
 
-    border-bottom:1px solid #232329;
+    background:#16213b;
 
-}
-
-
-
-.window-header h2 {
-
-    color:#f5f5f7;
-
-    margin:0;
+    border-bottom:1px solid rgba(255,255,255,.08);
 
 }
 
 
 
-.window-header p {
+.window-header h2{
 
-    color:#9d9da7;
+    color:#38bdf8;
 
-    margin-top:5px;
+    margin-bottom:5px;
 
 }
 
 
 
+.window-header p{
+
+    color:#94a3b8;
+
+}
 
 
-.status {
 
-    color:#30d158;
+/* ===========================
+   Status Indicator
+=========================== */
+
+
+.status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 
     font-weight:600;
 
 }
 
 
-#statusDot {
 
-    color:#30d158;
+#statusDot{
 
-}
-
-
-
-
-
-/* APP BODY */
-
-.studio-body {
-
-    display:flex;
-
-    min-height:500px;
-
-}
-
-
-
-
-
-/* SIDEBAR */
-
-.sidebar {
-
-    width:260px;
-
-    background:#111114;
-
-    border-right:1px solid #232329;
-
-    padding:20px;
-
-}
-
-
-
-
-
-.sidebar-title {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-
-
-.sidebar h3 {
-
-    color:#f5f5f7;
-
-}
-
-
-
-.sidebar button {
-
-    background:#0a84ff;
-
-    border:none;
-
-    color:white;
-
-    width:32px;
-
-    height:32px;
-
-    border-radius:8px;
-
-    cursor:pointer;
+    color:#22c55e;
 
     font-size:20px;
 
@@ -209,240 +188,473 @@ body {
 
 
 
-.sidebar input {
 
-    width:100%;
+/* ===========================
+   Studio Layout
+=========================== */
 
-    box-sizing:border-box;
 
-    margin:15px 0;
+.studio-body{
 
-    padding:12px;
+    display:grid;
 
-    background:#1c1c22;
+    grid-template-columns:260px 1fr;
 
-    border:none;
-
-    border-radius:10px;
-
-    color:white;
+    min-height:600px;
 
 }
 
 
 
+/* ===========================
+   Sidebar
+=========================== */
 
 
-#snippetList button {
+.sidebar{
 
-
-    width:100%;
-
-    text-align:left;
-
-    margin-bottom:8px;
-
-    background:#1c1c22;
-
-    color:#f5f5f7;
-
-    border:none;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-
-#snippetList button:hover {
-
-    background:#0a84ff;
-
-}
-
-
-
-
-
-
-
-
-/* EDITOR */
-
-.editor {
-
-    flex:1;
+    background:#0b1220;
 
     padding:25px;
 
-}
-
-
-
-
-.editor input {
-
-
-    width:100%;
-
-    box-sizing:border-box;
-
-    padding:14px;
-
-    background:#1c1c22;
-
-    color:white;
-
-    border:none;
-
-    border-radius:10px;
-
-    margin-bottom:15px;
-
-    font-size:15px;
+    border-right:1px solid rgba(255,255,255,.08);
 
 }
 
 
 
-
-textarea {
-
-
-    width:100%;
-
-    height:150px;
-
-    box-sizing:border-box;
-
-    resize:none;
-
-    background:#1c1c22;
-
-    color:#f5f5f7;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    font-family:monospace;
-
-    font-size:14px;
-
-}
-
-
-
-
-
-/* ACTION BUTTONS */
-
-
-.actions {
+.sidebar-title{
 
     display:flex;
 
-    gap:10px;
+    justify-content:space-between;
 
-    margin-top:15px;
+    align-items:center;
 
-    flex-wrap:wrap;
+    margin-bottom:20px;
 
 }
 
 
 
-.actions button {
+.sidebar-title h3{
+
+    color:#38bdf8;
+
+}
 
 
-    background:#1c1c22;
+
+.sidebar-title button{
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:10px;
 
     border:none;
 
-    color:#c5c5d1;
+    background:#2563eb;
 
-    padding:10px 15px;
+    color:white;
 
-    border-radius:8px;
+    font-size:22px;
 
     cursor:pointer;
 
-}
-
-
-
-.actions button:hover {
-
-    background:#0a84ff;
-
-    color:white;
+    transition:.3s;
 
 }
 
 
 
+.sidebar-title button:hover{
 
-
-
-
-
-/* TEST AREA */
-
-
-.preview {
-
-
-    margin-top:25px;
-
-    background:#101014;
-
-    border-radius:14px;
-
-    padding:20px;
+    background:#3b82f6;
 
 }
 
 
 
-.preview h3 {
-
-    color:white;
-
-}
+/* ===========================
+   Search
+=========================== */
 
 
-
-.preview p {
-
-    color:#9d9da7;
-
-}
-
-
-
-
-.preview input {
-
+#search{
 
     width:100%;
-
-    box-sizing:border-box;
 
     padding:12px;
 
-    background:#1c1c22;
+    border-radius:10px;
+
+    border:1px solid #334155;
+
+    background:#16213b;
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+
+
+#search:focus{
+
+    outline:none;
+
+    border-color:#38bdf8;
+
+}
+
+
+
+/* ===========================
+   Snippet List
+=========================== */
+
+
+#snippetList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+#snippetList button{
+
+    text-align:left;
+
+    padding:12px 15px;
+
+    border-radius:10px;
 
     border:none;
 
+    background:#16213b;
+
+    color:#e2e8f0;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+#snippetList button:hover{
+
+    background:#2563eb;
+
+}
+
+/* ===========================
+   Editor
+=========================== */
+
+
+.editor{
+
+    padding:30px;
+
+    background:#111827;
+
+}
+
+
+
+/* ===========================
+   Inputs
+=========================== */
+
+
+#keyword{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:20px;
+
+    border-radius:12px;
+
+    border:1px solid #334155;
+
+    background:#16213b;
+
+    color:white;
+
+    font-size:1rem;
+
+}
+
+
+
+#keyword:focus{
+
+    outline:none;
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
+/* ===========================
+   Script Text Area
+=========================== */
+
+
+#script{
+
+    width:100%;
+
+    height:220px;
+
+    resize:vertical;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    border:1px solid #334155;
+
+    background:#0b1220;
+
+    color:#e2e8f0;
+
+    font-family:monospace;
+
+    font-size:.95rem;
+
+    line-height:1.6;
+
+}
+
+
+
+#script:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+
+/* ===========================
+   Command Buttons
+=========================== */
+
+
+.actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+
+
+.actions button{
+
+    padding:10px 18px;
+
     border-radius:10px;
+
+    border:1px solid #334155;
+
+    background:#16213b;
+
+    color:#e2e8f0;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.actions button:hover{
+
+    background:#2563eb;
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+
+/* ===========================
+   Live Preview
+=========================== */
+
+
+.preview{
+
+    margin-top:35px;
+
+    padding:25px;
+
+    background:#16213b;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.preview h3{
+
+    color:#38bdf8;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.preview p{
+
+    color:#94a3b8;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
+/* Trigger Input */
+
+
+#triggerBox{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #334155;
+
+    background:#0b1220;
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+
+
+#triggerBox:focus{
+
+    outline:none;
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
+/* Result Box */
+
+
+#result{
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#0b1220;
+
+    color:#cbd5e1;
+
+    min-height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+
+
+/* ===========================
+   Action Buttons
+=========================== */
+
+
+.buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+
+
+.buttons button{
+
+    padding:13px 25px;
+
+    border-radius:12px;
+
+    border:none;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+
+
+/* Delete Button */
+
+
+.delete{
+
+    background:#7f1d1d;
 
     color:white;
 
@@ -450,22 +662,267 @@ textarea {
 
 
 
+.delete:hover{
+
+    background:#dc2626;
+
+}
 
 
-#result {
 
 
-    margin-top:15px;
 
-    padding:15px;
+/* Test Button */
+
+
+.buttons button:not(.save):not(.delete){
+
+    background:#334155;
+
+    color:white;
+
+}
+
+
+
+.buttons button:not(.save):not(.delete):hover{
+
+    background:#475569;
+
+}
+
+
+
+
+
+/* Save Button */
+
+
+.save{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.save:hover{
+
+    background:#3b82f6;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+
+
+/* ===========================
+   Mobile Adjustments
+=========================== */
+
+
+@media(max-width:900px){
+
+
+    .studio-body{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .sidebar{
+
+        border-right:none;
+
+        border-bottom:1px solid rgba(255,255,255,.08);
+
+    }
+
+
+}
+
+/* ===========================
+   Final Polish
+=========================== */
+
+
+/* Smooth Hover Effects */
+
+.automation-window,
+.preview,
+.sidebar,
+.editor{
+
+    transition:.35s ease;
+
+}
+
+
+
+
+/* ===========================
+   Active Snippet Style
+=========================== */
+
+
+#snippetList button.active{
+
+    background:#2563eb;
+
+    color:white;
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
+/* ===========================
+   Status States
+=========================== */
+
+
+.status.running #statusDot{
+
+    color:#22c55e;
+
+}
+
+
+.status.error #statusDot{
+
+    color:#ef4444;
+
+}
+
+
+
+
+
+/* ===========================
+   Demo Animations
+=========================== */
+
+
+.automation-window{
+
+    animation:fadeUp .8s ease;
+
+}
+
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+
+/* ===========================
+   Footer Override
+=========================== */
+
+
+footer{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+}
+
+
+
+
+
+/* ===========================
+   Buttons General Fix
+=========================== */
+
+
+button{
+
+    font-family:'Inter',sans-serif;
+
+}
+
+
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+
+
+
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
 
     border-radius:10px;
 
-    background:#151519;
+}
 
-    color:#30d158;
 
-    min-height:20px;
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#3b82f6;
 
 }
 
@@ -473,107 +930,153 @@ textarea {
 
 
 
+/* ===========================
+   Tablet
+=========================== */
+
+
+@media(max-width:700px){
+
+
+    .demo-header h1{
+
+        font-size:2.8rem;
+
+    }
 
 
 
+    .demo-header{
 
-/* BOTTOM BUTTONS */
+        text-align:center;
+
+    }
 
 
-.buttons {
 
-    display:flex;
+    .demo-header .btn{
 
-    gap:12px;
+        margin:auto;
 
-    margin-top:25px;
+    }
+
+
+
+    .window-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+
+
+    .editor{
+
+        padding:20px;
+
+    }
+
+
+
+    .actions button{
+
+        flex:1;
+
+        min-width:120px;
+
+    }
+
+
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .buttons button{
+
+        width:100%;
+
+    }
+
 
 }
 
 
 
-.buttons button {
 
 
-    flex:1;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-}
+/* ===========================
+   Small Phones
+=========================== */
 
 
+@media(max-width:480px){
 
 
-.delete {
+    .demo-header h1{
 
-    background:#1c1c22;
+        font-size:2.2rem;
 
-    color:#ff453a;
-
-}
+    }
 
 
 
-.buttons button:nth-child(2){
+    .demo-header .subtitle{
 
-    background:#1c1c22;
+        font-size:1rem;
 
-    color:#f5f5f7;
-
-}
+    }
 
 
 
-.save {
+    .automation-window{
 
-    background:#30d158;
+        width:100%;
 
-    color:#04170a;
+        border-radius:12px;
 
-}
-
-
+    }
 
 
 
+    .window-header{
 
-/* MOBILE */
+        padding:20px;
 
-@media(max-width:800px){
-
-
-.studio-body {
-
-    flex-direction:column;
-
-}
+    }
 
 
 
-.sidebar {
+    .sidebar{
 
-    width:auto;
+        padding:20px;
 
-    border-right:none;
-
-    border-bottom:1px solid #232329;
-
-}
+    }
 
 
-.demo-header h1 {
 
-    font-size:40px;
+    .editor{
 
-}
+        padding:18px;
+
+    }
+
+
+
+    #script{
+
+        height:180px;
+
+    }
+
 
 
 }
