@@ -539,7 +539,7 @@ function executeScript(script){
     // ENTER KEY
 
     result = result.replace(
-        /\{enter\}/g,
+        /\{enter\}/gi,
         "[Keyboard: ENTER]"
     );
 
@@ -548,7 +548,7 @@ function executeScript(script){
     // TAB KEY
 
     result = result.replace(
-        /\{tab\}/g,
+        /\{tab\}/gi,
         "[Keyboard: TAB]"
     );
 
@@ -557,7 +557,7 @@ function executeScript(script){
     // SPACE KEY
 
     result = result.replace(
-        /\{space\}/g,
+        /\{space\}/gi,
         "[Keyboard: SPACE]"
     );
 
@@ -566,7 +566,7 @@ function executeScript(script){
     // BACKSPACE
 
     result = result.replace(
-        /\{backspace\}/g,
+        /\{backspace\}/gi,
         "[Keyboard: BACKSPACE]"
     );
 
@@ -575,7 +575,7 @@ function executeScript(script){
     // COPY
 
     result = result.replace(
-        /\{ctrl\+c\}/g,
+        /\{ctrl\+c\}/gi,
         "[Keyboard Shortcut: CTRL+C]"
     );
 
@@ -584,7 +584,7 @@ function executeScript(script){
     // PASTE
 
     result = result.replace(
-        /\{ctrl\+v\}/g,
+        /\{ctrl\+v\}/gi,
         "[Keyboard Shortcut: CTRL+V]"
     );
 
@@ -593,7 +593,7 @@ function executeScript(script){
     // CUT
 
     result = result.replace(
-        /\{ctrl\+x\}/g,
+        /\{ctrl\+x\}/gi,
         "[Keyboard Shortcut: CTRL+X]"
     );
 
@@ -602,7 +602,7 @@ function executeScript(script){
     // SAVE
 
     result = result.replace(
-        /\{ctrl\+s\}/g,
+        /\{ctrl\+s\}/gi,
         "[Keyboard Shortcut: CTRL+S]"
     );
 
@@ -869,6 +869,11 @@ triggerBox.addEventListener(
 ========================== */
 
 
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
 document
 .querySelectorAll(
     ".actions button"
@@ -885,15 +890,12 @@ document
             button.dataset.command;
 
 
-
             let start =
             scriptEditor.selectionStart;
 
 
-
             let end =
             scriptEditor.selectionEnd;
-
 
 
             let text =
@@ -920,7 +922,6 @@ document
 
 
 
-
             let cursor =
             start +
             command.length;
@@ -939,9 +940,11 @@ document
             scriptEditor.focus();
 
 
-
         }
     );
+
+
+});
 
 
 });
