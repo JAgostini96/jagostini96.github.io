@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>GIF Search App Demo | Jonathan Agostini</title>
+
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet" href="style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header class="navbar">
+
+
+<div class="container">
+
+
+<h2 class="logo">
+
+JA
+
+</h2>
+
+
+
+<nav>
+
+<a href="../index.html#about">
+About
+</a>
+
+<a href="../index.html#education">
+Education
+</a>
+
+<a href="../index.html#skills">
+Skills
+</a>
+
+<a href="../index.html#projects">
+Projects
+</a>
+
+<a href="../index.html#experience">
+Experience
+</a>
+
+<a href="../index.html#contact">
+Contact
+</a>
+
+</nav>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+<section class="demo-header">
+
+
+<div class="container">
+
+
+<p class="tag">
+
+Interactive Demo
+
+</p>
+
+
+
+<h1>
+
+GIF Search App
+
+</h1>
+
+
+
+<p class="subtitle">
+
+A Microsoft Teams inspired GIF picker built with Python and the Giphy API.
+
+Search GIFs, preview animations, copy GIFs, and save favorites.
+
+</p>
+
+
+
+<a href="../index.html#projects" class="btn secondary">
+
+← Back To Projects
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="demo-section">
+
+
+<div class="gif-window">
+
+
+
+
+
+<div class="window-header">
+
+
+<div>
+
+
+<h2>
+
+GIF Search App
+
+</h2>
+
+
+<p>
+
+Giphy GIF Browser
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="status">
+
+
+<span id="statusDot">
+
+●
+
+</span>
+
+
+<span id="statusText">
+
+Connected
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="gif-body">
+
+
+
+
+
+<!-- LEFT SIDE SEARCH -->
+
+<div class="search-panel">
+
+
+<h3>
+
+Search GIFs
+
+</h3>
+
+
+
+
+<input
+
+type="text"
+
+id="gifSearch"
+
+placeholder="Search GIFs..."
+
+>
+
+
+
+
+
+
+
+<!-- THIS IS WHERE SEARCH RESULTS APPEAR -->
+
+<div class="gif-results-container">
+
+
+<h4>
+
+Results
+
+</h4>
+
+
+<div id="gifResults" class="gif-grid">
+
+
+<p>
+
+Search for a GIF...
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- RIGHT SIDE PREVIEW -->
+
+
+<div class="preview-panel">
+
+
+<h3>
+
+Preview
+
+</h3>
+
+
+
+
+
+<div id="selectedGif" class="selected-gif">
+
+
+<p>
+
+Select a GIF
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="actions">
+
+
+<button onclick="copyGif()">
+
+📋 Copy GIF
+
+</button>
+
+
+
+<button onclick="favoriteGif()">
+
+⭐ Favorite
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="preview favorites">
+
+
+<h3>
+
+Favorites
+
+</h3>
+
+
+
+<div id="favoritesList">
+
+
+<p>
+
+No favorites saved
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<div class="container">
+
+
+<p>
+
+© 2026 Jonathan Agostini • Software Engineer
+
+</p>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
