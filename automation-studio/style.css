@@ -1,478 +1,546 @@
 /* ===================================
+
    AUTOMATION STUDIO DEMO PAGE
-   UPDATED STYLE PART 1
-=================================== */
 
-
-/* ==========================
-   RESET
-========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+   =================================== */
 
 
 
-body{
 
-    background:#0b0b0f;
 
-    color:#f5f5f7;
+body {
 
-    font-family:'Inter',sans-serif;
-
-    line-height:1.6;
-
-    overflow-x:hidden;
+    background: #0b0b0f;
 
 }
 
 
 
-/* ==========================
-   CONTAINER
-========================== */
 
 
-.container{
 
-    width:min(1100px,92%);
+
+
+
+/* HEADER */
+
+
+
+.demo-header {
+
+    padding: 120px 0 60px;
+
+    text-align: center;
+
+}
+
+
+
+
+
+.demo-header h1 {
+
+    font-size: 56px;
+
+    margin: 20px 0;
+
+    color: #f5f5f7;
+
+}
+
+
+
+
+
+.demo-header .subtitle {
+
+    max-width: 700px;
+
+    margin: auto;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* DEMO SECTION */
+
+
+
+.demo-section {
+
+
+
+    padding: 40px 0 100px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* MAIN APP WINDOW */
+
+
+
+.automation-window {
+
+
+
+    width: 900px;
+
+    max-width: 95%;
+
+
 
     margin:auto;
 
-}
 
-
-
-/* ==========================
-   NAVBAR
-========================== */
-
-
-/* ==========================
-   HEADER
-========================== */
-
-
-.demo-header{
-
-    padding:110px 0 55px;
-
-    text-align:center;
-
-}
-
-
-
-.demo-header h1{
-
-    font-size:56px;
-
-    line-height:1.1;
-
-    margin:20px 0;
-
-    color:#f5f5f7;
-
-}
-
-
-
-.demo-header .subtitle{
-
-    max-width:700px;
-
-    margin:auto;
-
-    color:#9d9da7;
-
-    font-size:1.15rem;
-
-}
-
-
-
-/* ==========================
-   TAG
-========================== */
-
-
-.tag{
-
-    display:inline-block;
-
-    padding:7px 15px;
-
-    border-radius:50px;
-
-    background:#0a84ff22;
-
-    color:#0a84ff;
-
-    font-weight:600;
-
-}
-
-
-
-/* ==========================
-   BUTTON BASE
-========================== */
-
-
-.btn{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:12px 25px;
-
-    border-radius:10px;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-.primary{
-
-    background:#0a84ff;
-
-    color:white;
-
-}
-
-
-
-.primary:hover{
-
-    transform:translateY(-3px);
-
-    background:#409cff;
-
-}
-
-
-
-.secondary{
-
-    border:1px solid #232329;
-
-    color:#f5f5f7;
-
-}
-
-
-
-.secondary:hover{
-
-    background:#1c1c22;
-
-}
-
-
-
-/* ==========================
-   DEMO SECTION
-========================== */
-
-
-.demo-section{
-
-    padding:40px 0 100px;
-
-}
-
-
-
-/* ==========================
-   MAIN APP WINDOW
-========================== */
-
-
-.automation-window{
-
-    width:900px;
-
-    max-width:95%;
-
-    margin:auto;
 
     background:#151519;
 
+
+
     border:1px solid #232329;
+
+
 
     border-radius:20px;
 
+
+
     overflow:hidden;
+
+
 
     box-shadow:
 
     0 30px 80px rgba(0,0,0,.45);
 
+
+
 }
 
 
 
-/* ==========================
-   WINDOW HEADER
-========================== */
 
 
-.window-header{
+
+
+
+
+
+
+
+
+
+
+/* WINDOW HEADER */
+
+
+
+.window-header {
+
+
 
     display:flex;
 
+
+
     justify-content:space-between;
 
+
+
     align-items:center;
+
+
 
     padding:22px 28px;
 
+
+
     border-bottom:1px solid #232329;
+
+
 
 }
 
 
 
-.window-header h2{
+
+
+
+
+.window-header h2 {
+
+
 
     color:#f5f5f7;
+
+
 
     margin:0;
 
+
+
 }
 
 
 
-.window-header p{
+
+
+
+
+.window-header p {
+
+
 
     color:#9d9da7;
 
+
+
     margin-top:5px;
+
+
 
 }
 
 
 
-.status{
+
+
+
+
+
+
+
+
+.status {
+
+
 
     color:#30d158;
+
+
 
     font-weight:600;
 
-    display:flex;
 
-    gap:8px;
-
-    align-items:center;
 
 }
 
 
 
-#statusDot{
+
+
+#statusDot {
+
+
 
     color:#30d158;
 
-    animation:pulse 2s infinite;
+
 
 }
 
 
 
-@keyframes pulse{
-
-    0%{
-        opacity:1;
-    }
-
-    50%{
-        opacity:.4;
-    }
-
-    100%{
-        opacity:1;
-    }
-
-}
 
 
 
-/* ==========================
-   APP BODY
-========================== */
 
 
-.studio-body{
+
+
+
+/* APP BODY */
+
+
+
+.studio-body {
+
+
 
     display:flex;
+
+
 
     min-height:500px;
 
-    height:auto;
+
 
 }
 
 
 
-/* ==========================
-   SIDEBAR
-========================== */
 
 
-.sidebar{
+
+
+
+
+
+
+/* SIDEBAR */
+
+
+
+.sidebar {
+
+
 
     width:260px;
 
-    flex-shrink:0;
+
 
     background:#111114;
 
+
+
     border-right:1px solid #232329;
+
+
 
     padding:20px;
 
+
+
 }
 
 
 
-.sidebar-title{
+
+
+
+
+
+
+
+
+.sidebar-title {
+
+
 
     display:flex;
+
+
 
     justify-content:space-between;
 
+
+
     align-items:center;
+
+
 
 }
 
 
 
-.sidebar h3{
+
+
+
+
+.sidebar h3 {
+
+
 
     color:#f5f5f7;
 
+
+
 }
 
 
 
-.sidebar-title button{
+
+
+
+
+.sidebar button {
+
+
 
     background:#0a84ff;
 
+
+
     border:none;
 
+
+
     color:white;
+
+
 
     width:32px;
 
+
+
     height:32px;
+
+
 
     border-radius:8px;
 
+
+
     cursor:pointer;
+
+
 
     font-size:20px;
 
+
+
 }
 
 
 
-.sidebar-title button:hover{
-
-    background:#409cff;
-
-}
-
-/* ==========================
-   SIDEBAR SEARCH
-========================== */
 
 
-#search{
+
+
+
+
+.sidebar input {
+
+
 
     width:100%;
 
+
+
     box-sizing:border-box;
+
+
 
     margin:15px 0;
 
+
+
     padding:12px;
+
+
 
     background:#1c1c22;
 
-    border:1px solid transparent;
+
+
+    border:none;
+
+
 
     border-radius:10px;
 
+
+
     color:white;
 
-    outline:none;
+
 
 }
 
 
 
-#search:focus{
 
-    border-color:#0a84ff;
 
-}
+
 
 
 
 
 
 /* ==========================
-   SNIPPET LIST
+   SNIPPET BUTTONS
 ========================== */
 
 
-#snippetList{
+#snippetList button {
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-
-
-#snippetList button{
 
     width:100%;
 
     text-align:left;
 
+
+    margin-bottom:8px;
+
+
     background:#1c1c22;
 
-    color:#f5f5f7;
 
-    border:none;
+    color:#d8d8e0;
 
-    padding:12px;
 
-    border-radius:10px;
+    border:1px solid transparent;
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
 
     cursor:pointer;
 
-    transition:.2s;
+
+    font-size:15px;
+
+
+    font-weight:500;
+
+
+    letter-spacing:.3px;
+
+
+    transition:.25s;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+}
+
+
+
+/* small icon before snippet name */
+
+#snippetList button::before{
+
+
+    content:"⌘";
+
+
+    margin-right:10px;
+
+
+    color:#0a84ff;
+
+
+    font-size:14px;
+
+
+    opacity:.8;
+
 
 }
 
@@ -480,9 +548,55 @@ body{
 
 #snippetList button:hover{
 
-    background:#0a84ff;
+
+    background:#25252d;
+
+
+    border-color:#0a84ff;
+
 
     color:white;
+
+
+    transform:translateX(4px);
+
+
+}
+
+
+
+/* selected snippet */
+
+
+#snippetList button.selected{
+
+
+    background:#0a84ff !important;
+
+
+    color:white !important;
+
+
+    border-color:#0a84ff;
+
+
+    box-shadow:
+
+    0 8px 20px rgba(10,132,255,.25);
+
+
+}
+
+
+
+/* selected icon */
+
+
+#snippetList button.selected::before{
+
+
+    color:white;
+
 
 }
 
@@ -490,24 +604,32 @@ body{
 
 
 
-/* ==========================
-   EDITOR AREA
-========================== */
 
 
-.editor{
+
+
+
+
+
+
+
+
+
+/* EDITOR */
+
+
+
+.editor {
+
+
 
     flex:1;
 
-    min-width:0;
+
 
     padding:25px;
 
-    display:flex;
 
-    flex-direction:column;
-
-    gap:15px;
 
 }
 
@@ -515,247 +637,111 @@ body{
 
 
 
-/* ==========================
-   INPUTS
-========================== */
 
 
-#keyword{
+
+
+.editor input {
+
+
+
+
 
     width:100%;
 
+
+
     box-sizing:border-box;
+
+
 
     padding:14px;
 
+
+
     background:#1c1c22;
+
+
 
     color:white;
 
+
+
     border:none;
+
+
 
     border-radius:10px;
 
-    font-size:15px;
 
-    outline:none;
-
-}
-
-
-
-#keyword:focus{
-
-    outline:1px solid #0a84ff;
-
-}
-
-
-
-
-
-/* ==========================
-   SCRIPT TEXT AREA
-========================== */
-
-
-#script{
-
-    width:100%;
-
-    height:150px;
-
-    min-height:150px;
-
-    resize:none;
-
-    box-sizing:border-box;
-
-    background:#1c1c22;
-
-    color:#f5f5f7;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    font-family:monospace;
-
-    font-size:14px;
-
-    outline:none;
-
-}
-
-
-
-#script:focus{
-
-    outline:1px solid #0a84ff;
-
-}
-
-
-
-
-
-/* ==========================
-   COMMAND BUTTONS
-========================== */
-
-
-.actions{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:5px;
-
-    flex-wrap:wrap;
-
-}
-
-
-
-.actions button{
-
-    background:#1c1c22;
-
-    border:none;
-
-    color:#c5c5d1;
-
-    padding:10px 15px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-
-.actions button:hover{
-
-    background:#0a84ff;
-
-    color:white;
-
-}
-
-
-
-
-
-/* ==========================
-   PREVIEW AREA
-========================== */
-
-
-.preview{
-
-    margin-top:15px;
-
-    background:#101014;
-
-    border-radius:14px;
-
-    padding:20px;
-
-}
-
-
-
-.preview h3{
-
-    color:white;
-
-    margin-bottom:5px;
-
-}
-
-
-
-.preview p{
-
-    color:#9d9da7;
 
     margin-bottom:15px;
 
+
+
+    font-size:15px;
+
+
+
 }
 
 
 
 
 
-/* ==========================
-   TRIGGER BOX
-========================== */
 
 
-#triggerBox{
+
+
+textarea {
+
+
+
+
 
     width:100%;
 
+
+
+    height:150px;
+
+
+
     box-sizing:border-box;
 
-    padding:12px;
+
+
+    resize:none;
+
+
 
     background:#1c1c22;
 
-    color:white;
+
+
+    color:#f5f5f7;
+
+
 
     border:none;
 
-    border-radius:10px;
-
-    outline:none;
-
-}
 
 
-
-#triggerBox:focus{
-
-    outline:1px solid #0a84ff;
-
-}
+    border-radius:12px;
 
 
-
-
-
-/* ==========================
-   RESULT OUTPUT
-========================== */
-
-
-#result{
-
-    margin-top:15px;
 
     padding:15px;
 
-    border-radius:10px;
 
-    background:#151519;
-
-    color:#30d158;
-
-    min-height:45px;
-
-    max-height:100px;
-
-    overflow:hidden;
 
     font-family:monospace;
 
-    white-space:pre-wrap;
+
+
+    font-size:14px;
+
+
 
 }
 
@@ -763,40 +749,37 @@ body{
 
 
 
-/* ==========================
-   BOTTOM BUTTON AREA
-========================== */
 
 
-.buttons{
+
+
+
+
+/* ACTION BUTTONS */
+
+
+
+
+
+.actions {
+
+
 
     display:flex;
 
-    gap:12px;
+
+
+    gap:10px;
+
+
 
     margin-top:15px;
 
-    padding-bottom:5px;
-
-}
 
 
+    flex-wrap:wrap;
 
-.buttons button{
 
-    flex:1;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.2s;
 
 }
 
@@ -804,47 +787,343 @@ body{
 
 
 
-/* DELETE */
 
 
-.delete{
+.actions button {
+
+
+
+
 
     background:#1c1c22;
 
-    color:#ff453a;
+
+
+    border:none;
+
+
+
+    color:#c5c5d1;
+
+
+
+    padding:10px 15px;
+
+
+
+    border-radius:8px;
+
+
+
+    cursor:pointer;
+
+
 
 }
 
 
 
-.delete:hover{
 
-    background:#ff453a;
+
+
+
+.actions button:hover {
+
+
+
+    background:#0a84ff;
+
+
 
     color:white;
 
+
+
 }
 
 
 
 
 
-/* TEST BUTTON */
+
+
+
+
+
+
+
+
+
+
+
+
+/* TEST AREA */
+
+
+
+
+
+.preview {
+
+
+
+
+
+    margin-top:25px;
+
+
+
+    background:#101014;
+
+
+
+    border-radius:14px;
+
+
+
+    padding:20px;
+
+
+
+}
+
+
+
+
+
+
+
+.preview h3 {
+
+
+
+    color:white;
+
+
+
+}
+
+
+
+
+
+
+
+.preview p {
+
+
+
+    color:#9d9da7;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.preview input {
+
+
+
+
+
+    width:100%;
+
+
+
+    box-sizing:border-box;
+
+
+
+    padding:12px;
+
+
+
+    background:#1c1c22;
+
+
+
+    border:none;
+
+
+
+    border-radius:10px;
+
+
+
+    color:white;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+#result {
+
+
+
+
+
+    margin-top:15px;
+
+
+
+    padding:15px;
+
+
+
+    border-radius:10px;
+
+
+
+    background:#151519;
+
+
+
+    color:#30d158;
+
+
+
+    min-height:20px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BOTTOM BUTTONS */
+
+
+
+
+
+.buttons {
+
+
+
+    display:flex;
+
+
+
+    gap:12px;
+
+
+
+    margin-top:25px;
+
+
+
+}
+
+
+
+
+
+
+
+.buttons button {
+
+
+
+
+
+    flex:1;
+
+
+
+    height:42px;
+
+
+
+    border:none;
+
+
+
+    border-radius:10px;
+
+
+
+    cursor:pointer;
+
+
+
+    font-weight:600;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.delete {
+
+
+
+    background:#1c1c22;
+
+
+
+    color:#ff453a;
+
+
+
+}
+
+
+
+
+
 
 
 .buttons button:nth-child(2){
 
+
+
     background:#1c1c22;
+
+
 
     color:#f5f5f7;
 
-}
 
-
-
-.buttons button:nth-child(2):hover{
-
-    background:#33333b;
 
 }
 
@@ -852,22 +1131,19 @@ body{
 
 
 
-/* SAVE */
 
 
-.save{
+.save {
+
+
 
     background:#30d158;
 
+
+
     color:#04170a;
 
-}
 
-
-
-.save:hover{
-
-    background:#34e36a;
 
 }
 
@@ -875,445 +1151,91 @@ body{
 
 
 
+
+
+
+
+
+
+
+
+/* MOBILE */
+
+
+
+@media(max-width:800px){
+
+
+
+
+
+.studio-body {
+
+
+
+    flex-direction:column;
+
+
+
+}
+
+
+
+
+
+
+
+.sidebar {
+
+
+
+    width:auto;
+
+
+
+    border-right:none;
+
+
+
+    border-bottom:1px solid #232329;
+
+
+
+}
+
+
+
+
+
+.demo-header h1 {
+
+
+
+    font-size:40px;
+
+
+
+}
+#snippetList button.selected{
+
+    background:#0a84ff;
+
+    color:white;
+
+}
+
+
+
+
+}
 /* ==========================
-   KEEP APP COMPACT
+   SELECTED SNIPPET
 ========================== */
 
+#snippetList button.selected{
 
-.automation-window{
+    background:#0a84ff !important;
 
-    overflow:visible;
-
-}
-
-
-
-.studio-body{
-
-    overflow:visible;
+    color:white !important;
 
 }
-
-
-
-.editor{
-
-    overflow:visible;
-
-}
-
-
-
-
-
-/* Prevent browser from
-   shrinking controls */
-
-.actions button,
-.buttons button,
-.sidebar button{
-
-    flex-shrink:0;
-
-}
-
-/* ==========================
-   FOOTER
-========================== */
-
-
-footer{
-
-    border-top:1px solid #232329;
-
-    padding:35px 0;
-
-    text-align:center;
-
-    color:#9d9da7;
-
-}
-
-
-
-
-
-/* ==========================
-   PAGE SPACING FIXES
-========================== */
-
-
-/*
-   Keeps the demo a fixed app-like
-   window instead of becoming a
-   giant stretched webpage
-*/
-
-
-.demo-section{
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-
-
-.automation-window{
-
-    margin-bottom:40px;
-
-}
-
-
-
-/*
-   Prevents buttons from being
-   pushed outside the window
-*/
-
-
-.editor{
-
-    min-height:0;
-
-}
-
-
-
-.buttons{
-
-    flex-shrink:0;
-
-}
-
-
-
-
-
-/* ==========================
-   MOBILE LAYOUT
-========================== */
-
-
-@media(max-width:900px){
-
-
-    .studio-body{
-
-        flex-direction:column;
-
-    }
-
-
-
-    .sidebar{
-
-        width:100%;
-
-        border-right:none;
-
-        border-bottom:1px solid #232329;
-
-    }
-
-
-
-    .demo-header h1{
-
-        font-size:42px;
-
-    }
-
-
-
-    .automation-window{
-
-        width:95%;
-
-    }
-
-
-
-}
-
-
-
-
-
-@media(max-width:650px){
-
-
-    .navbar .container{
-
-        height:auto;
-
-        padding:15px 0;
-
-        flex-direction:column;
-
-        gap:15px;
-
-    }
-
-
-
-    nav{
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-
-    }
-
-
-
-    .demo-header{
-
-        padding:70px 0 40px;
-
-    }
-
-
-
-    .demo-header h1{
-
-        font-size:34px;
-
-    }
-
-
-
-    .demo-header .subtitle{
-
-        font-size:1rem;
-
-    }
-
-
-
-    .window-header{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:15px;
-
-    }
-
-
-
-    .editor{
-
-        padding:20px;
-
-    }
-
-
-
-    .actions{
-
-        gap:8px;
-
-    }
-
-
-
-    .actions button{
-
-        flex:1;
-
-        min-width:120px;
-
-    }
-
-
-
-    .buttons{
-
-        flex-direction:column;
-
-    }
-
-
-
-    .buttons button{
-
-        width:100%;
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================
-   SMALL PHONES
-========================== */
-
-
-@media(max-width:420px){
-
-
-    .sidebar{
-
-        padding:15px;
-
-    }
-
-
-
-    .editor{
-
-        padding:15px;
-
-    }
-
-
-
-    .demo-header h1{
-
-        font-size:30px;
-
-    }
-
-
-
-    .actions button{
-
-        width:100%;
-
-    }
-
-
-
-}
-
-
-
-
-
-/* ==========================
-   SCROLLBAR ONLY FOR PAGE
-========================== */
-
-
-/*
-   Important:
-   The app itself has no scroll.
-   The website page can scroll normally.
-*/
-
-
-html{
-
-    overflow-y:auto;
-
-}
-
-
-
-body{
-
-    overflow-x:hidden;
-
-}
-
-
-
-
-
-/* ==========================
-   CLEAN GLASS EFFECT
-========================== */
-
-
-.automation-window{
-
-    backdrop-filter:blur(20px);
-
-}
-
-
-
-
-
-/* ==========================
-   HOVER POLISH
-========================== */
-
-
-#snippetList button,
-.actions button,
-.buttons button{
-
-    transform:translateY(0);
-
-}
-
-
-
-#snippetList button:hover,
-.actions button:hover,
-.buttons button:hover{
-
-    transform:translateY(-2px);
-
-}
-
-
-
-
-
-/* ==========================
-   FINAL ALIGNMENT FIX
-========================== */
-
-
-/*
-   Stops the editor area from
-   forcing the app taller than
-   the visible demo window
-*/
-
-
-.editor textarea,
-#script{
-
-    flex-shrink:0;
-
-}
-
-
-
-.preview{
-
-    flex-shrink:0;
-
-}
-
-
-
-/*
-   Keeps bottom controls visible
-*/
-
-
-.buttons{
-
-    position:relative;
-
-    z-index:5;
-
-}
-
-
-
-/* ==========================
-   END AUTOMATION STUDIO STYLE
-========================== */
