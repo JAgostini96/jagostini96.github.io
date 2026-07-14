@@ -1,1192 +1,789 @@
-// ===================================
-// AUTOMATION STUDIO WEB DEMO ENGINE
-// Enhanced Simulation Version
-// ===================================
+// ==========================================
+// AUTOMATION STUDIO WEB DEMO
+// Jonathan Agostini
+// Part 1
+// ==========================================
+
+console.clear();
+console.log("Automation Studio Loaded");
+
+// ==========================================
+// DEFAULT SNIPPETS
+// ==========================================
+
+const defaultSnippets = {
+
+    hello:{
+        script:"Hello! This is an automated message."
+    },
+
+    email:{
+        script:
+`Hello,
+
+I wanted to follow up regarding our previous conversation.
+
+Thank you.`
+    },
+
+    meeting:{
+        script:"Meeting scheduled for {date} at {time}"
+    }
+
+};
 
 
-// ===============================
-// LOAD SAVED SNIPPETS
-// ===============================
+// ==========================================
+// STORAGE
+// ==========================================
 
-
-let snippets =
-    JSON.parse(
-        localStorage.getItem("automationSnippets")
-    )
-    ||
-    {
-
-        hello:{
-            script:
-            "Hello! This is an automated message."
-        },
-
-
-        email:{
-            script:
-            "Hello,\n\nI wanted to follow up regarding our previous conversation.\n\nThank you."
-        },
-
-
-        meeting:{
-            script:
-            "Meeting scheduled for {date}"
-        }
-
-    };
-
-
+let snippets = {};
 
 let currentKeyword = "hello";
 
-let triggerTimer;
+const STORAGE_KEY = "automationStudioSnippets";
 
 
+// ==========================================
+// LOAD STORAGE
+// ==========================================
 
+function loadStorage(){
 
+    const saved =
+        localStorage.getItem(STORAGE_KEY);
 
+    if(saved){
 
+        try{
 
+            snippets = JSON.parse(saved);
 
-// ===============================
-// SAVE TO BROWSER STORAGE
-// ===============================
+        }
 
+        catch{
 
-function saveStorage(){
+            snippets = structuredClone(defaultSnippets);
 
+        }
 
-    localStorage.setItem(
-        "automationSnippets",
-        JSON.stringify(snippets)
-    );
+    }
 
+    else{
+
+        snippets = structuredClone(defaultSnippets);
+
+    }
 
 }
 
 
+// ==========================================
+// SAVE STORAGE
+// ==========================================
+
+function saveStorage(){
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(snippets,null,2)
+
+    );
+
+}
 
 
-
-
-
-
-
-// ===============================
+// ==========================================
 // LOAD SNIPPET
-// ===============================
-
+// ==========================================
 
 function loadSnippet(keyword){
-
 
     if(!snippets[keyword])
         return;
 
-
-
     currentKeyword = keyword;
 
+    document.getElementById("keyword").value =
+        keyword;
 
-
-    document.getElementById(
-        "keyword"
-    ).value = keyword;
-
-
-
-    document.getElementById(
-        "script"
-    ).value =
-    snippets[keyword].script;
-
-
+    document.getElementById("script").value =
+        snippets[keyword].script;
 
 }
 
 
-
-
-
-
-
-
-
-// ===============================
+// ==========================================
 // CREATE NEW SNIPPET
-// ===============================
-
+// ==========================================
 
 function newSnippet(){
 
-
     let name =
-    prompt(
-        "Enter new trigger keyword:"
-    );
-
-
+        prompt(
+            "Enter new trigger keyword:"
+        );
 
     if(!name)
         return;
 
+    name = name.trim();
 
-
-    name =
-    name
-    .trim()
-    .toLowerCase();
-
-
+    if(name==="")
+        return;
 
     if(snippets[name]){
 
-
-        alert(
-            "This keyword already exists."
-        );
-
+        alert("That keyword already exists.");
 
         return;
 
-
     }
 
+    snippets[name]={
 
-
-    snippets[name] = {
-
-
-        script:
-        ""
+        script:""
 
     };
 
-
-
-    saveStorage();
-
-
-
-    loadSnippet(name);
-
-
+    currentKeyword=name;
 
     refreshSnippetList();
 
+    loadSnippet(name);
 
+    saveStorage();
 
 }
 
 
-
-
-
-
-
-
-
-// ===============================
+// ==========================================
 // SAVE SNIPPET
-// ===============================
-
+// ==========================================
 
 function saveSnippet(){
 
+    const keyword =
+        document
+        .getElementById("keyword")
+        .value
+        .trim();
 
-    let keyword =
-    document.getElementById(
-        "keyword"
-    )
-    .value
-    .trim()
-    .toLowerCase();
+    const script =
+        document
+        .getElementById("script")
+        .value;
 
-
-
-    let script =
-    document.getElementById(
-        "script"
-    )
-    .value;
-
-
-
-
-
-    if(keyword === ""){
-
-
-        alert(
-            "Keyword cannot be empty."
-        );
-
-
+    if(keyword==="")
         return;
 
-
-    }
-
-
-
-
-
-    snippets[keyword] = {
-
+    snippets[keyword]={
 
         script:script
 
-
     };
 
-
-
-
-    currentKeyword =
-    keyword;
-
-
-
-
-    saveStorage();
-
-
+    currentKeyword=keyword;
 
     refreshSnippetList();
 
-
+    saveStorage();
 
     showMessage(
         "Snippet saved ✓"
     );
 
-
-
-}
-
-// ===============================
-// SIDEBAR SEARCH
-// ===============================
-
-
-function searchSnippets(){
-
-
-    let query =
-    document.getElementById(
-        "search"
-    )
-    .value
-    .toLowerCase();
-
-
-
-    let buttons =
-    document.querySelectorAll(
-        "#snippetList button"
-    );
-
-
-
-    buttons.forEach(btn=>{
-
-
-        let name =
-        btn.innerText
-        .toLowerCase();
-
-
-
-        if(
-            name.includes(query)
-        ){
-
-            btn.style.display =
-            "block";
-
-        }
-        else{
-
-            btn.style.display =
-            "none";
-
-        }
-
-
-    });
-
-
 }
 
 
+// ==========================================
+// DELETE CURRENT SNIPPET
+// ==========================================
 
+function deleteSnippet(){
 
+    if(!snippets[currentKeyword])
+        return;
 
+    if(!confirm(
+        "Delete '"+currentKeyword+"'?"
+    ))
+        return;
 
+    delete snippets[currentKeyword];
 
+    saveStorage();
 
+    refreshSnippetList();
 
-// ===============================
-// REFRESH SIDEBAR
-// ===============================
+    const keys =
+        Object.keys(snippets);
 
+    if(keys.length){
 
-function refreshSnippetList(){
-
-
-    let container =
-    document.getElementById(
-        "snippetList"
-    );
-
-
-
-    container.innerHTML = "";
-
-
-
-
-    Object.keys(snippets)
-    .forEach(keyword=>{
-
-
-        let button =
-        document.createElement(
-            "button"
-        );
-
-
-
-        button.innerText =
-        keyword;
-
-
-
-        button.onclick =
-        function(){
-
-            loadSnippet(keyword);
-
-        };
-
-
-
-        container.appendChild(
-            button
-        );
-
-
-
-    });
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// INSERT COMMANDS
-// ===============================
-
-
-function insertCommand(command){
-
-
-    let editor =
-    document.getElementById(
-        "script"
-    );
-
-
-
-    let start =
-    editor.selectionStart;
-
-
-
-    let end =
-    editor.selectionEnd;
-
-
-
-    let text =
-    editor.value;
-
-
-
-    editor.value =
-        text.substring(0,start)
-        +
-        command
-        +
-        text.substring(end);
-
-
-
-    editor.focus();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// DEBOUNCE TYPING
-// SIMULATES DESKTOP LISTENER
-// ===============================
-
-
-function debouncedTrigger(){
-
-
-    clearTimeout(
-        triggerTimer
-    );
-
-
-
-    triggerTimer =
-    setTimeout(()=>{
-
-
-        checkTrigger();
-
-
-
-    },400);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// AUTOMATION TRIGGER SYSTEM
-// ===============================
-
-
-function checkTrigger(){
-
-
-    let box =
-    document.getElementById(
-        "triggerBox"
-    );
-
-
-
-    let value =
-    box.value;
-
-
-
-    let matched =
-    null;
-
-
-
-
-
-    Object.keys(snippets)
-    .forEach(keyword=>{
-
-
-        let regex =
-        new RegExp(
-            "\\b"
-            +
-            keyword
-            +
-            "\\b",
-            "i"
-        );
-
-
-
-        if(
-            regex.test(value)
-        ){
-
-            matched =
-            keyword;
-
-        }
-
-
-
-    });
-
-
-
-
-
-
-    if(matched){
-
-
-
-        setStatus(
-            "running"
-        );
-
-
-
-        let output =
-        executeScript(
-            snippets[matched]
-            .script
-        );
-
-
-
-
-        document.getElementById(
-            "result"
-        )
-        .innerHTML =
-        output;
-
-
-
-
-        // simulate keyword replacement
-
-
-        box.value =
-        value.replace(
-            new RegExp(
-                matched,
-                "i"
-            ),
-            ""
-        )
-        .trim();
-
-
-
-
-
-        setTimeout(()=>{
-
-
-            setStatus(
-                "active"
-            );
-
-
-
-        },1200);
-
-
+        loadSnippet(keys[0]);
 
     }
 
+    else{
 
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// SIMULATED AUTOMATION ENGINE
-// ===============================
-
-
-function executeScript(script){
-
-
-    let result =
-    script;
-
-
-
-
-
-    // DATE COMMAND
-
-
-    result =
-    result.replace(
-
-        "{date}",
-
-        new Date()
-        .toLocaleDateString()
-
-    );
-
-
-
-
-
-
-    // SLEEP COMMAND
-
-
-    result =
-    result.replace(
-
-        /\{sleep:(.*?)\}/g,
-
-        function(match,time){
-
-
-            return (
-                "[Waiting "
-                +
-                time
-                +
-                " seconds]"
-            );
-
-
-        }
-
-    );
-
-
-
-
-
-
-
-    // KEYBOARD COMMANDS
-
-
-    result =
-    result.replace(
-
-        /\{(ctrl|alt|shift)\+(.*?)\}/gi,
-
-
-        function(match,key,value){
-
-
-            return (
-
-                "[Keyboard Action: "
-                +
-                key
-                +
-                "+"
-                +
-                value
-                +
-                "]"
-
-            );
-
-
-        }
-
-    );
-
-
-
-
-
-
-
-
-    // MOUSE COMMANDS
-
-
-    result =
-    result.replace(
-
-        /\{(click|doubleclick|move):(.*?)\}/gi,
-
-
-        function(match,action,target){
-
-
-            return (
-
-                "[Mouse Action: "
-                +
-                action
-                +
-                " "
-                +
-                target
-                +
-                "]"
-
-            );
-
-
-        }
-
-    );
-
-
-
-
-
-
-
-    return result.replace(
-        /\n/g,
-        "<br>"
-    );
-
-
-}
-
-// ===============================
-// TEST RUN BUTTON
-// ===============================
-
-
-function testRun(){
-
-
-    let script =
-    document.getElementById(
-        "script"
-    )
-    .value;
-
-
-
-    let output =
-    executeScript(script);
-
-
-
-    document.getElementById(
-        "result"
-    )
-    .innerHTML =
-    output;
-
-
-
-    setStatus(
-        "running"
-    );
-
-
-
-    setTimeout(()=>{
-
-
-        setStatus(
-            "active"
+        snippets = structuredClone(
+            defaultSnippets
         );
 
-
-    },1000);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// DELETE SNIPPET
-// ===============================
-
-
-document
-.querySelector(".delete")
-.addEventListener(
-"click",
-function(){
-
-
-    let keyword =
-    document.getElementById(
-        "keyword"
-    )
-    .value
-    .trim();
-
-
-
-    if(
-        !keyword
-    )
-    return;
-
-
-
-
-    if(
-        snippets[keyword]
-    ){
-
-
-
-        delete snippets[keyword];
-
-
+        saveStorage();
 
         refreshSnippetList();
 
+        loadSnippet("hello");
+
+    }
+
+}
 
 
+// ==========================================
+// REFRESH SIDEBAR
+// ==========================================
 
+function refreshSnippetList(){
+
+    const container =
         document.getElementById(
-            "keyword"
-        )
-        .value = "";
-
-
-
-        document.getElementById(
-            "script"
-        )
-        .value = "";
-
-
-
-        showMessage(
-            "Snippet deleted"
+            "snippetList"
         );
 
+    container.innerHTML="";
 
-    }
+    Object.keys(snippets)
+    .sort()
+    .forEach(keyword=>{
 
+        const button =
+            document.createElement(
+                "button"
+            );
 
+        button.textContent =
+            keyword;
 
-});
+        if(keyword===currentKeyword){
 
+            button.classList.add(
+                "active"
+            );
 
+        }
 
+        button.onclick=()=>{
 
+            loadSnippet(keyword);
 
+            refreshSnippetList();
 
+        };
 
+        container.appendChild(button);
 
+    });
 
-// ===============================
-// STATUS INDICATOR
-// ===============================
+}
 
-
-function setStatus(state){
-
-
-    let dot =
-    document.getElementById(
-        "statusDot"
-    );
-
-
-
-    let text =
-    document.getElementById(
-        "statusText"
-    );
-
-
-
-
-
-    if(
-        state === "running"
-    ){
+// ==========================================
+// AUTOMATION ENGINE
+// Part 2
+// ==========================================
 
 
-        dot.style.color =
-        "#facc15";
+// ==========================================
+// SEARCH SNIPPETS
+// ==========================================
 
+function searchSnippets(){
 
-        text.innerHTML =
-        "Running";
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
 
+    document
+        .querySelectorAll("#snippetList button")
+        .forEach(button=>{
 
-    }
-    else{
+            const visible =
+                button.textContent
+                .toLowerCase()
+                .includes(query);
 
+            button.style.display =
+                visible
+                ? "block"
+                : "none";
 
-        dot.style.color =
-        "#22c55e";
-
-
-        text.innerHTML =
-        "Active";
-
-
-    }
-
-
+        });
 
 }
 
 
 
+// ==========================================
+// INSERT COMMAND
+// ==========================================
 
+function insertCommand(command){
 
+    const editor =
+        document.getElementById(
+            "script"
+        );
 
+    const start =
+        editor.selectionStart;
 
+    const end =
+        editor.selectionEnd;
 
+    editor.setRangeText(
 
-// ===============================
-// STATUS MESSAGE
-// ===============================
+        command,
 
+        start,
 
-function showMessage(message){
+        end,
 
+        "end"
 
-    let result =
-    document.getElementById(
-        "result"
     );
 
+    editor.focus();
+
+}
 
 
-    result.innerHTML =
-    message;
+
+// ==========================================
+// SIMULATED SCRIPT ENGINE
+// ==========================================
+
+function executeScript(script){
+
+    let output = script;
+
+    const now = new Date();
+
+    output = output.replace(
+        /\{date\}/gi,
+        now.toLocaleDateString()
+    );
+
+    output = output.replace(
+        /\{time\}/gi,
+        now.toLocaleTimeString()
+    );
+
+    output = output.replace(
+        /\{datetime\}/gi,
+        now.toLocaleString()
+    );
+
+    output = output.replace(
+
+        /\{sleep:(.*?)\}/gi,
+
+        (match,value)=>{
+
+            return `[Sleep ${value}s]`;
+
+        }
+
+    );
+
+    output = output.replace(
+
+        /\{(ctrl|alt|shift)\+(.+?)\}/gi,
+
+        (match,key,button)=>{
+
+            return `[Keyboard ${key.toUpperCase()}+${button.toUpperCase()}]`;
+
+        }
+
+    );
+
+    output = output.replace(
+
+        /\{click:(.*?)\}/gi,
+
+        (match,value)=>{
+
+            return `[Mouse Click ${value}]`;
+
+        }
+
+    );
+
+    output = output.replace(
+
+        /\{doubleclick:(.*?)\}/gi,
+
+        (match,value)=>{
+
+            return `[Double Click ${value}]`;
+
+        }
+
+    );
+
+    output = output.replace(
+
+        /\{move:(.*?)\}/gi,
+
+        (match,value)=>{
+
+            return `[Move Mouse ${value}]`;
+
+        }
+
+    );
+
+    output = output.replace(
+
+        /\n/g,
+
+        "<br>"
+
+    );
+
+    return output;
+
+}
 
 
+
+// ==========================================
+// LIVE TRIGGER SYSTEM
+// ==========================================
+
+let triggerTimer = null;
+
+function checkTrigger(){
+
+    clearTimeout(triggerTimer);
+
+    triggerTimer = setTimeout(()=>{
+
+        const box =
+            document.getElementById(
+                "triggerBox"
+            );
+
+        const value =
+            box.value
+            .trim()
+            .toLowerCase();
+
+        if(value==="")
+            return;
+
+        let matched = null;
+
+        Object.keys(snippets)
+        .forEach(keyword=>{
+
+            if(
+                value ===
+                keyword.toLowerCase()
+            ){
+
+                matched = keyword;
+
+            }
+
+        });
+
+        if(!matched)
+            return;
+
+        setStatus("running");
+
+        const result =
+            executeScript(
+                snippets[matched].script
+            );
+
+        document
+            .getElementById("result")
+            .innerHTML =
+            result;
+
+        box.value = "";
+
+        setTimeout(()=>{
+
+            setStatus("active");
+
+        },800);
+
+    },150);
+
+}
+
+
+
+// ==========================================
+// TEST RUN
+// ==========================================
+
+function testRun(){
+
+    const script =
+        document
+        .getElementById("script")
+        .value;
+
+    setStatus("running");
+
+    document
+        .getElementById("result")
+        .innerHTML =
+        executeScript(script);
 
     setTimeout(()=>{
 
+        setStatus("active");
 
-        result.innerHTML =
-        "Waiting...";
-
-
-
-    },2500);
-
-
+    },800);
 
 }
 
+// ==========================================
+// AUTOMATION STUDIO WEB DEMO
+// Part 3
+// ==========================================
 
 
+// ==========================================
+// STATUS INDICATOR
+// ==========================================
 
+function setStatus(state){
 
+    const dot =
+        document.getElementById("statusDot");
 
+    const text =
+        document.getElementById("statusText");
 
+    if(!dot || !text)
+        return;
 
+    switch(state){
 
-// ===============================
-// LOCAL STORAGE SAVE
-// SIMULATES APP SETTINGS
-// ===============================
+        case "running":
 
+            dot.style.color="#f59e0b";
+            text.textContent="Running";
+            break;
 
-function saveToStorage(){
+        case "saved":
 
+            dot.style.color="#22c55e";
+            text.textContent="Saved";
+            break;
 
-    localStorage.setItem(
+        case "active":
 
-        "automationSnippets",
+        default:
 
-        JSON.stringify(
-            snippets
-        )
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// LOAD SAVED SNIPPETS
-// ===============================
-
-
-function loadStorage(){
-
-
-    let saved =
-    localStorage.getItem(
-        "automationSnippets"
-    );
-
-
-
-    if(saved){
-
-
-        snippets =
-        JSON.parse(
-            saved
-        );
-
+            dot.style.color="#22c55e";
+            text.textContent="Active";
+            break;
 
     }
 
+}
 
+
+
+// ==========================================
+// RESULT MESSAGE
+// ==========================================
+
+function showMessage(message){
+
+    const result =
+        document.getElementById("result");
+
+    if(!result)
+        return;
+
+    result.innerHTML=message;
+
+    setStatus("saved");
+
+    setTimeout(()=>{
+
+        result.innerHTML="Waiting...";
+
+        setStatus("active");
+
+    },1800);
 
 }
 
 
 
-
-
-
-
-
-
-// ===============================
-// AUTO SAVE WHEN SAVING
-// ===============================
-
-
-const originalSave =
-saveSnippet;
-
-
-
-saveSnippet =
-function(){
-
-
-    originalSave();
-
-
-
-    saveToStorage();
-
-
-
-};
-
-
-
-
-
-
-
-
-
-// ===============================
-// KEYBOARD SIMULATION
-// ENTER TRIGGERS TEST
-// ===============================
-
+// ==========================================
+// AUTO SAVE WHILE EDITING
+// ==========================================
 
 document
-.getElementById(
-    "triggerBox"
-)
-.addEventListener(
-"keydown",
-function(e){
+.getElementById("script")
+.addEventListener("input",()=>{
 
+    const keyword =
+        document
+        .getElementById("keyword")
+        .value
+        .trim();
 
-    if(
-        e.key === "Enter"
-    ){
+    if(keyword==="")
+        return;
 
+    snippets[keyword]={
 
-        checkTrigger();
+        script:
+        document
+        .getElementById("script")
+        .value
 
+    };
 
-
-    }
-
-
+    saveStorage();
 
 });
 
 
 
 
+// ==========================================
+// SAVE WHEN KEYWORD CHANGES
+// ==========================================
+
+document
+.getElementById("keyword")
+.addEventListener("change",()=>{
+
+    saveSnippet();
+
+});
 
 
 
 
+// ==========================================
+// DELETE BUTTON
+// ==========================================
 
-// ===============================
-// INITIALIZE APP
-// ===============================
+const deleteButton =
+    document.querySelector(".delete");
+
+if(deleteButton){
+
+    deleteButton.onclick =
+        deleteSnippet;
+
+}
 
 
-let triggerTimer;
 
 
+// ==========================================
+// KEYBOARD SHORTCUTS
+// ==========================================
+
+document.addEventListener("keydown",(e)=>{
+
+    // CTRL + S
+
+    if(e.ctrlKey && e.key==="s"){
+
+        e.preventDefault();
+
+        saveSnippet();
+
+    }
+
+    // DELETE
+
+    if(
+
+        e.key==="Delete" &&
+
+        document.activeElement.id==="keyword"
+
+    ){
+
+        deleteSnippet();
+
+    }
+
+});
+
+
+
+
+// ==========================================
+// INITIALIZE
+// ==========================================
 
 loadStorage();
 
-
-
 refreshSnippetList();
 
+if(snippets[currentKeyword]){
 
-
-if(
-    snippets.hello
-){
-
-    loadSnippet(
-        "hello"
-    );
+    loadSnippet(currentKeyword);
 
 }
 else{
 
+    loadSnippet(
 
-    let first =
-    Object.keys(
-        snippets
-    )[0];
+        Object.keys(snippets)[0]
 
-
-
-    if(first){
-
-        loadSnippet(
-            first
-        );
-
-    }
-
+    );
 
 }
 
+setStatus("active");
 
 
 
 
-setStatus(
-    "active"
-);
+// ==========================================
+// CONSOLE MESSAGE
+// ==========================================
+
+console.log(`
+======================================
+
+Automation Studio Web Demo
+
+Features Enabled
+
+✓ Persistent Snippets
+✓ Search
+✓ Live Trigger Detection
+✓ Save / Delete
+✓ Local Storage
+✓ Simulated Commands
+✓ Keyboard Shortcuts
+✓ Browser Automation Demo
+
+======================================
+`);
