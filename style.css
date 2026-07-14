@@ -1,5 +1,469 @@
 /* ===========================
-   Projects / Highlight
+   Jonathan Agostini Portfolio
+   style.css
+=========================== */
+
+
+/* ===========================
+   Reset
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:#0f172a;
+
+    color:#f8fafc;
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+}
+
+
+
+/* ===========================
+   Background Glow
+=========================== */
+
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        radial-gradient(circle at top left,#2563eb33,transparent 35%),
+        radial-gradient(circle at bottom right,#06b6d433,transparent 35%);
+
+    z-index:-1;
+
+}
+
+
+
+/* ===========================
+   Container
+=========================== */
+
+
+.container{
+
+    width:min(1100px,90%);
+
+    margin:auto;
+
+}
+
+
+
+/* ===========================
+   Navigation
+=========================== */
+
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(15,23,42,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.navbar .container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    height:75px;
+
+}
+
+
+
+.logo{
+
+    color:#38bdf8;
+
+    font-size:1.8rem;
+
+    font-weight:800;
+
+}
+
+
+
+nav{
+
+    display:flex;
+
+    gap:28px;
+
+}
+
+
+
+nav a{
+
+    text-decoration:none;
+
+    color:#e2e8f0;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+
+
+nav a:hover,
+nav a.active{
+
+    color:#38bdf8;
+
+}
+
+
+
+/* ===========================
+   Hero Section
+=========================== */
+
+
+.hero{
+
+    min-height:85vh;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.hero-content{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.hero-text{
+
+    max-width:750px;
+
+}
+
+
+
+.tag{
+
+    display:inline-block;
+
+    background:#2563eb22;
+
+    color:#60a5fa;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.hero h1{
+
+    font-size:4.2rem;
+
+    line-height:1.05;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.subtitle{
+
+    color:#cbd5e1;
+
+    font-size:1.25rem;
+
+    margin-bottom:40px;
+
+    max-width:650px;
+
+}
+
+
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+/* ===========================
+   Buttons
+=========================== */
+
+
+.btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.primary{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.primary:hover{
+
+    transform:translateY(-3px);
+
+    background:#3b82f6;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.45);
+
+}
+
+
+
+.secondary{
+
+    border:1px solid #334155;
+
+    color:white;
+
+}
+
+
+
+.secondary:hover{
+
+    background:#1e293b;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* ===========================
+   Sections
+=========================== */
+
+
+.section{
+
+    padding:90px 0;
+
+}
+
+
+
+.section h2{
+
+    font-size:2.3rem;
+
+    margin-bottom:40px;
+
+}
+
+
+
+/* ===========================
+   Cards
+=========================== */
+
+
+.card,
+.skill-card,
+.highlight,
+.timeline-item{
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    transition:.35s;
+
+}
+
+
+
+.card:hover,
+.skill-card:hover,
+.highlight:hover,
+.timeline-item:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.15);
+
+}
+
+
+
+/* ===========================
+   About Card
+=========================== */
+
+
+.card{
+
+    padding:35px;
+
+    backdrop-filter:blur(20px);
+
+}
+
+
+
+.card p{
+
+    margin-bottom:18px;
+
+}
+
+
+
+.muted{
+
+    color:#94a3b8;
+
+}
+
+
+
+/* ===========================
+   Skills
+=========================== */
+
+
+.skills-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.skill-card{
+
+    padding:30px;
+
+}
+
+
+
+.skill-card h3{
+
+    color:#38bdf8;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.skill-card ul{
+
+    padding-left:18px;
+
+}
+
+
+
+.skill-card li{
+
+    margin-bottom:10px;
+
+}
+
+/* ===========================
+   Projects / Highlights
 =========================== */
 
 
@@ -27,13 +491,12 @@
 
     min-height:390px;
 
-    overflow:hidden;
-
 }
 
 
 
 /* Project Titles */
+
 
 .highlight h3{
 
@@ -49,24 +512,12 @@
 
 /* Project Text */
 
+
 .highlight p{
 
     color:#cbd5e1;
 
-    margin-bottom:20px;
-
-    line-height:1.7;
-
-}
-
-
-/* Technology paragraph spacing */
-
-.highlight p:nth-of-type(2){
-
-    margin-top:10px;
-
-    margin-bottom:35px;
+    margin-bottom:18px;
 
 }
 
@@ -79,44 +530,6 @@
 }
 
 
-
-/* Keep button at bottom without covering text */
-
-.highlight .btn{
-
-    margin-top:auto;
-
-    align-self:flex-start;
-
-    flex-shrink:0;
-
-}
-
-
-
-/* Demo button sizing */
-
-.highlight .btn.primary{
-
-    min-width:165px;
-
-    padding:12px 24px;
-
-}
-
-
-
-/* Hover */
-
-.highlight:hover{
-
-    transform:translateY(-6px);
-
-    border-color:#2563eb;
-
-    box-shadow:0 15px 35px rgba(37,99,235,.15);
-
-}
 
 /* ===========================
    Technology Badges
@@ -158,6 +571,27 @@
 }
 
 
+
+/* ===========================
+   Project Buttons Fix
+=========================== */
+
+
+.highlight .btn{
+
+    margin-top:20px;
+
+    align-self:flex-start;
+
+}
+
+
+
+.highlight .btn.primary{
+
+    min-width:165px;
+
+}
 
 
 
@@ -240,8 +674,6 @@
 
 
 
-
-
 /* ===========================
    Contact
 =========================== */
@@ -281,8 +713,6 @@
 
 
 
-
-
 /* ===========================
    Footer
 =========================== */
@@ -299,8 +729,6 @@ footer{
     color:#94a3b8;
 
 }
-
-
 
 
 
@@ -343,8 +771,6 @@ footer{
 
 
 
-
-
 /* ===========================
    Scroll Animations
 =========================== */
@@ -373,8 +799,6 @@ footer{
     transform:translateY(0);
 
 }
-
-
 
 
 
@@ -413,6 +837,8 @@ footer{
     }
 
 }
+
+
 
 /* ===========================
    Scroll To Top
@@ -473,12 +899,8 @@ footer{
 
 }
 
-
-
-
-
 /* ===========================
-   Tablet
+   Responsive Tablet
 =========================== */
 
 
@@ -520,10 +942,8 @@ footer{
 
 
 
-
-
 /* ===========================
-   Mobile
+   Responsive Mobile
 =========================== */
 
 
@@ -687,8 +1107,6 @@ footer{
 
 
 }
-
-
 
 
 
