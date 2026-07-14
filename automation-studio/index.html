@@ -1,81 +1,45 @@
+Auto tool index
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Automation Studio Demo | Jonathan Agostini</title>
 
-<title>
-Automation Studio | Jonathan Agostini
-</title>
-
-
-<meta name="description" content="Automation Studio - A workflow automation tool created by Jonathan Agostini.">
-
-
+<link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="style.css">
 
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-
 </head>
-
 
 
 <body>
 
 
-
 <header class="navbar">
-
 
 <div class="container">
 
-
-<a href="../index.html" class="logo">
-
+<h2 class="logo">
 JA
-
-</a>
-
+</h2>
 
 
 <nav>
 
-<a href="../index.html">
-Portfolio
-</a>
-
-
-<a href="#features">
-Features
-</a>
-
-
-<a href="#workflow">
-Workflow
-</a>
-
-
-<a href="#about">
-About
-</a>
-
+<a href="../index.html#about">About</a>
+<a href="../index.html#skills">Skills</a>
+<a href="../index.html#projects">Projects</a>
+<a href="../index.html#experience">Experience</a>
+<a href="../index.html#contact">Contact</a>
 
 </nav>
 
 
 </div>
-
 
 </header>
 
@@ -83,20 +47,15 @@ About
 
 
 
-<section class="hero">
+<section class="demo-header">
 
 
 <div class="container">
 
 
-<div class="hero-content">
-
-
-
 <p class="tag">
-Automation Tool
+Interactive Demo
 </p>
-
 
 
 <h1>
@@ -104,39 +63,17 @@ Automation Studio
 </h1>
 
 
-
 <p class="subtitle">
 
-Create custom workflows, automate repetitive actions,
-and streamline everyday tasks with an easy-to-use
-automation environment.
+A browser-based recreation of my Python automation tool.
+Create keyword snippets, trigger workflows, and simulate automation actions.
 
 </p>
 
 
-
-<div class="hero-buttons">
-
-
-<a href="#features" class="btn primary">
-
-Explore Features
-
+<a href="../index.html#projects" class="btn secondary">
+← Back To Projects
 </a>
-
-
-
-<a href="../index.html" class="btn secondary">
-
-Back To Portfolio
-
-</a>
-
-
-</div>
-
-
-</div>
 
 
 </div>
@@ -148,253 +85,186 @@ Back To Portfolio
 
 
 
-<section id="features" class="section">
+
+<section class="demo-section">
 
 
-<div class="container">
+<div class="automation-window">
 
 
-<h2>
-Features
-</h2>
-
-
-
-<div class="feature-grid">
-
-
-
-<div class="feature-card">
-
-
-<h3>
-⚡ Workflow Automation
-</h3>
-
-
-<p>
-
-Build automated sequences that execute actions
-based on custom triggers and commands.
-
-</p>
-
-
-</div>
-
-
-
-<div class="feature-card">
-
-
-<h3>
-⌨️ Hotkey Controls
-</h3>
-
-
-<p>
-
-Assign shortcuts to quickly launch workflows
-and automate repetitive tasks.
-
-</p>
-
-
-</div>
-
-
-
-<div class="feature-card">
-
-
-<h3>
-🛠 Custom Actions
-</h3>
-
-
-<p>
-
-Create reusable automation commands for
-different productivity scenarios.
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-<section id="workflow" class="section">
-
-
-<div class="container">
-
-
-<h2>
-How It Works
-</h2>
-
-
-
-<div class="workflow-card">
-
-
-
-<div class="step">
-
-
-<span>
-01
-</span>
+<div class="window-header">
 
 
 <div>
 
-<h3>
-Create A Workflow
-</h3>
-
+<h2>
+Automation Studio
+</h2>
 
 <p>
-
-Define the actions you want Automation Studio
-to perform.
-
+Snippet Automation Simulator
 </p>
 
 </div>
 
 
-</div>
 
+<div class="status">
 
-
-
-
-<div class="step">
-
-
-<span>
-02
+<span id="statusDot">
+●
 </span>
 
-
-<div>
-
-<h3>
-Assign A Trigger
-</h3>
-
-
-<p>
-
-Connect your workflow to a shortcut or event
-that starts the automation.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="step">
-
-
-<span>
-03
+<span id="statusText">
+Active
 </span>
 
+</div>
 
-<div>
+
+</div>
+
+
+
+
+
+
+<div class="studio-body">
+
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+
+<div class="sidebar-title">
 
 <h3>
-Execute Automation
+Snippets
+</h3>
+
+<button onclick="newSnippet()">
++
+</button>
+
+
+</div>
+
+
+
+<input 
+id="search"
+placeholder="Search..."
+onkeyup="searchSnippets()"
+>
+
+
+
+<div id="snippetList">
+
+
+<button onclick="loadSnippet('hello')">
+hello
+</button>
+
+
+<button onclick="loadSnippet('email')">
+email
+</button>
+
+
+<button onclick="loadSnippet('meeting')">
+meeting
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- EDITOR -->
+
+
+<div class="editor">
+
+
+<input 
+id="keyword"
+placeholder="Enter Keyword..."
+value="hello"
+>
+
+
+<textarea id="script">
+
+Hello! This is an automated message.
+
+</textarea>
+
+
+
+
+<div class="actions">
+
+
+<button onclick="insertCommand('{date}')">
+Date
+</button>
+
+
+<button onclick="insertCommand('{ctrl+c}')">
+Copy
+</button>
+
+
+<button onclick="insertCommand('{ctrl+v}')">
+Paste
+</button>
+
+
+<button onclick="insertCommand('{sleep:1}')">
+Sleep
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="preview">
+
+
+<h3>
+Live Trigger Test
 </h3>
 
 
 <p>
-
-Run your workflow and let Automation Studio
-handle repetitive tasks.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section id="about" class="section">
-
-
-<div class="container">
-
-
-<h2>
-About Automation Studio
-</h2>
-
-
-
-<div class="card">
-
-
-<p>
-
-Automation Studio was created as a productivity
-automation platform designed to simplify repetitive
-computer tasks.
-
+Type a keyword below:
 </p>
 
 
-
-<p>
-
-The project focuses on workflow design, scripting,
-and creating tools that allow users to spend less
-time on repetitive actions and more time on important work.
-
-</p>
+<input 
+id="triggerBox"
+placeholder="Try typing hello..."
+onkeyup="checkTrigger()"
+>
 
 
+<div id="result">
 
-<p>
-
-Built with modern web technologies, this version
-acts as a demonstration of automation concepts and
-workflow management.
-
-</p>
-
+Waiting...
 
 </div>
 
@@ -402,70 +272,32 @@ workflow management.
 </div>
 
 
-</section>
 
 
 
 
 
+<div class="buttons">
 
 
-<section class="section">
+<button class="delete">
+Delete
+</button>
 
 
-<div class="container">
+<button onclick="testRun()">
+Test Run
+</button>
 
 
-<h2>
-Technology
-</h2>
+<button class="save"
+onclick="saveSnippet()">
+Save Snippet
+</button>
 
-
-
-<div class="tech-grid">
-
-
-<div class="tech-card">
-
-<h3>
-HTML
-</h3>
-
-<p>
-Page structure and application layout.
-</p>
 
 </div>
 
-
-
-
-<div class="tech-card">
-
-<h3>
-CSS
-</h3>
-
-<p>
-Modern responsive interface design.
-</p>
-
-</div>
-
-
-
-
-<div class="tech-card">
-
-<h3>
-JavaScript
-</h3>
-
-<p>
-Workflow logic and interactive features.
-</p>
-
-</div>
 
 
 
@@ -475,99 +307,8 @@ Workflow logic and interactive features.
 </div>
 
 
-</section>
-
-<section class="section">
-
-
-<div class="container">
-
-
-<div class="demo-card">
-
-
-<h2>
-Project Demo
-</h2>
-
-
-<p>
-
-This demo showcases the Automation Studio interface
-and the concepts behind building workflow automation
-software.
-
-</p>
-
-
-
-<a 
-href="#"
-class="btn primary">
-
-Launch Demo
-
-</a>
-
-
 </div>
 
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="section">
-
-
-<div class="container">
-
-
-<h2>
-Developer
-</h2>
-
-
-
-<div class="card developer-card">
-
-
-<h3>
-Jonathan Agostini
-</h3>
-
-
-
-<p>
-
-Software Engineer specializing in Python automation,
-workflow solutions, desktop applications, and
-productivity tools.
-
-</p>
-
-
-
-<a 
-href="../index.html"
-class="btn secondary">
-
-View Full Portfolio
-
-</a>
-
-
-</div>
-
-
-</div>
 
 
 </section>
@@ -585,9 +326,7 @@ View Full Portfolio
 
 
 <p>
-
-© 2026 Jonathan Agostini • Automation Studio
-
+© 2026 Jonathan Agostini • Software Engineer
 </p>
 
 
@@ -599,11 +338,8 @@ View Full Portfolio
 
 
 
-
 <script src="script.js"></script>
 
-
 </body>
-
 
 </html>
