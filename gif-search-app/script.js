@@ -259,7 +259,9 @@ async function searchGifs(query){
             title:gif.title,
 
 
-            url:gif.images.fixed_height.url
+            url:gif.images.fixed_height.url,
+
+            original:gif.images.original.url
 
 
 
@@ -712,16 +714,14 @@ function selectGif(gif,card){
 
 
 // ===============================
-// COPY GIF
+// COPY GIF IMAGE TO CLIPBOARD
 // ===============================
 
 
-function copyGif(){
-
+async function copyGif(){
 
 
     if(!selectedGif){
-
 
 
         showMessage(
@@ -740,23 +740,73 @@ function copyGif(){
 
 
 
-
-    navigator.clipboard.writeText(
-
-        selectedGif.url
-
-    );
+    try{
 
 
+        const response = await fetch(
+
+            selectedGif.original
+
+        );
 
 
 
-    showMessage(
+        const blob = await response.blob();
 
-    "GIF copied ✓"
 
-    );
 
+        const clipboardItem = new ClipboardItem({
+
+            [blob.type]: blob
+
+        });
+
+
+
+        await navigator.clipboard.write([
+
+            clipboardItem
+
+        ]);
+
+
+
+
+
+        showMessage(
+
+        "GIF copied ✓"
+
+        );
+
+
+
+    }
+
+
+
+    catch(error){
+
+
+
+        console.error(
+
+            "Clipboard Error:",
+
+            error
+
+        );
+
+
+
+        showMessage(
+
+        "Copy failed"
+
+        );
+
+
+    }
 
 
 }
