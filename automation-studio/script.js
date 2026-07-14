@@ -1,333 +1,53 @@
-/* =====================================================
-   Automation Studio Web Version
-   script.js
-
-   PART 1
-   Core App + Storage + Snippet Management
-===================================================== */
+// ===================================
+// AUTOMATION STUDIO WEB DEMO ENGINE
+// PART 1
+// ===================================
 
 
-/* ==========================
-   GLOBAL STATE
-========================== */
+
+// ===============================
+// SNIPPET STORAGE
+// ===============================
 
 
-const APP_NAME = "Automation Studio";
+let snippets =
 
-
-let scripts =
 JSON.parse(
-    localStorage.getItem("automationScripts")
-) || {};
+    localStorage.getItem(
+        "automationSnippets"
+    )
+)
 
+||
 
+{
 
-let selectedScript = null;
 
+    hello: {
 
-let automationEnabled = true;
+        script:
+        "Hello! This is an automated message."
 
+    },
 
-let expansionCount = 0;
 
 
+    email: {
 
-let typedBuffer = "";
+        script:
+        "Hello,\n\nI wanted to follow up regarding our previous conversation.\n\nThank you."
 
+    },
 
 
-/* ==========================
-   DOM REFERENCES
-========================== */
 
+    meeting: {
 
-const keywordInput =
-document.getElementById("keyword");
-
-
-
-const editor =
-document.getElementById("script");
-
-
-
-const snippetList =
-document.getElementById("snippetList");
-
-
-
-const searchBox =
-document.getElementById("search");
-
-
-
-const triggerBox =
-document.getElementById("triggerBox");
-
-
-
-const saveButton =
-document.getElementById("saveSnippet");
-
-
-
-const deleteButton =
-document.getElementById("deleteSnippet");
-
-
-
-const newButton =
-document.getElementById("newSnippetButton");
-
-
-
-const testButton =
-document.getElementById("testRun");
-
-
-
-const result =
-document.getElementById("result");
-
-
-
-const statusText =
-document.getElementById("statusText");
-
-
-
-const statusDot =
-document.getElementById("statusDot");
-
-
-
-
-
-/* ==========================
-   STORAGE
-========================== */
-
-
-function saveScripts(){
-
-    localStorage.setItem(
-        "automationScripts",
-        JSON.stringify(scripts)
-    );
-
-}
-
-
-
-
-
-
-
-/* ==========================
-   INITIAL LOAD
-========================== */
-
-
-refreshScripts();
-
-updateStatus();
-
-
-
-
-
-
-
-
-/* ==========================
-   SNIPPET LIST
-========================== */
-
-
-function refreshScripts(filter=""){
-
-
-    if(!snippetList)
-        return;
-
-
-
-    snippetList.innerHTML="";
-
-
-
-    let keys =
-    Object.keys(scripts)
-    .sort();
-
-
-
-    keys.forEach(keyword=>{
-
-
-        if(
-            filter &&
-            !keyword
-            .toLowerCase()
-            .includes(
-                filter.toLowerCase()
-            )
-        ){
-
-            return;
-
-        }
-
-
-
-        let button =
-        document.createElement("button");
-
-
-
-        button.textContent =
-        keyword;
-
-
-
-        if(keyword === selectedScript){
-
-            button.style.background =
-            "#2563eb";
-
-        }
-
-
-
-        button.onclick=function(){
-
-            selectScript(keyword);
-
-        };
-
-
-
-        snippetList.appendChild(button);
-
-
-
-    });
-
-
-
-
-
-    if(snippetList.children.length===0){
-
-
-        let empty =
-        document.createElement("p");
-
-
-        empty.textContent =
-        "No snippets yet";
-
-
-        empty.style.color =
-        "#94a3b8";
-
-
-        snippetList.appendChild(empty);
-
+        script:
+        "Meeting scheduled for {date}"
 
     }
 
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
-   SELECT SCRIPT
-========================== */
-
-
-function selectScript(keyword){
-
-
-    if(!scripts[keyword])
-        return;
-
-
-
-    selectedScript =
-    keyword;
-
-
-
-    keywordInput.value =
-    keyword;
-
-
-
-    editor.value =
-    scripts[keyword].script;
-
-
-
-    refreshScripts();
-
-
-
-    log(
-        "Loaded snippet: "
-        + keyword
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* ==========================
-   NEW SCRIPT
-========================== */
-
-
-newButton.onclick=function(){
-
-
-    selectedScript =
-    null;
-
-
-
-    keywordInput.value =
-    "";
-
-
-
-    editor.value =
-    "";
-
-
-
-    refreshScripts();
-
-
-
-    log(
-        "New snippet"
-    );
 
 
 };
@@ -337,109 +57,219 @@ newButton.onclick=function(){
 
 
 
+let currentKeyword = "hello";
 
 
 
-/* ==========================
-   SAVE SCRIPT
-========================== */
+let triggerRunning = false;
 
 
-saveButton.onclick=function(){
+
+
+
+
+// ===============================
+// SAVE DATA
+// ===============================
+
+
+
+function saveSnippets(){
+
+
+    localStorage.setItem(
+
+        "automationSnippets",
+
+        JSON.stringify(snippets)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// LOAD SNIPPET
+// ===============================
+
+
+
+function loadSnippet(keyword){
+
+
+
+    if(!snippets[keyword])
+
+        return;
+
+
+
+
+
+    currentKeyword = keyword;
+
+
+
+
+
+    document.getElementById("keyword").value = keyword;
+
+
+
+
+
+    document.getElementById("script").value =
+
+        snippets[keyword].script;
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// CREATE NEW SNIPPET
+// ===============================
+
+
+
+function newSnippet(){
+
+
+
+    let name = prompt(
+
+        "Enter new trigger keyword:"
+
+    );
+
+
+
+
+
+    if(!name)
+
+        return;
+
+
+
+
+
+    snippets[name] = {
+
+
+        script:""
+
+
+    };
+
+
+
+
+
+    saveSnippets();
+
+
+
+
+
+    loadSnippet(name);
+
+
+
+
+
+    refreshSnippetList();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// SAVE SNIPPET
+// ===============================
+
+
+
+function saveSnippet(){
+
+
 
 
 
     let keyword =
-    keywordInput.value.trim();
 
+    document.getElementById("keyword")
 
+    .value
 
-    let body =
-    editor.value.trim();
-
-
-
-
-
-    if(keyword===""){
-
-
-        log(
-            "ERROR: Keyword required"
-        );
-
-
-        return;
-
-    }
+    .trim();
 
 
 
 
 
-    if(body===""){
 
 
-        log(
-            "ERROR: Script empty"
-        );
+    let script =
 
+    document.getElementById("script")
+
+    .value;
+
+
+
+
+
+
+
+
+    if(keyword === "")
 
         return;
 
-    }
 
 
 
 
 
 
-    /*
-       Handle rename
-    */
 
 
-    if(
-        selectedScript &&
-        selectedScript !== keyword &&
-        scripts[selectedScript]
-    ){
-
-
-        delete scripts[selectedScript];
-
-
-    }
+    snippets[keyword] = {
 
 
 
+        script:script
 
-
-    let old =
-    scripts[keyword] || {};
-
-
-
-
-
-    scripts[keyword]={
-
-
-        script:body,
-
-
-        uses:
-        old.uses || 0,
-
-
-        last_used:
-        old.last_used || null,
-
-
-        created:
-        old.created ||
-        new Date()
-        .toISOString()
 
 
     };
@@ -449,138 +279,38 @@ saveButton.onclick=function(){
 
 
 
-    selectedScript =
-    keyword;
 
 
 
-    saveScripts();
+    currentKeyword = keyword;
 
 
 
-    refreshScripts();
+
+
+    saveSnippets();
 
 
 
-    updateStatus();
+
+
+    refreshSnippetList();
 
 
 
-    log(
-        "Saved: "
-        + keyword
+
+
+
+
+
+    showMessage(
+
+        "Snippet saved ✓"
+
     );
 
 
 
-};
-
-
-
-
-
-
-
-
-
-/* ==========================
-   DELETE SCRIPT
-========================== */
-
-
-deleteButton.onclick=function(){
-
-
-
-    let keyword =
-    selectedScript ||
-    keywordInput.value.trim();
-
-
-
-
-
-    if(!scripts[keyword]){
-
-
-        log(
-            "Nothing selected"
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    delete scripts[keyword];
-
-
-
-    saveScripts();
-
-
-
-    selectedScript =
-    null;
-
-
-
-    keywordInput.value =
-    "";
-
-
-
-    editor.value =
-    "";
-
-
-
-    refreshScripts();
-
-
-
-    updateStatus();
-
-
-
-    log(
-        "Deleted: "
-        + keyword
-    );
-
-
-};
-
-
-
-
-
-
-
-
-/* ==========================
-   SEARCH
-========================== */
-
-
-if(searchBox){
-
-
-searchBox.oninput=function(){
-
-
-    refreshScripts(
-        searchBox.value
-    );
-
-
-};
 
 
 }
@@ -593,367 +323,83 @@ searchBox.oninput=function(){
 
 
 
-/* ==========================
-   LOG SYSTEM
-========================== */
-
-
-function log(message){
-
-
-    if(!result)
-        return;
 
 
 
-    result.textContent +=
-    "\n\n"
-    +
-    message;
+// ===============================
+// DELETE SNIPPET
+// ===============================
 
 
-}
+
+function deleteSnippet(){
+
+
+
+    let keyword = currentKeyword;
 
 
 
 
 
+    if(!snippets[keyword])
 
-
-/* ==========================
-   STATUS
-========================== */
-
-
-function updateStatus(){
-
-
-    if(!statusText)
         return;
 
 
 
 
-    if(automationEnabled){
 
+    delete snippets[keyword];
 
-        statusText.textContent =
-        "Active";
 
 
 
-        if(statusDot)
-        statusDot.style.color =
-        "#4ade80";
 
+    saveSnippets();
 
-    }
-    else{
 
 
-        statusText.textContent =
-        "Paused";
 
 
+    currentKeyword = null;
 
-        if(statusDot)
-        statusDot.style.color =
-        "#ef4444";
 
 
-    }
 
 
+    document.getElementById(
 
-}
+        "keyword"
 
-/* =====================================================
-   Automation Studio Web Version
+    ).value="";
 
-   PART 2
-   Script Engine + Command Parser
-===================================================== */
 
 
-/* ==========================
-   COMMAND REGISTRY
-========================== */
 
 
-const actions = {
+    document.getElementById(
 
+        "script"
 
-    date(command){
+    ).value="";
 
-        return new Date()
-        .toLocaleDateString();
 
-    },
 
 
 
-    time(command){
+    refreshSnippetList();
 
-        return new Date()
-        .toLocaleTimeString();
 
-    },
 
 
 
-    sleep(command){
+    showMessage(
 
-
-        let seconds =
-        command
-        .split(":")[1];
-
-
-
-        return (
-            "⏱ Wait "
-            +
-            seconds
-            +
-            " seconds"
-        );
-
-
-    },
-
-
-
-    click(command){
-
-
-        let position =
-        command
-        .split(":")[1];
-
-
-
-        return (
-            "🖱 Click "
-            +
-            position
-        );
-
-
-    },
-
-
-
-    doubleclick(command){
-
-
-        let position =
-        command
-        .split(":")[1];
-
-
-
-        return (
-            "🖱 Double Click "
-            +
-            position
-        );
-
-
-    },
-
-
-
-    move(command){
-
-
-        let position =
-        command
-        .split(":")[1];
-
-
-
-        return (
-            "🖱 Move Mouse "
-            +
-            position
-        );
-
-
-    },
-
-
-
-    enter(command){
-
-        return "⌨ Enter";
-
-    },
-
-
-
-    tab(command){
-
-        return "⌨ Tab";
-
-    },
-
-
-
-    space(command){
-
-        return "⌨ Space";
-
-    },
-
-
-
-    backspace(command){
-
-        return "⌫ Backspace";
-
-    },
-
-
-
-    esc(command){
-
-        return "⎋ Escape";
-
-    }
-
-
-};
-
-
-
-
-
-
-
-
-
-/* ==========================
-   COMMAND EXECUTION
-========================== */
-
-
-function executeCommand(command){
-
-
-
-    command =
-    command
-    .toLowerCase()
-    .trim();
-
-
-
-
-
-
-    /*
-       Exact commands
-
-       {date}
-       {enter}
-
-    */
-
-
-    if(actions[command]){
-
-
-        return actions[command](command);
-
-
-    }
-
-
-
-
-
-    /*
-       Prefix commands
-
-       {sleep:1}
-       {click:200,300}
-
-    */
-
-
-    for(let key in actions){
-
-
-
-        if(
-            command.startsWith(
-                key + ":"
-            )
-        ){
-
-
-            return actions[key](command);
-
-
-        }
-
-
-    }
-
-
-
-
-
-
-
-    /*
-       Hotkeys
-
-       {ctrl+c}
-       {alt+tab}
-
-    */
-
-
-    if(
-        command.includes("+")
-    ){
-
-
-        return (
-            "⌨ Hotkey ["
-            +
-            command
-            +
-            "]"
-        );
-
-
-    }
-
-
-
-
-
-
-    /*
-       Normal key press
-
-       {a}
-       {backspace}
-
-    */
-
-
-    return (
-
-        "⌨ Key ["
-        +
-        command
-        +
-        "]"
+        "Snippet deleted"
 
     );
+
 
 
 }
@@ -966,58 +412,69 @@ function executeCommand(command){
 
 
 
-/* ==========================
-   SCRIPT PARSER
-========================== */
 
 
-function parseScript(script){
+// ===============================
+// SIDEBAR SEARCH
+// ===============================
 
 
 
-    let parts =
-    script.split(
-        /(\{.*?\})/
+function searchSnippets(){
+
+
+
+
+
+    let query =
+
+    document.getElementById("search")
+
+    .value
+
+    .toLowerCase();
+
+
+
+
+
+
+
+
+    let buttons =
+
+    document.querySelectorAll(
+
+        "#snippetList button"
+
     );
 
 
 
-    let output = "";
 
 
 
 
 
-    parts.forEach(part=>{
-
-
-
-        if(!part)
-            return;
-
+    buttons.forEach(btn=>{
 
 
 
 
 
         if(
-            part.startsWith("{")
-            &&
-            part.endsWith("}")
+
+            btn.innerText
+
+            .toLowerCase()
+
+            .includes(query)
+
         ){
 
 
 
-            let command =
-            part.substring(
-                1,
-                part.length - 1
-            );
-
-
-
-            output +=
-            executeCommand(command);
+            btn.style.display="block";
 
 
 
@@ -1026,10 +483,14 @@ function parseScript(script){
         else{
 
 
-            output += part;
+
+            btn.style.display="none";
+
 
 
         }
+
+
 
 
 
@@ -1038,8 +499,6 @@ function parseScript(script){
 
 
 
-    return output;
-
 
 }
 
@@ -1051,179 +510,91 @@ function parseScript(script){
 
 
 
-/* ==========================
-   TEST RUN
-========================== */
+// ===============================
+// REFRESH SIDEBAR
+// ===============================
 
 
 
-if(testButton){
-
-
-
-testButton.onclick=function(){
-
-
-
-    let script =
-    editor.value.trim();
+function refreshSnippetList(){
 
 
 
 
-    if(script===""){
+
+    let container =
+
+    document.getElementById(
+
+        "snippetList"
+
+    );
 
 
-        log(
-            "Nothing to test"
+
+
+
+
+    container.innerHTML="";
+
+
+
+
+
+
+
+    Object.keys(snippets)
+
+    .forEach(keyword=>{
+
+
+
+
+
+
+        let button =
+
+        document.createElement(
+
+            "button"
+
         );
 
 
-        return;
 
 
-    }
 
 
+        button.innerText =
 
+        keyword;
 
 
 
-    let preview =
-    parseScript(script);
 
 
 
 
+        button.onclick =
 
+        ()=>loadSnippet(keyword);
 
-    result.textContent =
 
-    "TEST RUN\n\n"
 
-    +
 
-    preview;
 
 
 
-};
+        container.appendChild(button);
 
-}
 
 
 
 
 
+    });
 
 
-
-
-/* ==========================
-   ACTION BUTTON INSERTS
-========================== */
-
-
-
-let actionButtons =
-document.querySelectorAll(
-    ".actions button"
-);
-
-
-
-
-
-actionButtons.forEach(button=>{
-
-
-
-    button.onclick=function(){
-
-
-
-        let command =
-        this.dataset.command;
-
-
-
-
-
-        if(command){
-
-
-            editor.value +=
-            command;
-
-
-
-            editor.focus();
-
-
-        }
-
-
-
-    };
-
-
-
-});
-
-/* =====================================================
-   Automation Studio Web Version
-
-   PART 3
-   Live Trigger Expansion Engine
-===================================================== */
-
-
-/* ==========================
-   KEYBOARD BUFFER SYSTEM
-
-   Mimics:
-
-   keyboard_worker()
-
-   from Python app
-
-========================== */
-
-
-let triggerBuffer = "";
-
-
-
-
-
-if(triggerBox){
-
-
-
-triggerBox.addEventListener(
-"input",
-function(){
-
-
-
-    if(!automationEnabled)
-        return;
-
-
-
-
-    triggerBuffer =
-    triggerBox.value;
-
-
-
-
-    checkForExpansion();
-
-
-
-
-});
 
 
 
@@ -1237,29 +608,106 @@ function(){
 
 
 
-/* ==========================
-   CHECK TRIGGERS
-========================== */
-
-
-function checkForExpansion(){
+// ===============================
+// INSERT COMMANDS
+// ===============================
 
 
 
-    let currentText =
-    triggerBuffer.toLowerCase();
+function insertCommand(command){
 
 
 
 
 
+    let editor =
 
-    for(let keyword in scripts){
+    document.getElementById(
+
+        "script"
+
+    );
 
 
 
-        let compareKeyword =
-        keyword.toLowerCase();
+
+
+    editor.value += command;
+
+
+
+
+
+    editor.focus();
+
+
+
+
+
+}
+
+// ===================================
+// AUTOMATION STUDIO WEB DEMO ENGINE
+// PART 2
+// SCRIPT ENGINE + TRIGGER SYSTEM
+// ===================================
+
+
+
+
+
+// ===============================
+// AUTOMATION TRIGGER SYSTEM
+// ===============================
+
+
+
+function checkTrigger(){
+
+
+
+    if(triggerRunning)
+
+        return;
+
+
+
+
+
+    let box =
+
+    document.getElementById(
+
+        "triggerBox"
+
+    );
+
+
+
+
+
+    let value =
+
+    box.value;
+
+
+
+
+
+
+
+    let matched = null;
+
+
+
+
+
+
+
+
+    Object.keys(snippets)
+
+    .forEach(keyword=>{
 
 
 
@@ -1267,18 +715,22 @@ function checkForExpansion(){
 
 
         if(
-            currentText.endsWith(
-                compareKeyword
+
+            value
+
+            .toLowerCase()
+
+            .endsWith(
+
+                keyword.toLowerCase()
+
             )
+
         ){
 
 
 
-            expandTrigger(keyword);
-
-
-
-            return;
+            matched = keyword;
 
 
 
@@ -1286,7 +738,129 @@ function checkForExpansion(){
 
 
 
+
+
+    });
+
+
+
+
+
+
+
+
+    if(matched){
+
+
+
+        triggerRunning = true;
+
+
+
+
+
+
+        let output =
+
+        executeScript(
+
+            snippets[matched].script
+
+        );
+
+
+
+
+
+
+
+
+        document.getElementById(
+
+            "result"
+
+        ).innerHTML = output;
+
+
+
+
+
+
+
+
+
+        snippets[matched].uses =
+
+        (snippets[matched].uses || 0) + 1;
+
+
+
+
+
+        saveSnippets();
+
+
+
+
+
+
+
+
+
+        /*
+            Remove only the trigger word
+            instead of destroying the text
+        */
+
+
+
+
+
+
+        let removeLength =
+
+        matched.length;
+
+
+
+
+
+
+
+        box.value =
+
+        value.substring(
+
+            0,
+
+            value.length-removeLength
+
+        );
+
+
+
+
+
+
+
+
+
+        setTimeout(()=>{
+
+
+            triggerRunning=false;
+
+
+        },300);
+
+
+
+
+
     }
+
+
+
 
 
 
@@ -1300,57 +874,96 @@ function checkForExpansion(){
 
 
 
-/* ==========================
-   EXPAND SNIPPET
 
-   Equivalent to:
-
-   backspace keyword
-   execute_script()
-
-========================== */
-
-
-function expandTrigger(keyword){
+// ===============================
+// LIVE TYPING LISTENER
+// ===============================
 
 
 
-    let data =
-    scripts[keyword];
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
 
 
 
-    if(!data)
-        return;
+    let box =
 
+    document.getElementById(
 
+        "triggerBox"
+
+    );
 
 
 
 
 
-    /*
-       Remove trigger word
-
-       Example:
-
-       hello
-
-       becomes:
-
-       ""
-
-    */
+    if(box){
 
 
-    let remaining =
 
-    triggerBuffer.substring(
+        box.addEventListener(
 
-        0,
+            "input",
 
-        triggerBuffer.length -
-        keyword.length
+            checkTrigger
+
+        );
+
+
+
+    }
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// SIMULATED SCRIPT ENGINE
+// ===============================
+
+
+
+function executeScript(script){
+
+
+
+
+
+    let result = script;
+
+
+
+
+
+
+
+    // DATE COMMAND
+
+
+
+    result =
+
+    result.replace(
+
+        /\{date\}/g,
+
+        new Date()
+
+        .toLocaleDateString()
 
     );
 
@@ -1360,9 +973,22 @@ function expandTrigger(keyword){
 
 
 
-    let expansion =
-    parseScript(
-        data.script
+
+
+    // TIME COMMAND
+
+
+
+    result =
+
+    result.replace(
+
+        /\{time\}/g,
+
+        new Date()
+
+        .toLocaleTimeString()
+
     );
 
 
@@ -1370,74 +996,106 @@ function expandTrigger(keyword){
 
 
 
-    /*
-       Replace text
-
-    */
-
-
-    triggerBox.value =
-    remaining +
-    expansion;
 
 
 
 
 
-    triggerBuffer =
-    triggerBox.value;
+    // WAIT COMMAND
 
 
 
+    result =
 
+    result.replace(
 
+        /\{sleep:(.*?)\}/g,
 
+        "[Waiting $1 seconds]"
 
-
-    /*
-       Update statistics
-
-    */
-
-
-    data.uses =
-    (data.uses || 0)+1;
-
-
-
-
-    data.last_used =
-    new Date()
-    .toISOString();
-
-
-
-
-
-    expansionCount++;
-
-
-
-
-
-    saveScripts();
-
-
-
-    updateStatus();
+    );
 
 
 
 
 
 
-    result.textContent =
 
-    "EXPANDED:\n\n"
 
-    +
 
-    expansion;
+    // HOTKEYS
+
+
+
+    result =
+
+    result.replace(
+
+        /\{(ctrl|alt|shift)\+(.*?)\}/g,
+
+        "[Keyboard: $1+$2]"
+
+    );
+
+
+
+
+
+
+
+
+
+    // MOUSE ACTIONS
+
+
+
+    result =
+
+    result.replace(
+
+        /\{(click|doubleclick|move):(.*?)\}/g,
+
+        "[Mouse Action: $1 $2]"
+
+    );
+
+
+
+
+
+
+
+
+
+    // KEYS
+
+
+
+    result =
+
+    result.replace(
+
+        /\{(enter|tab|space|backspace)\}/g,
+
+        "[Keyboard: $1]"
+
+    );
+
+
+
+
+
+
+
+
+
+    return result.replace(
+
+        /\n/g,
+
+        "<br>"
+
+    );
 
 
 
@@ -1451,76 +1109,367 @@ function expandTrigger(keyword){
 
 
 
-/* ==========================
-   STATUS UPDATE
-
-   Adds expansion count
-
-========================== */
-
-
-function updateStatus(){
+// ===============================
+// TEST RUN BUTTON
+// ===============================
 
 
 
-    if(!statusText)
-        return;
+function testRun(){
 
 
 
 
 
-    if(automationEnabled){
+    let script =
 
+    document.getElementById(
 
+        "script"
 
-        statusText.textContent =
-
-        "Active  •  "
-
-        +
-
-        Object.keys(scripts).length
-
-        +
-
-        " snippets  •  "
-
-        +
-
-        expansionCount
-
-        +
-
-        " expanded";
+    ).value;
 
 
 
 
 
 
-        if(statusDot)
 
-        statusDot.style.color =
-        "#4ade80";
+    document.getElementById(
+
+        "result"
+
+    ).innerHTML =
+
+    executeScript(script);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// CLEAR EXECUTION LOG
+// ===============================
+
+
+
+function clearLog(){
+
+
+
+
+
+    document.getElementById(
+
+        "result"
+
+    ).innerHTML =
+
+    "Waiting...";
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// STATUS MESSAGE
+// ===============================
+
+
+
+function showMessage(text){
+
+
+
+
+
+    let result =
+
+    document.getElementById(
+
+        "result"
+
+    );
+
+
+
+
+
+    result.innerHTML=text;
+
+
+
+
+
+
+
+    setTimeout(()=>{
+
+
+
+
+
+        result.innerHTML =
+
+        "Waiting...";
+
+
+
+
+
+    },2000);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// BUTTON CONNECTIONS
+// ===============================
+
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+
+
+
+    let clearButton =
+
+    document.getElementById(
+
+        "clearLog"
+
+    );
+
+
+
+
+
+
+    if(clearButton){
+
+
+        clearButton.onclick =
+
+        clearLog;
+
+
+    }
+
+
+
+
+
+
+
+});
+
+
+// ===================================
+// AUTOMATION STUDIO WEB DEMO ENGINE
+// PART 3
+// STARTUP + BUTTON CONNECTIONS
+// ===================================
+
+
+
+
+
+// ===============================
+// BUTTON CONNECTIONS
+// ===============================
+
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+
+
+
+
+
+    // -------------------------------
+    // SAVE BUTTON
+    // -------------------------------
+
+
+    let saveButton =
+
+    document.getElementById(
+
+        "saveSnippet"
+
+    );
+
+
+
+
+    if(saveButton){
+
+
+        saveButton.onclick =
+
+        saveSnippet;
+
+
+    }
+
+
+
+
+
+
+
+
+
+    // -------------------------------
+    // DELETE BUTTON
+    // -------------------------------
+
+
+
+    let deleteButton =
+
+    document.getElementById(
+
+        "deleteSnippet"
+
+    );
+
+
+
+
+
+    if(deleteButton){
+
+
+        deleteButton.onclick =
+
+        deleteSnippet;
+
+
+    }
+
+
+
+
+
+
+
+
+
+    // -------------------------------
+    // NEW BUTTON
+    // -------------------------------
+
+
+
+    let newButton =
+
+    document.getElementById(
+
+        "newSnippetButton"
+
+    );
+
+
+
+
+
+    if(newButton){
+
+
+
+        newButton.onclick =
+
+        newSnippet;
 
 
 
     }
 
-    else{
 
 
 
-        statusText.textContent =
-        "Paused";
 
 
 
-        if(statusDot)
 
-        statusDot.style.color =
-        "#ef4444";
+
+    // -------------------------------
+    // TEST BUTTON
+    // -------------------------------
+
+
+
+    let testButton =
+
+    document.getElementById(
+
+        "testRun"
+
+    );
+
+
+
+
+
+
+    if(testButton){
+
+
+        testButton.onclick =
+
+        testRun;
 
 
     }
@@ -1528,7 +1477,43 @@ function updateStatus(){
 
 
 
-}
+
+
+
+
+
+    // -------------------------------
+    // SEARCH BOX
+    // -------------------------------
+
+
+
+    let search =
+
+    document.getElementById(
+
+        "search"
+
+    );
+
+
+
+
+
+    if(search){
+
+
+
+        search.addEventListener(
+
+            "input",
+
+            searchSnippets
+
+        );
+
+
+    }
 
 
 
@@ -1538,40 +1523,128 @@ function updateStatus(){
 
 
 
-/* ==========================
-   PAUSE BUTTON SUPPORT
-
-   Optional if button exists
-
-========================== */
-
-
-const pauseButton =
-document.getElementById("pauseAutomation");
+    // -------------------------------
+    // COMMAND BUTTONS
+    // -------------------------------
 
 
 
-if(pauseButton){
+    let commands =
 
+    document.querySelectorAll(
 
+        ".actions button"
 
-pauseButton.onclick=function(){
-
-
-
-    automationEnabled =
-    !automationEnabled;
-
-
-
-    updateStatus();
+    );
 
 
 
 
 
-};
+
+
+    commands.forEach(button=>{
 
 
 
-}
+
+
+        button.addEventListener(
+
+            "click",
+
+            ()=>{
+
+
+
+
+
+                let command =
+
+                button.dataset.command;
+
+
+
+
+
+                insertCommand(
+
+                    command
+
+                );
+
+
+
+
+
+
+            }
+
+        );
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// START APPLICATION
+// ===============================
+
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+
+
+
+    refreshSnippetList();
+
+
+
+
+
+    if(snippets.hello){
+
+
+        loadSnippet(
+
+            "hello"
+
+        );
+
+
+    }
+
+
+
+
+
+
+});
