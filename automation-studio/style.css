@@ -1,0 +1,1010 @@
+/* ===========================
+   Automation Studio
+   style.css
+=========================== */
+
+
+/* ===========================
+   Reset
+=========================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:#0f172a;
+
+    color:#f8fafc;
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+}
+
+
+
+/* ===========================
+   Background Glow
+=========================== */
+
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(circle at top left,#2563eb44,transparent 35%),
+
+        radial-gradient(circle at bottom right,#06b6d433,transparent 35%);
+
+    z-index:-1;
+
+}
+
+
+
+/* ===========================
+   Container
+=========================== */
+
+
+.container{
+
+    width:min(1100px,90%);
+
+    margin:auto;
+
+}
+
+
+
+/* ===========================
+   Navigation
+=========================== */
+
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(15,23,42,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.navbar .container{
+
+    height:75px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+
+.logo{
+
+    color:#38bdf8;
+
+    font-size:1.8rem;
+
+    font-weight:800;
+
+    text-decoration:none;
+
+}
+
+
+
+nav{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+
+
+nav a{
+
+    color:#e2e8f0;
+
+    text-decoration:none;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+
+
+nav a:hover{
+
+    color:#38bdf8;
+
+}
+
+
+
+/* ===========================
+   Hero
+=========================== */
+
+
+.hero{
+
+    min-height:85vh;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.hero-content{
+
+    max-width:800px;
+
+}
+
+
+
+.tag{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#2563eb22;
+
+    color:#60a5fa;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.hero h1{
+
+    font-size:4rem;
+
+    line-height:1.1;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.subtitle{
+
+    color:#cbd5e1;
+
+    font-size:1.25rem;
+
+    max-width:700px;
+
+    margin-bottom:40px;
+
+}
+
+
+
+/* ===========================
+   Buttons
+=========================== */
+
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.primary{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.primary:hover{
+
+    background:#3b82f6;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.4);
+
+}
+
+
+
+.secondary{
+
+    border:1px solid #334155;
+
+    color:white;
+
+}
+
+
+
+.secondary:hover{
+
+    background:#1e293b;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* ===========================
+   Sections
+=========================== */
+
+
+.section{
+
+    padding:90px 0;
+
+}
+
+
+
+.section h2{
+
+    font-size:2.3rem;
+
+    margin-bottom:40px;
+
+}
+
+/* ===========================
+   Feature Cards
+=========================== */
+
+
+.feature-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.feature-card{
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    transition:.35s;
+
+}
+
+
+
+.feature-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.15);
+
+}
+
+
+
+.feature-card h3{
+
+    color:#38bdf8;
+
+    margin-bottom:15px;
+
+    font-size:1.3rem;
+
+}
+
+
+
+.feature-card p{
+
+    color:#cbd5e1;
+
+}
+
+
+
+
+
+/* ===========================
+   Workflow Steps
+=========================== */
+
+
+.workflow-card{
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:35px;
+
+}
+
+
+
+.step{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    padding:25px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.step:last-child{
+
+    border-bottom:none;
+
+}
+
+
+
+.step span{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:700;
+
+}
+
+
+
+.step h3{
+
+    margin-bottom:8px;
+
+}
+
+
+
+.step p{
+
+    color:#cbd5e1;
+
+}
+
+
+
+
+
+/* ===========================
+   General Cards
+=========================== */
+
+
+.card{
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    transition:.35s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#2563eb;
+
+}
+
+
+
+.card p{
+
+    color:#cbd5e1;
+
+    margin-bottom:18px;
+
+}
+
+
+
+
+
+/* ===========================
+   Technology Cards
+=========================== */
+
+
+.tech-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.tech-card{
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    transition:.3s;
+
+}
+
+
+
+.tech-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#38bdf8;
+
+}
+
+
+
+.tech-card h3{
+
+    color:#38bdf8;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.tech-card p{
+
+    color:#cbd5e1;
+
+}
+
+
+
+
+
+/* ===========================
+   Demo Section
+=========================== */
+
+
+.demo-card{
+
+    text-align:center;
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:45px;
+
+}
+
+
+
+.demo-card h2{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.demo-card p{
+
+    color:#cbd5e1;
+
+    max-width:650px;
+
+    margin:0 auto 30px;
+
+}
+
+
+
+
+
+/* ===========================
+   Developer Card
+=========================== */
+
+
+.developer-card{
+
+    text-align:center;
+
+}
+
+
+
+.developer-card h3{
+
+    color:#38bdf8;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.developer-card .btn{
+
+    margin-top:20px;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+
+footer{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+}
+
+
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#3b82f6;
+
+}
+
+
+
+
+
+/* ===========================
+   Scroll Animations
+=========================== */
+
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+        opacity .8s ease,
+
+        transform .8s ease;
+
+}
+
+
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+
+
+
+/* ===========================
+   Ripple Effect
+=========================== */
+
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    animation:ripple .6s linear;
+
+    background:rgba(255,255,255,.35);
+
+    pointer-events:none;
+
+}
+
+
+
+@keyframes ripple{
+
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+
+
+
+
+/* ===========================
+   Responsive Tablet
+=========================== */
+
+
+@media(max-width:900px){
+
+
+    .hero h1{
+
+        font-size:3rem;
+
+    }
+
+
+
+    .subtitle{
+
+        font-size:1.1rem;
+
+    }
+
+
+
+    nav{
+
+        gap:15px;
+
+    }
+
+
+}
+
+
+
+
+
+/* ===========================
+   Responsive Mobile
+=========================== */
+
+
+@media(max-width:700px){
+
+
+    .navbar .container{
+
+        flex-direction:column;
+
+        height:auto;
+
+        padding:18px 0;
+
+        gap:15px;
+
+    }
+
+
+
+    nav{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:15px;
+
+    }
+
+
+
+    .hero{
+
+        min-height:70vh;
+
+        text-align:center;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:2.5rem;
+
+    }
+
+
+
+    .subtitle{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+
+
+    .section{
+
+        padding:70px 0;
+
+    }
+
+
+
+    .section h2{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .step{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .btn{
+
+        width:100%;
+
+        max-width:320px;
+
+    }
+
+
+
+}
+
+
+
+
+
+/* ===========================
+   Small Phones
+=========================== */
+
+
+@media(max-width:480px){
+
+
+    .container{
+
+        width:92%;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:2.1rem;
+
+    }
+
+
+
+    .logo{
+
+        font-size:1.5rem;
+
+    }
+
+
+
+    nav a{
+
+        font-size:.9rem;
+
+    }
+
+
+
+    .section h2{
+
+        font-size:1.8rem;
+
+    }
+
+
+
+    .card,
+    .feature-card,
+    .tech-card,
+    .workflow-card,
+    .demo-card{
+
+        padding:24px;
+
+    }
+
+
+}
