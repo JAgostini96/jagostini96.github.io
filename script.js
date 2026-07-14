@@ -1,5 +1,5 @@
 /* ===========================
-   Jonathan Agostinis Portfolio
+   Jonathan Agostini Portfolio
    script.js
 =========================== */
 
@@ -9,26 +9,16 @@
 =========================== */
 
 
-const animatedElements = document.querySelectorAll(
-    ".section, .card, .skill-card, .highlight, .timeline-item"
-);
-
-
 const observer = new IntersectionObserver(
-    (entries)=>{
 
+    (entries)=>{
 
         entries.forEach((entry)=>{
 
 
             if(entry.isIntersecting){
 
-
                 entry.target.classList.add("show");
-
-
-                observer.unobserve(entry.target);
-
 
             }
 
@@ -37,23 +27,26 @@ const observer = new IntersectionObserver(
 
 
     },
+
     {
         threshold:0.15
     }
+
 );
 
 
 
-animatedElements.forEach((element)=>{
+document.querySelectorAll(".section").forEach((section)=>{
 
 
-    element.classList.add("hidden");
+    section.classList.add("hidden");
 
 
-    observer.observe(element);
+    observer.observe(section);
 
 
 });
+
 
 
 
@@ -63,32 +56,30 @@ animatedElements.forEach((element)=>{
 =========================== */
 
 
-const sections = document.querySelectorAll("section[id]");
+const sections = document.querySelectorAll("section");
 
 const navLinks = document.querySelectorAll("nav a");
 
 
 
-function updateActiveNav(){
+window.addEventListener("scroll",()=>{
 
 
-    let currentSection = "";
+    let current = "";
 
 
 
     sections.forEach((section)=>{
 
 
-        const sectionTop =
-            section.offsetTop - 200;
+        const sectionTop = section.offsetTop - 150;
 
 
 
         if(window.scrollY >= sectionTop){
 
 
-            currentSection =
-                section.getAttribute("id");
+            current = section.getAttribute("id");
 
 
         }
@@ -105,12 +96,11 @@ function updateActiveNav(){
 
 
 
-        if(
-            link.getAttribute("href") ===
-            "#" + currentSection
-        ){
+        if(link.getAttribute("href") === "#" + current){
+
 
             link.classList.add("active");
+
 
         }
 
@@ -118,107 +108,141 @@ function updateActiveNav(){
     });
 
 
-}
 
-
-
-window.addEventListener(
-    "scroll",
-    updateActiveNav
-);
-
-
-updateActiveNav();
+});
 
 
 
 
 
 /* ===========================
-   Smooth Button Ripple Effect
+   Smooth Scroll For Navigation
 =========================== */
 
 
-document.querySelectorAll(".btn")
-.forEach((button)=>{
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
 
-    button.addEventListener(
-        "click",
-        function(event){
+    anchor.addEventListener("click",function(e){
 
 
-            const ripple =
-                document.createElement("span");
-
-
-
-            const size =
-                Math.max(
-                    this.offsetWidth,
-                    this.offsetHeight
-                );
+        const target =
+            document.querySelector(
+                this.getAttribute("href")
+            );
 
 
 
-            const rect =
-                this.getBoundingClientRect();
+        if(target){
+
+
+            e.preventDefault();
 
 
 
-            ripple.style.width =
-                size + "px";
+            target.scrollIntoView({
 
+                behavior:"smooth",
 
-            ripple.style.height =
-                size + "px";
+                block:"start"
 
-
-            ripple.style.left =
-                event.clientX -
-                rect.left -
-                size / 2 +
-                "px";
-
-
-            ripple.style.top =
-                event.clientY -
-                rect.top -
-                size / 2 +
-                "px";
-
-
-
-            ripple.className =
-                "ripple";
-
-
-
-            const oldRipple =
-                this.querySelector(".ripple");
-
-
-
-            if(oldRipple){
-
-                oldRipple.remove();
-
-            }
-
-
-
-            this.appendChild(ripple);
-
+            });
 
 
         }
-    );
+
+
+    });
+
+
+});
+
+
+
+
+
+/* ===========================
+   Button Ripple Effect
+=========================== */
+
+
+document.querySelectorAll(".btn").forEach(button=>{
+
+
+    button.addEventListener("click",function(e){
+
+
+        const ripple =
+            document.createElement("span");
+
+
+
+        const diameter =
+            Math.max(
+                this.clientWidth,
+                this.clientHeight
+            );
+
+
+
+        const radius =
+            diameter / 2;
+
+
+
+        ripple.style.width =
+            diameter + "px";
+
+
+
+        ripple.style.height =
+            diameter + "px";
+
+
+
+        const rect =
+            this.getBoundingClientRect();
+
+
+
+        ripple.style.left =
+            e.clientX - rect.left - radius + "px";
+
+
+
+        ripple.style.top =
+            e.clientY - rect.top - radius + "px";
+
+
+
+        ripple.classList.add("ripple");
+
+
+
+        const oldRipple =
+            this.querySelector(".ripple");
+
+
+
+        if(oldRipple){
+
+            oldRipple.remove();
+
+        }
+
+
+
+        this.appendChild(ripple);
+
+
+
+    });
 
 
 });
 
 /* ===========================
-   Hero Name Typing Effect
+   Hero Typing Animation
 =========================== */
 
 
@@ -230,7 +254,7 @@ const heroTitle =
 if(heroTitle){
 
 
-    const originalText =
+    const text =
         heroTitle.textContent.trim();
 
 
@@ -243,24 +267,22 @@ if(heroTitle){
 
 
 
-    function typeHeroText(){
+    function typeTitle(){
 
 
-        if(index < originalText.length){
+        if(index < text.length){
 
 
             heroTitle.textContent +=
-                originalText.charAt(index);
+                text.charAt(index);
 
 
 
             index++;
 
 
-            setTimeout(
-                typeHeroText,
-                70
-            );
+
+            setTimeout(typeTitle,80);
 
 
         }
@@ -270,19 +292,13 @@ if(heroTitle){
 
 
 
-    window.addEventListener(
-        "load",
-        ()=>{
+    window.addEventListener("load",()=>{
 
 
-            setTimeout(
-                typeHeroText,
-                400
-            );
+        setTimeout(typeTitle,400);
 
 
-        }
-    );
+    });
 
 
 }
@@ -301,24 +317,23 @@ const scrollButton =
 
 
 
-scrollButton.innerHTML =
-    "↑";
-
-
-
 scrollButton.className =
     "scroll-top";
 
 
 
-document.body.appendChild(
-    scrollButton
-);
+scrollButton.innerHTML =
+    "↑";
+
+
+
+document.body.appendChild(scrollButton);
 
 
 
 
-function toggleScrollButton(){
+
+window.addEventListener("scroll",()=>{
 
 
     if(window.scrollY > 500){
@@ -341,130 +356,62 @@ function toggleScrollButton(){
     }
 
 
-}
-
-
-
-window.addEventListener(
-    "scroll",
-    toggleScrollButton
-);
+});
 
 
 
 
 
-scrollButton.addEventListener(
-    "click",
-    ()=>{
+scrollButton.addEventListener("click",()=>{
 
 
-        window.scrollTo({
+    window.scrollTo({
 
-            top:0,
+        top:0,
 
-            behavior:"smooth"
-
-        });
-
-
-    }
-);
-
-
-
-
-
-/* ===========================
-   Project Card Equal Height Fix
-=========================== */
-
-
-function resizeProjectCards(){
-
-
-    const cards =
-        document.querySelectorAll(
-            ".highlight"
-        );
-
-
-
-    let maxHeight = 0;
-
-
-
-    cards.forEach((card)=>{
-
-
-        card.style.height =
-            "auto";
-
-
-
-        if(card.offsetHeight > maxHeight){
-
-            maxHeight =
-                card.offsetHeight;
-
-        }
-
+        behavior:"smooth"
 
     });
 
 
-
-    if(window.innerWidth > 700){
-
-
-        cards.forEach((card)=>{
-
-
-            card.style.height =
-                maxHeight + "px";
-
-
-        });
-
-
-    }
-
-
-}
-
-
-
-window.addEventListener(
-    "load",
-    resizeProjectCards
-);
-
-
-
-window.addEventListener(
-    "resize",
-    resizeProjectCards
-);
+});
 
 
 
 
 
 /* ===========================
-   External Link Safety
+   External Link Protection
 =========================== */
 
 
-document
-.querySelectorAll(
+document.querySelectorAll(
     'a[target="_blank"]'
-)
-.forEach((link)=>{
+).forEach(link=>{
 
 
     link.setAttribute(
         "rel",
         "noopener noreferrer"
+    );
+
+
+});
+
+
+
+
+
+/* ===========================
+   Page Load Animation
+=========================== */
+
+
+window.addEventListener("load",()=>{
+
+
+    document.body.classList.add(
+        "loaded"
     );
 
 
@@ -491,15 +438,6 @@ Built with:
 ✔ CSS
 ✔ JavaScript
 ✔ GitHub Pages
-
-Features:
-
-✔ Scroll animations
-✔ Active navigation
-✔ Button effects
-✔ Responsive layout
-✔ Project cards
-✔ Smooth scrolling
 
 Thanks for visiting!
 
