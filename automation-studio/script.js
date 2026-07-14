@@ -510,6 +510,7 @@ function insertCommand(command){
 
 // ===============================
 // AUTOMATION TRIGGER SYSTEM
+// SIMULATES DESKTOP APP BEHAVIOR
 // ===============================
 
 
@@ -522,9 +523,8 @@ function checkTrigger(){
     );
 
 
-
     let value =
-    box.value.trim();
+    box.value;
 
 
 
@@ -536,20 +536,20 @@ function checkTrigger(){
     .forEach(keyword=>{
 
 
-        if(
-            value
-            .toLowerCase()
-            .endsWith(
-                keyword.toLowerCase()
-            )
-        ){
+        let pattern =
+        new RegExp(
+            "\\b" + keyword + "\\b",
+            "i"
+        );
 
+
+        if(
+            pattern.test(value)
+        ){
 
             matched = keyword;
 
-
         }
-
 
 
     });
@@ -557,10 +557,7 @@ function checkTrigger(){
 
 
 
-
-
     if(matched){
-
 
 
         setStatus(
@@ -583,7 +580,16 @@ function checkTrigger(){
 
 
 
-        box.value="";
+        // simulate replacement behavior
+
+        box.value =
+        value.replace(
+            new RegExp(
+                matched,
+                "i"
+            ),
+            ""
+        ).trim();
 
 
 
@@ -595,12 +601,11 @@ function checkTrigger(){
             );
 
 
-        },1500);
+        },1200);
 
 
 
     }
-
 
 
 }
