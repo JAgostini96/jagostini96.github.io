@@ -1,5 +1,6 @@
 // ===================================
 // AUTOMATION STUDIO WEB DEMO ENGINE
+// Enhanced Simulation Version
 // ===================================
 
 
@@ -8,40 +9,64 @@
 // ===============================
 
 
-let snippets = JSON.parse(
-    localStorage.getItem("automationSnippets")
-) || {
+let snippets =
+    JSON.parse(
+        localStorage.getItem("automationSnippets")
+    )
+    ||
+    {
+
+        hello:{
+            script:
+            "Hello! This is an automated message."
+        },
 
 
-    hello: {
-
-        script:
-        "Hello! This is an automated message."
-
-    },
+        email:{
+            script:
+            "Hello,\n\nI wanted to follow up regarding our previous conversation.\n\nThank you."
+        },
 
 
-    email: {
+        meeting:{
+            script:
+            "Meeting scheduled for {date}"
+        }
 
-        script:
-        "Hello,\n\nI wanted to follow up regarding our previous conversation.\n\nThank you."
-
-    },
-
-
-    meeting: {
-
-        script:
-        "Meeting scheduled for {date}"
-
-    }
-
-
-};
+    };
 
 
 
 let currentKeyword = "hello";
+
+let triggerTimer;
+
+
+
+
+
+
+
+
+// ===============================
+// SAVE TO BROWSER STORAGE
+// ===============================
+
+
+function saveStorage(){
+
+
+    localStorage.setItem(
+        "automationSnippets",
+        JSON.stringify(snippets)
+    );
+
+
+}
+
+
+
+
 
 
 
@@ -77,11 +102,9 @@ function loadSnippet(keyword){
 
 
 
-    highlightSnippet(keyword);
-
-
-
 }
+
+
 
 
 
@@ -97,7 +120,8 @@ function loadSnippet(keyword){
 function newSnippet(){
 
 
-    let name = prompt(
+    let name =
+    prompt(
         "Enter new trigger keyword:"
     );
 
@@ -108,13 +132,23 @@ function newSnippet(){
 
 
 
+    name =
+    name
+    .trim()
+    .toLowerCase();
+
+
+
     if(snippets[name]){
 
+
         alert(
-            "That keyword already exists."
+            "This keyword already exists."
         );
 
+
         return;
+
 
     }
 
@@ -123,8 +157,8 @@ function newSnippet(){
     snippets[name] = {
 
 
-        script:""
-
+        script:
+        ""
 
     };
 
@@ -133,7 +167,9 @@ function newSnippet(){
     saveStorage();
 
 
+
     loadSnippet(name);
+
 
 
     refreshSnippetList();
@@ -141,6 +177,8 @@ function newSnippet(){
 
 
 }
+
+
 
 
 
@@ -157,17 +195,21 @@ function saveSnippet(){
 
 
     let keyword =
-    document
-    .getElementById("keyword")
+    document.getElementById(
+        "keyword"
+    )
     .value
-    .trim();
+    .trim()
+    .toLowerCase();
 
 
 
     let script =
-    document
-    .getElementById("script")
+    document.getElementById(
+        "script"
+    )
     .value;
+
 
 
 
@@ -175,14 +217,16 @@ function saveSnippet(){
     if(keyword === ""){
 
 
-        showMessage(
-            "Enter a keyword first"
+        alert(
+            "Keyword cannot be empty."
         );
 
 
         return;
 
+
     }
+
 
 
 
@@ -197,7 +241,10 @@ function saveSnippet(){
 
 
 
-    currentKeyword = keyword;
+
+    currentKeyword =
+    keyword;
+
 
 
 
@@ -217,90 +264,6 @@ function saveSnippet(){
 
 }
 
-
-
-
-
-
-
-
-// ===============================
-// DELETE SNIPPET
-// ===============================
-
-
-function deleteSnippet(){
-
-
-    if(!snippets[currentKeyword])
-        return;
-
-
-
-    delete snippets[currentKeyword];
-
-
-
-    saveStorage();
-
-
-
-    refreshSnippetList();
-
-
-
-    document.getElementById(
-        "keyword"
-    ).value="";
-
-
-
-    document.getElementById(
-        "script"
-    ).value="";
-
-
-
-    showMessage(
-        "Snippet deleted"
-    );
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// SAVE TO LOCAL STORAGE
-// ===============================
-
-
-function saveStorage(){
-
-
-    localStorage.setItem(
-
-        "automationSnippets",
-
-        JSON.stringify(snippets)
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
 // ===============================
 // SIDEBAR SEARCH
 // ===============================
@@ -310,31 +273,58 @@ function searchSnippets(){
 
 
     let query =
-    document
-    .getElementById("search")
+    document.getElementById(
+        "search"
+    )
     .value
     .toLowerCase();
 
 
 
-    document
-    .querySelectorAll(
+    let buttons =
+    document.querySelectorAll(
         "#snippetList button"
-    )
-    .forEach(button=>{
+    );
 
 
-        button.style.display =
-        button.innerText
-        .toLowerCase()
-        .includes(query)
 
-        ? "block"
+    buttons.forEach(btn=>{
 
-        : "none";
+
+        let name =
+        btn.innerText
+        .toLowerCase();
+
+
+
+        if(
+            name.includes(query)
+        ){
+
+            btn.style.display =
+            "block";
+
+        }
+        else{
+
+            btn.style.display =
+            "none";
+
+        }
 
 
     });
+
+
+}
+
+
+
+
+
+
+
+
 
 // ===============================
 // REFRESH SIDEBAR
@@ -351,7 +341,8 @@ function refreshSnippetList(){
 
 
 
-    container.innerHTML="";
+    container.innerHTML = "";
+
 
 
 
@@ -380,69 +371,17 @@ function refreshSnippetList(){
 
 
 
-        if(keyword === currentKeyword){
-
-            button.classList.add(
-                "active"
-            );
-
-        }
-
-
-
-        container.appendChild(button);
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// HIGHLIGHT ACTIVE SNIPPET
-// ===============================
-
-
-function highlightSnippet(keyword){
-
-
-    document
-    .querySelectorAll(
-        "#snippetList button"
-    )
-    .forEach(button=>{
-
-
-        button.classList.remove(
-            "active"
+        container.appendChild(
+            button
         );
 
 
-        if(
-            button.innerText === keyword
-        ){
-
-            button.classList.add(
-                "active"
-            );
-
-        }
-
 
     });
 
 
 }
+
 
 
 
@@ -482,15 +421,10 @@ function insertCommand(command){
 
 
     editor.value =
-
         text.substring(0,start)
-
         +
-
         command
-
         +
-
         text.substring(end);
 
 
@@ -508,9 +442,46 @@ function insertCommand(command){
 
 
 
+
+// ===============================
+// DEBOUNCE TYPING
+// SIMULATES DESKTOP LISTENER
+// ===============================
+
+
+function debouncedTrigger(){
+
+
+    clearTimeout(
+        triggerTimer
+    );
+
+
+
+    triggerTimer =
+    setTimeout(()=>{
+
+
+        checkTrigger();
+
+
+
+    },400);
+
+
+
+}
+
+
+
+
+
+
+
+
+
 // ===============================
 // AUTOMATION TRIGGER SYSTEM
-// SIMULATES DESKTOP APP BEHAVIOR
 // ===============================
 
 
@@ -523,12 +494,16 @@ function checkTrigger(){
     );
 
 
+
     let value =
     box.value;
 
 
 
-    let matched = null;
+    let matched =
+    null;
+
+
 
 
 
@@ -536,20 +511,27 @@ function checkTrigger(){
     .forEach(keyword=>{
 
 
-        let pattern =
+        let regex =
         new RegExp(
-            "\\b" + keyword + "\\b",
+            "\\b"
+            +
+            keyword
+            +
+            "\\b",
             "i"
         );
 
 
+
         if(
-            pattern.test(value)
+            regex.test(value)
         ){
 
-            matched = keyword;
+            matched =
+            keyword;
 
         }
+
 
 
     });
@@ -557,7 +539,10 @@ function checkTrigger(){
 
 
 
+
+
     if(matched){
+
 
 
         setStatus(
@@ -568,19 +553,24 @@ function checkTrigger(){
 
         let output =
         executeScript(
-            snippets[matched].script
+            snippets[matched]
+            .script
         );
+
 
 
 
         document.getElementById(
             "result"
-        ).innerHTML =
+        )
+        .innerHTML =
         output;
 
 
 
-        // simulate replacement behavior
+
+        // simulate keyword replacement
+
 
         box.value =
         value.replace(
@@ -589,7 +579,10 @@ function checkTrigger(){
                 "i"
             ),
             ""
-        ).trim();
+        )
+        .trim();
+
+
 
 
 
@@ -601,11 +594,13 @@ function checkTrigger(){
             );
 
 
+
         },1200);
 
 
 
     }
+
 
 
 }
@@ -619,7 +614,7 @@ function checkTrigger(){
 
 
 // ===============================
-// SIMULATED SCRIPT ENGINE
+// SIMULATED AUTOMATION ENGINE
 // ===============================
 
 
@@ -632,12 +627,14 @@ function executeScript(script){
 
 
 
+
     // DATE COMMAND
+
 
     result =
     result.replace(
 
-        /\{date\}/g,
+        "{date}",
 
         new Date()
         .toLocaleDateString()
@@ -649,36 +646,29 @@ function executeScript(script){
 
 
 
-
-    // TIME COMMAND
-
-    result =
-    result.replace(
-
-        /\{time\}/g,
-
-        new Date()
-        .toLocaleTimeString()
-
-    );
-
-
-
-
-
-
-
     // SLEEP COMMAND
+
 
     result =
     result.replace(
 
         /\{sleep:(.*?)\}/g,
 
-        "[Waiting $1 seconds]"
+        function(match,time){
+
+
+            return (
+                "[Waiting "
+                +
+                time
+                +
+                " seconds]"
+            );
+
+
+        }
 
     );
-
 
 
 
@@ -688,12 +678,32 @@ function executeScript(script){
 
     // KEYBOARD COMMANDS
 
+
     result =
     result.replace(
 
         /\{(ctrl|alt|shift)\+(.*?)\}/gi,
 
-        "[Keyboard: $1+$2]"
+
+        function(match,key,value){
+
+
+            return (
+
+                "[Keyboard Action: "
+                +
+                key
+                +
+                "+"
+                +
+                value
+                +
+                "]"
+
+            );
+
+
+        }
 
     );
 
@@ -704,14 +714,34 @@ function executeScript(script){
 
 
 
-    // MOUSE ACTIONS
+    // MOUSE COMMANDS
+
 
     result =
     result.replace(
 
         /\{(click|doubleclick|move):(.*?)\}/gi,
 
-        "[Mouse Action: $1 $2]"
+
+        function(match,action,target){
+
+
+            return (
+
+                "[Mouse Action: "
+                +
+                action
+                +
+                " "
+                +
+                target
+                +
+                "]"
+
+            );
+
+
+        }
 
     );
 
@@ -722,26 +752,15 @@ function executeScript(script){
 
 
     return result.replace(
-
         /\n/g,
-
         "<br>"
-
     );
 
 
 }
 
-
-
-
-
-
-
-
-
 // ===============================
-// TEST RUN
+// TEST RUN BUTTON
 // ===============================
 
 
@@ -749,26 +768,29 @@ function testRun(){
 
 
     let script =
-    document
-    .getElementById(
+    document.getElementById(
         "script"
     )
     .value;
 
 
 
-    setStatus(
-        "running"
-    );
+    let output =
+    executeScript(script);
 
 
 
-    document
-    .getElementById(
+    document.getElementById(
         "result"
     )
     .innerHTML =
-    executeScript(script);
+    output;
+
+
+
+    setStatus(
+        "running"
+    );
 
 
 
@@ -780,11 +802,89 @@ function testRun(){
         );
 
 
-    },1500);
+    },1000);
 
 
 
 }
+
+
+
+
+
+
+
+
+
+// ===============================
+// DELETE SNIPPET
+// ===============================
+
+
+document
+.querySelector(".delete")
+.addEventListener(
+"click",
+function(){
+
+
+    let keyword =
+    document.getElementById(
+        "keyword"
+    )
+    .value
+    .trim();
+
+
+
+    if(
+        !keyword
+    )
+    return;
+
+
+
+
+    if(
+        snippets[keyword]
+    ){
+
+
+
+        delete snippets[keyword];
+
+
+
+        refreshSnippetList();
+
+
+
+
+        document.getElementById(
+            "keyword"
+        )
+        .value = "";
+
+
+
+        document.getElementById(
+            "script"
+        )
+        .value = "";
+
+
+
+        showMessage(
+            "Snippet deleted"
+        );
+
+
+    }
+
+
+
+});
+
 
 
 
@@ -801,9 +901,9 @@ function testRun(){
 function setStatus(state){
 
 
-    let status =
-    document.querySelector(
-        ".status"
+    let dot =
+    document.getElementById(
+        "statusDot"
     );
 
 
@@ -815,15 +915,18 @@ function setStatus(state){
 
 
 
-    status.className =
-    "status " + state;
 
 
+    if(
+        state === "running"
+    ){
 
-    if(state==="running"){
+
+        dot.style.color =
+        "#facc15";
 
 
-        text.innerText =
+        text.innerHTML =
         "Running";
 
 
@@ -831,7 +934,11 @@ function setStatus(state){
     else{
 
 
-        text.innerText =
+        dot.style.color =
+        "#22c55e";
+
+
+        text.innerHTML =
         "Active";
 
 
@@ -848,12 +955,13 @@ function setStatus(state){
 
 
 
+
 // ===============================
-// MESSAGE DISPLAY
+// STATUS MESSAGE
 // ===============================
 
 
-function showMessage(text){
+function showMessage(message){
 
 
     let result =
@@ -864,7 +972,7 @@ function showMessage(text){
 
 
     result.innerHTML =
-    text;
+    message;
 
 
 
@@ -876,43 +984,12 @@ function showMessage(text){
 
 
 
-    },2000);
+    },2500);
 
 
 
 }
 
-// ===============================
-// KEYBOARD SHORTCUT SUPPORT
-// ===============================
-
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-
-        // CTRL + S saves snippet
-
-        if(
-            event.ctrlKey &&
-            event.key === "s"
-        ){
-
-
-            event.preventDefault();
-
-
-            saveSnippet();
-
-
-        }
-
-
-
-    }
-
-);
 
 
 
@@ -922,135 +999,131 @@ document.addEventListener(
 
 
 // ===============================
-// AUTO SAVE EDITOR
+// LOCAL STORAGE SAVE
+// SIMULATES APP SETTINGS
 // ===============================
 
 
-document
-.getElementById("script")
-?.addEventListener(
-    "input",
-    function(){
+function saveToStorage(){
 
 
-        if(snippets[currentKeyword]){
+    localStorage.setItem(
 
+        "automationSnippets",
 
-            snippets[currentKeyword].script =
-            this.value;
-
-
-
-            saveStorage();
-
-
-        }
-
-
-    }
-
-);
-
-
-
-
-
-
-
-
-// ===============================
-// KEYWORD LIVE UPDATE
-// ===============================
-
-
-document
-.getElementById("keyword")
-?.addEventListener(
-    "change",
-    function(){
-
-
-        currentKeyword =
-        this.value.trim();
-
-
-
-    }
-
-);
-
-
-
-
-
-
-
-
-// ===============================
-// BUTTON RIPPLE EFFECT
-// ===============================
-
-
-document
-.querySelectorAll("button")
-.forEach(button=>{
-
-
-    button.addEventListener(
-        "click",
-        function(event){
-
-
-            let ripple =
-            document.createElement(
-                "span"
-            );
-
-
-
-            ripple.className =
-            "ripple";
-
-
-
-            let rect =
-            this.getBoundingClientRect();
-
-
-
-            ripple.style.left =
-            event.clientX -
-            rect.left +
-            "px";
-
-
-
-            ripple.style.top =
-            event.clientY -
-            rect.top +
-            "px";
-
-
-
-            this.appendChild(
-                ripple
-            );
-
-
-
-            setTimeout(()=>{
-
-
-                ripple.remove();
-
-
-            },600);
-
-
-
-        }
+        JSON.stringify(
+            snippets
+        )
 
     );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// LOAD SAVED SNIPPETS
+// ===============================
+
+
+function loadStorage(){
+
+
+    let saved =
+    localStorage.getItem(
+        "automationSnippets"
+    );
+
+
+
+    if(saved){
+
+
+        snippets =
+        JSON.parse(
+            saved
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// AUTO SAVE WHEN SAVING
+// ===============================
+
+
+const originalSave =
+saveSnippet;
+
+
+
+saveSnippet =
+function(){
+
+
+    originalSave();
+
+
+
+    saveToStorage();
+
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// KEYBOARD SIMULATION
+// ENTER TRIGGERS TEST
+// ===============================
+
+
+document
+.getElementById(
+    "triggerBox"
+)
+.addEventListener(
+"keydown",
+function(e){
+
+
+    if(
+        e.key === "Enter"
+    ){
+
+
+        checkTrigger();
+
+
+
+    }
+
 
 
 });
@@ -1062,35 +1135,58 @@ document
 
 
 
+
 // ===============================
-// INITIALIZE APPLICATION
+// INITIALIZE APP
 // ===============================
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+let triggerTimer;
 
 
 
-        refreshSnippetList();
+loadStorage();
 
 
+
+refreshSnippetList();
+
+
+
+if(
+    snippets.hello
+){
+
+    loadSnippet(
+        "hello"
+    );
+
+}
+else{
+
+
+    let first =
+    Object.keys(
+        snippets
+    )[0];
+
+
+
+    if(first){
 
         loadSnippet(
-            "hello"
+            first
         );
-
-
-
-        setStatus(
-            "active"
-        );
-
-
 
     }
 
-);
+
 }
 
+
+
+
+
+setStatus(
+    "active"
+);
