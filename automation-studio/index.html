@@ -9,14 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
 <title>Automation Studio Demo | Jonathan Agostini</title>
 
 
-<!-- Main portfolio style -->
+
 <link rel="stylesheet" href="../style.css">
 
-<!-- Automation Studio demo style -->
 <link rel="stylesheet" href="style.css">
+
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,17 +25,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
+
 </head>
+
+
+
 
 
 <body>
 
 
 
+
+
 <header class="navbar">
 
 
+
 <div class="container">
+
 
 
 <h2 class="logo">
@@ -42,6 +51,8 @@
 JA
 
 </h2>
+
+
 
 
 
@@ -74,7 +85,11 @@ Contact
 </nav>
 
 
+
+
+
 </div>
+
 
 
 </header>
@@ -85,10 +100,20 @@ Contact
 
 
 
+
+
+
+
 <section class="demo-header">
 
 
+
+
+
 <div class="container">
+
+
+
 
 
 <p class="tag">
@@ -96,6 +121,8 @@ Contact
 Interactive Demo
 
 </p>
+
+
 
 
 
@@ -108,11 +135,18 @@ Automation Studio
 
 
 
+
 <p class="subtitle">
+
+
 
 A browser-based recreation of my Python automation tool.
 
 Create keyword snippets, trigger workflows, and simulate automation actions.
+
+Demo only, not as strong as the Python version
+
+
 
 </p>
 
@@ -128,33 +162,56 @@ Create keyword snippets, trigger workflows, and simulate automation actions.
 
 
 
+
+
 </div>
+
+
+
 
 
 </section>
 
-<!-- ==========================
-     DEMO APPLICATION WINDOW
-========================== -->
+
+
+
+
+
+
+
+
+
+
 
 
 <section class="demo-section">
+
+
+
 
 
 <div class="automation-window">
 
 
 
+
+
 <div class="window-header">
 
 
+
+
+
 <div>
+
+
 
 <h2>
 
 Automation Studio
 
 </h2>
+
 
 
 <p>
@@ -164,13 +221,17 @@ Snippet Automation Simulator
 </p>
 
 
+
 </div>
 
 
 
 
 
+
+
 <div class="status">
+
 
 
 <span id="statusDot">
@@ -180,6 +241,7 @@ Snippet Automation Simulator
 </span>
 
 
+
 <span id="statusText">
 
 Active
@@ -187,11 +249,18 @@ Active
 </span>
 
 
+
+</div>
+
+
+
+
+
 </div>
 
 
 
-</div>
+
 
 
 
@@ -209,16 +278,18 @@ Active
 
 
 
-<!-- ==========================
-     SIDEBAR
-========================== -->
+<!-- SIDEBAR -->
+
 
 
 <div class="sidebar">
 
 
 
+
+
 <div class="sidebar-title">
+
 
 
 <h3>
@@ -237,19 +308,23 @@ Snippets
 
 
 
+
+
 </div>
 
 
 
 
 
-<input
+
+
+<input 
 
 id="search"
 
 placeholder="Search..."
 
-oninput="searchSnippets()"
+onkeyup="searchSnippets()"
 
 >
 
@@ -258,35 +333,88 @@ oninput="searchSnippets()"
 
 
 
-<!-- JavaScript fills this -->
 
 <div id="snippetList">
 
 
+
+
+
+<button onclick="loadSnippet('hello')">
+
+hello
+
+</button>
+
+
+
+
+
+<button onclick="loadSnippet('email')">
+
+email
+
+</button>
+
+
+
+
+
+<button onclick="loadSnippet('meeting')">
+
+meeting
+
+</button>
+
+
+
+
+
+
+
 </div>
 
 
 
 
+
 </div>
 
-<!-- ==========================
-     EDITOR AREA
-========================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- EDITOR -->
+
+
+
 
 
 <div class="editor">
 
 
 
-<input
+
+
+<input 
 
 id="keyword"
 
 placeholder="Enter Keyword..."
 
->
+value="hello"
 
+>
 
 
 
@@ -294,9 +422,15 @@ placeholder="Enter Keyword..."
 
 <textarea id="script">
 
+
+
 Hello! This is an automated message.
 
+
+
 </textarea>
+
+
 
 
 
@@ -308,8 +442,9 @@ Hello! This is an automated message.
 
 
 
-<button 
-onclick="insertCommand('{date}')">
+
+
+<button onclick="insertCommand('{date}')">
 
 Date
 
@@ -318,8 +453,8 @@ Date
 
 
 
-<button 
-onclick="insertCommand('{ctrl+c}')">
+
+<button onclick="insertCommand('{ctrl+c}')">
 
 Copy
 
@@ -328,8 +463,8 @@ Copy
 
 
 
-<button 
-onclick="insertCommand('{ctrl+v}')">
+
+<button onclick="insertCommand('{ctrl+v}')">
 
 Paste
 
@@ -338,12 +473,14 @@ Paste
 
 
 
-<button 
-onclick="insertCommand('{sleep:1}')">
+
+<button onclick="insertCommand('{sleep:1}')">
 
 Sleep
 
 </button>
+
+
 
 
 
@@ -357,12 +494,11 @@ Sleep
 
 
 
-<!-- ==========================
-     LIVE TRIGGER TEST
-========================== -->
 
 
 <div class="preview">
+
+
 
 
 
@@ -371,6 +507,7 @@ Sleep
 Live Trigger Test
 
 </h3>
+
 
 
 
@@ -385,13 +522,13 @@ Type a keyword below:
 
 
 
-<input
+<input 
 
 id="triggerBox"
 
 placeholder="Try typing hello..."
 
-oninput="checkTrigger()"
+onkeyup="checkTrigger()"
 
 >
 
@@ -399,15 +536,20 @@ oninput="checkTrigger()"
 
 
 
-
 <div id="result">
+
+
 
 Waiting...
 
+
+
 </div>
 
 
 
+
+
 </div>
 
 
@@ -418,19 +560,20 @@ Waiting...
 
 
 
-<!-- ==========================
-     CONTROL BUTTONS
-========================== -->
+
+
+
+
 
 
 <div class="buttons">
 
 
 
-<button
 
+
+<button 
 class="delete"
-
 onclick="deleteSnippet()">
 
 Delete
@@ -441,9 +584,7 @@ Delete
 
 
 
-<button
-
-onclick="testRun()">
+<button onclick="testRun()">
 
 Test Run
 
@@ -453,21 +594,7 @@ Test Run
 
 
 
-<button
-
-onclick="clearOutput()">
-
-Clear
-
-</button>
-
-
-
-
-
-<button
-
-class="save"
+<button class="save"
 
 onclick="saveSnippet()">
 
@@ -478,12 +605,6 @@ Save Snippet
 
 
 
-</div>
-
-
-
-
-
 
 </div>
 
@@ -491,6 +612,10 @@ Save Snippet
 
 
 
+
+
+
+
 </div>
 
 
@@ -498,6 +623,14 @@ Save Snippet
 
 
 </div>
+
+
+
+
+
+</div>
+
+
 
 
 
@@ -513,16 +646,21 @@ Save Snippet
 
 
 
-<!-- ==========================
-     FOOTER
-========================== -->
+
+
+
+
 
 
 <footer>
 
 
 
+
+
 <div class="container">
+
+
 
 
 
@@ -534,11 +672,16 @@ Save Snippet
 
 
 
+
+
 </div>
 
 
 
+
+
 </footer>
+
 
 
 
@@ -552,6 +695,7 @@ Save Snippet
 
 
 </body>
+
 
 
 </html>
