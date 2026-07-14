@@ -386,19 +386,15 @@ async function loadTrending(){
 
         const results = data.data.map(gif=>({
 
-
-
             id:gif.id,
-
 
             title:gif.title,
 
+            url:gif.images.fixed_height.url,
 
-            url:gif.images.fixed_height.url
+            original:gif.images.original.url
 
-
-
-        }));
+}));
 
 
 
@@ -714,7 +710,7 @@ function selectGif(gif,card){
 
 
 // ===============================
-// COPY GIF IMAGE TO CLIPBOARD
+// COPY GIF TO CLIPBOARD
 // ===============================
 
 
@@ -725,9 +721,7 @@ async function copyGif(){
 
 
         showMessage(
-
         "Select a GIF first"
-
         );
 
 
@@ -735,8 +729,6 @@ async function copyGif(){
 
 
     }
-
-
 
 
 
@@ -755,11 +747,25 @@ async function copyGif(){
 
 
 
+        const gifBlob = new Blob(
+
+            [blob],
+
+            {
+                type:"image/gif"
+            }
+
+        );
+
+
+
+
         const clipboardItem = new ClipboardItem({
 
-            [blob.type]: blob
+            "image/gif": gifBlob
 
         });
+
 
 
 
@@ -768,7 +774,6 @@ async function copyGif(){
             clipboardItem
 
         ]);
-
 
 
 
@@ -788,12 +793,11 @@ async function copyGif(){
     catch(error){
 
 
-
         console.error(
 
-            "Clipboard Error:",
+        "Clipboard Error:",
 
-            error
+        error
 
         );
 
@@ -801,9 +805,10 @@ async function copyGif(){
 
         showMessage(
 
-        "Copy failed"
+        "Browser blocked GIF copy"
 
         );
+
 
 
     }
