@@ -1,22 +1,26 @@
-/* =====================================================
-   Automation Studio Web Version
+/* ===========================
+   Automation Studio Demo
    style.css
-   Part 1 - Base Layout + App Window
-===================================================== */
+   PART 1 - Updated
+=========================== */
 
 
 /* ===========================
-   RESET
+   Reset
 =========================== */
 
 
 *{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
 }
+
+
 
 
 
@@ -39,7 +43,7 @@ body{
 
 
 /* ===========================
-   BACKGROUND GLOW
+   Background Glow
 =========================== */
 
 
@@ -51,7 +55,9 @@ body::before{
 
     inset:0;
 
+
     background:
+
 
         radial-gradient(
             circle at top left,
@@ -59,11 +65,13 @@ body::before{
             transparent 40%
         ),
 
+
         radial-gradient(
             circle at bottom right,
             rgba(6,182,212,.25),
             transparent 40%
         );
+
 
     z-index:-1;
 
@@ -74,7 +82,7 @@ body::before{
 
 
 /* ===========================
-   PAGE CONTAINER
+   Container
 =========================== */
 
 
@@ -91,7 +99,7 @@ body::before{
 
 
 /* ===========================
-   NAVBAR
+   Navbar
 =========================== */
 
 
@@ -103,25 +111,23 @@ body::before{
 
     z-index:1000;
 
-    background:
 
-        rgba(15,23,42,.75);
+    background:rgba(15,23,42,.75);
 
-    backdrop-filter:
+    backdrop-filter:blur(15px);
 
-        blur(15px);
 
-    border-bottom:
-
-        1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
 
 }
 
 
 
+
+
 .navbar .container{
 
-    height:70px;
+    height:75px;
 
     display:flex;
 
@@ -139,7 +145,7 @@ body::before{
 
     color:#38bdf8;
 
-    font-size:1.7rem;
+    font-size:1.8rem;
 
     font-weight:800;
 
@@ -159,6 +165,8 @@ nav{
 
 
 
+
+
 nav a{
 
     color:#e2e8f0;
@@ -168,6 +176,8 @@ nav a{
     transition:.3s;
 
 }
+
+
 
 
 
@@ -182,39 +192,13 @@ nav a:hover{
 
 
 /* ===========================
-   HEADER
+   Demo Header
 =========================== */
 
 
 .demo-header{
 
-    padding:
-
-        60px 0 30px;
-
-}
-
-
-
-.tag{
-
-    display:inline-block;
-
-    padding:
-
-        7px 15px;
-
-    border-radius:
-
-        999px;
-
-    background:
-
-        rgba(37,99,235,.15);
-
-    color:#60a5fa;
-
-    font-weight:600;
+    padding:70px 0 35px;
 
 }
 
@@ -224,17 +208,11 @@ nav a:hover{
 
 .demo-header h1{
 
-    margin:
+    font-size:3.5rem;
 
-        18px 0;
+    margin:20px 0;
 
-    font-size:
-
-        3rem;
-
-    line-height:
-
-        1.1;
+    line-height:1.1;
 
 }
 
@@ -242,19 +220,15 @@ nav a:hover{
 
 
 
-.subtitle{
+.demo-header .subtitle{
 
-    max-width:
+    max-width:700px;
 
-        700px;
+    color:#cbd5e1;
 
-    color:
+    font-size:1.15rem;
 
-        #cbd5e1;
-
-    font-size:
-
-        1.05rem;
+    margin-bottom:30px;
 
 }
 
@@ -263,7 +237,32 @@ nav a:hover{
 
 
 /* ===========================
-   BUTTONS
+   Tag
+=========================== */
+
+
+.tag{
+
+    display:inline-block;
+
+    background:#2563eb22;
+
+    color:#60a5fa;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ===========================
+   Buttons
 =========================== */
 
 
@@ -275,17 +274,16 @@ nav a:hover{
 
     align-items:center;
 
-    padding:
 
-        12px 25px;
+    padding:13px 28px;
 
-    border-radius:
+    border-radius:12px;
 
-        12px;
 
     text-decoration:none;
 
     font-weight:600;
+
 
     cursor:pointer;
 
@@ -307,13 +305,13 @@ nav a:hover{
 
 
 
+
+
 .primary:hover{
 
     background:#3b82f6;
 
-    transform:
-
-        translateY(-3px);
+    transform:translateY(-3px);
 
 }
 
@@ -323,9 +321,7 @@ nav a:hover{
 
 .secondary{
 
-    border:
-
-        1px solid #334155;
+    border:1px solid #334155;
 
     color:white;
 
@@ -333,13 +329,13 @@ nav a:hover{
 
 
 
+
+
 .secondary:hover{
 
     background:#1e293b;
 
-    transform:
-
-        translateY(-3px);
+    transform:translateY(-3px);
 
 }
 
@@ -348,19 +344,13 @@ nav a:hover{
 
 
 /* ===========================
-   DEMO SECTION
+   Demo Section
 =========================== */
 
 
 .demo-section{
 
-    padding:
-
-        25px 0 70px;
-
-    display:flex;
-
-    justify-content:center;
+    padding:25px 0 80px;
 
 }
 
@@ -369,37 +359,29 @@ nav a:hover{
 
 
 /* ===========================
-   AUTOMATION WINDOW
+   Automation Window
 =========================== */
 
 
 .automation-window{
 
-    width:
+    background:#111827;
 
-        900px;
+    border-radius:22px;
 
-    max-width:
 
-        100%;
+    border:1px solid rgba(255,255,255,.1);
 
-    background:
-
-        #111827;
-
-    border-radius:
-
-        20px;
-
-    overflow:hidden;
-
-    border:
-
-        1px solid rgba(255,255,255,.1);
 
     box-shadow:
 
-        0 25px 70px rgba(0,0,0,.45);
+        0 20px 60px rgba(0,0,0,.35);
+
+
+    overflow:hidden;
+
+
+    height:600px;
 
 }
 
@@ -408,35 +390,29 @@ nav a:hover{
 
 
 /* ===========================
-   WINDOW HEADER
+   Window Header
 =========================== */
 
 
 .window-header{
 
-    height:
+    height:90px;
 
-        65px;
-
-    padding:
-
-        0 22px;
 
     display:flex;
 
-    justify-content:
-
-        space-between;
+    justify-content:space-between;
 
     align-items:center;
 
-    background:
 
-        #16213b;
+    padding:20px 30px;
 
-    border-bottom:
 
-        1px solid rgba(255,255,255,.08);
+    background:#16213b;
+
+
+    border-bottom:1px solid rgba(255,255,255,.08);
 
 }
 
@@ -446,9 +422,7 @@ nav a:hover{
 
 .window-header h2{
 
-    font-size:
-
-        1.25rem;
+    font-size:1.5rem;
 
 }
 
@@ -458,23 +432,12 @@ nav a:hover{
 
 .window-header p{
 
-    color:
-
-        #94a3b8;
-
-    font-size:
-
-        .85rem;
+    color:#94a3b8;
 
 }
 
 
 
-
-
-/* ===========================
-   STATUS
-=========================== */
 
 
 .status{
@@ -493,35 +456,17 @@ nav a:hover{
 
 
 
+
+
 #statusDot{
 
-    width:
-
-        10px;
-
-    height:
-
-        10px;
-
-    border-radius:
-
-        50%;
-
-    background:
-
-        #4ade80;
+    font-size:18px;
 
 }
 
-/* =====================================================
-   Automation Studio Web Version
-   style.css
-   Part 2 - Fixed Studio Layout
-===================================================== */
-
-
 /* ===========================
-   STUDIO BODY
+   Studio Body Layout
+   PART 2
 =========================== */
 
 
@@ -529,7 +474,7 @@ nav a:hover{
 
     display:flex;
 
-    height:470px;
+    height:510px;
 
     overflow:hidden;
 
@@ -540,31 +485,26 @@ nav a:hover{
 
 
 /* ===========================
-   SIDEBAR
+   Sidebar
 =========================== */
 
 
 .sidebar{
 
-    width:
+    width:260px;
 
-        230px;
 
-    flex-shrink:
+    background:#0b1220;
 
-        0;
 
-    background:
+    border-right:1px solid rgba(255,255,255,.08);
 
-        #0b1220;
 
-    border-right:
+    padding:25px;
 
-        1px solid rgba(255,255,255,.08);
 
-    padding:
+    flex-shrink:0;
 
-        18px;
 
 }
 
@@ -576,15 +516,12 @@ nav a:hover{
 
     display:flex;
 
+    justify-content:space-between;
+
     align-items:center;
 
-    justify-content:
 
-        space-between;
-
-    margin-bottom:
-
-        15px;
+    margin-bottom:20px;
 
 }
 
@@ -594,9 +531,7 @@ nav a:hover{
 
 .sidebar-title h3{
 
-    font-size:
-
-        1rem;
+    font-size:1.2rem;
 
 }
 
@@ -606,33 +541,29 @@ nav a:hover{
 
 .sidebar-title button{
 
-    width:
+    width:35px;
 
-        32px;
+    height:35px;
 
-    height:
-
-        32px;
 
     border:none;
 
-    border-radius:
+    border-radius:10px;
 
-        9px;
 
-    background:
+    background:#2563eb;
 
-        #2563eb;
 
     color:white;
 
-    font-size:
 
-        20px;
+    font-size:22px;
+
 
     cursor:pointer;
 
-    transition:.25s;
+
+    transition:.3s;
 
 }
 
@@ -642,9 +573,9 @@ nav a:hover{
 
 .sidebar-title button:hover{
 
-    background:
+    background:#3b82f6;
 
-        #3b82f6;
+    transform:translateY(-2px);
 
 }
 
@@ -653,43 +584,36 @@ nav a:hover{
 
 
 /* ===========================
-   SEARCH
+   Search Box
 =========================== */
 
 
 #search{
 
-    width:
 
-        100%;
+    width:100%;
 
-    height:
 
-        38px;
+    padding:12px 15px;
 
-    padding:
 
-        8px 12px;
+    margin-bottom:18px;
 
-    margin-bottom:
 
-        12px;
+    background:#16213b;
 
-    background:
 
-        #16213b;
+    border:1px solid rgba(255,255,255,.1);
 
-    border:
 
-        1px solid rgba(255,255,255,.1);
+    border-radius:12px;
 
-    border-radius:
-
-        9px;
 
     color:white;
 
+
     outline:none;
+
 
 }
 
@@ -699,9 +623,9 @@ nav a:hover{
 
 #search:focus{
 
-    border-color:
 
-        #38bdf8;
+    border-color:#2563eb;
+
 
 }
 
@@ -710,21 +634,21 @@ nav a:hover{
 
 
 /* ===========================
-   SNIPPET LIST
+   Snippet List
 =========================== */
 
 
 #snippetList{
 
+
     display:flex;
 
-    flex-direction:
 
-        column;
+    flex-direction:column;
 
-    gap:
 
-        7px;
+    gap:10px;
+
 
 }
 
@@ -734,47 +658,33 @@ nav a:hover{
 
 #snippetList button{
 
-    width:
 
-        100%;
+    width:100%;
 
-    height:
 
-        34px;
+    text-align:left;
 
-    padding:
 
-        6px 10px;
+    padding:12px 15px;
 
-    text-align:
 
-        left;
+    border-radius:10px;
 
-    background:
 
-        #16213b;
+    border:1px solid rgba(255,255,255,.08);
 
-    color:
 
-        #e2e8f0;
+    background:#16213b;
 
-    border:
 
-        1px solid rgba(255,255,255,.08);
+    color:#e2e8f0;
 
-    border-radius:
-
-        8px;
 
     cursor:pointer;
 
-    font-size:
 
-        .85rem;
+    transition:.25s;
 
-    transition:
-
-        .2s;
 
 }
 
@@ -784,33 +694,12 @@ nav a:hover{
 
 #snippetList button:hover{
 
-    background:
 
-        #1e293b;
-
-    border-color:
-
-        #38bdf8;
-
-}
+    background:#1e293b;
 
 
+    border-color:#38bdf8;
 
-
-
-#snippetList p{
-
-    color:
-
-        #94a3b8;
-
-    font-size:
-
-        .8rem;
-
-    text-align:
-
-        center;
 
 }
 
@@ -819,29 +708,30 @@ nav a:hover{
 
 
 /* ===========================
-   EDITOR AREA
+   Editor Area
 =========================== */
 
 
 .editor{
 
-    flex:
 
-        1;
+    flex:1;
 
-    padding:
 
-        18px;
+    padding:30px;
+
 
     display:flex;
 
-    flex-direction:
 
-        column;
+    flex-direction:column;
 
-    gap:
 
-        10px;
+    gap:15px;
+
+
+    min-width:0;
+
 
 }
 
@@ -850,39 +740,36 @@ nav a:hover{
 
 
 /* ===========================
-   KEYWORD
+   Keyword Input
 =========================== */
 
 
 #keyword{
 
-    width:
 
-        100%;
+    width:100%;
 
-    height:
 
-        38px;
+    padding:14px 18px;
 
-    padding:
 
-        8px 12px;
+    background:#16213b;
 
-    background:
 
-        #16213b;
+    border:1px solid rgba(255,255,255,.1);
 
-    border:
 
-        1px solid rgba(255,255,255,.1);
+    border-radius:12px;
 
-    border-radius:
-
-        9px;
 
     color:white;
 
+
+    font-size:1rem;
+
+
     outline:none;
+
 
 }
 
@@ -892,9 +779,9 @@ nav a:hover{
 
 #keyword:focus{
 
-    border-color:
 
-        #38bdf8;
+    border-color:#2563eb;
+
 
 }
 
@@ -903,55 +790,45 @@ nav a:hover{
 
 
 /* ===========================
-   SCRIPT BOX
+   Script Editor
 =========================== */
 
 
 #script{
 
-    width:
 
-        100%;
+    width:100%;
 
-    height:
 
-        95px;
+    height:150px;
 
-    min-height:
-
-        95px;
 
     resize:none;
 
-    padding:
 
-        12px;
+    padding:18px;
 
-    background:
 
-        #020617;
+    background:#020617;
 
-    border:
 
-        1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1);
 
-    border-radius:
 
-        10px;
+    border-radius:15px;
 
-    color:
 
-        #f8fafc;
+    color:#f8fafc;
 
-    font-family:
 
-        monospace;
+    font-family:monospace;
 
-    font-size:
 
-        .85rem;
+    font-size:.95rem;
+
 
     outline:none;
+
 
 }
 
@@ -961,9 +838,9 @@ nav a:hover{
 
 #script:focus{
 
-    border-color:
 
-        #38bdf8;
+    border-color:#38bdf8;
+
 
 }
 
@@ -972,21 +849,21 @@ nav a:hover{
 
 
 /* ===========================
-   COMMAND BUTTONS
+   Command Buttons
 =========================== */
 
 
 .actions{
 
+
     display:flex;
 
-    flex-wrap:
 
-        wrap;
+    flex-wrap:wrap;
 
-    gap:
 
-        6px;
+    gap:10px;
+
 
 }
 
@@ -996,33 +873,27 @@ nav a:hover{
 
 .actions button{
 
-    padding:
 
-        6px 10px;
+    padding:10px 16px;
 
-    border-radius:
 
-        8px;
+    border-radius:10px;
 
-    border:
 
-        1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1);
 
-    background:
 
-        #1e293b;
+    background:#1e293b;
+
 
     color:white;
 
+
     cursor:pointer;
 
-    font-size:
 
-        .75rem;
+    transition:.25s;
 
-    transition:
-
-        .2s;
 
 }
 
@@ -1032,9 +903,9 @@ nav a:hover{
 
 .actions button:hover{
 
-    background:
 
-        #2563eb;
+    background:#2563eb;
+
 
 }
 
@@ -1043,27 +914,24 @@ nav a:hover{
 
 
 /* ===========================
-   PREVIEW AREA
+   Preview Area
 =========================== */
 
 
 .preview{
 
-    padding:
 
-        12px;
+    padding:18px;
 
-    background:
 
-        #16213b;
+    background:#16213b;
 
-    border-radius:
 
-        12px;
+    border-radius:18px;
 
-    border:
 
-        1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+
 
 }
 
@@ -1073,13 +941,9 @@ nav a:hover{
 
 .preview h3{
 
-    font-size:
 
-        .95rem;
+    margin-bottom:8px;
 
-    margin-bottom:
-
-        4px;
 
 }
 
@@ -1089,17 +953,12 @@ nav a:hover{
 
 .preview p{
 
-    color:
 
-        #94a3b8;
+    color:#94a3b8;
 
-    font-size:
 
-        .75rem;
+    margin-bottom:10px;
 
-    margin-bottom:
-
-        8px;
 
 }
 
@@ -1108,39 +967,42 @@ nav a:hover{
 
 
 /* ===========================
-   TRIGGER INPUT
+   Trigger Input
 =========================== */
 
 
 #triggerBox{
 
-    width:
 
-        100%;
+    width:100%;
 
-    height:
 
-        38px;
+    height:70px;
 
-    padding:
 
-        8px 12px;
+    padding:14px;
 
-    background:
 
-        #020617;
+    background:#020617;
 
-    border:
 
-        1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.12);
 
-    border-radius:
 
-        9px;
+    border-radius:12px;
+
 
     color:white;
 
+
+    font-size:1rem;
+
+
+    resize:none;
+
+
     outline:none;
+
 
 }
 
@@ -1150,78 +1012,449 @@ nav a:hover{
 
 #triggerBox:focus{
 
-    border-color:
 
-        #38bdf8;
+    border-color:#38bdf8;
+
 
 }
 
 /* ===========================
-   Responsive Layout
+   Result Output
+   PART 3
+=========================== */
+
+
+#result{
+
+    margin-top:10px;
+
+
+    height:65px;
+
+
+    padding:15px;
+
+
+    background:#020617;
+
+
+    border-radius:12px;
+
+
+    border:1px solid rgba(255,255,255,.08);
+
+
+    color:#38bdf8;
+
+
+    font-family:monospace;
+
+
+    overflow:hidden;
+
+
+    overflow-wrap:break-word;
+
+
+}
+
+
+
+
+
+/* ===========================
+   Bottom Buttons
+=========================== */
+
+
+.buttons{
+
+
+    display:flex;
+
+
+    justify-content:flex-end;
+
+
+    gap:15px;
+
+
+    margin-top:auto;
+
+
+    padding-top:10px;
+
+
+    flex-shrink:0;
+
+
+}
+
+
+
+
+
+.buttons button{
+
+
+    padding:12px 24px;
+
+
+    min-height:42px;
+
+
+    border-radius:12px;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    font-weight:600;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+/* Delete */
+
+
+.delete{
+
+
+    background:#7f1d1d;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.delete:hover{
+
+
+    background:#dc2626;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+/* Test */
+
+
+.buttons button:not(.delete):not(.save){
+
+
+    background:#334155;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.buttons button:not(.delete):not(.save):hover{
+
+
+    background:#475569;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+/* Save */
+
+
+.save{
+
+
+    background:#2563eb;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.save:hover{
+
+
+    background:#3b82f6;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Active Status Animation
+=========================== */
+
+
+#statusDot{
+
+
+    animation:pulse 2s infinite;
+
+
+}
+
+
+
+
+
+@keyframes pulse{
+
+
+    0%{
+
+
+        opacity:1;
+
+
+    }
+
+
+    50%{
+
+
+        opacity:.4;
+
+
+    }
+
+
+    100%{
+
+
+        opacity:1;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Glass Effect
+=========================== */
+
+
+.automation-window{
+
+
+    backdrop-filter:blur(20px);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Page Scrollbar
+=========================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#0f172a;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#2563eb;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:#3b82f6;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Footer
+=========================== */
+
+
+footer{
+
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+
+    padding:35px 0;
+
+
+    text-align:center;
+
+
+    color:#94a3b8;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Responsive Tablet
 =========================== */
 
 
 @media(max-width:900px){
 
 
+    .automation-window{
+
+
+        height:auto;
+
+
+    }
+
+
+
+
+
     .studio-body{
+
+
+        height:auto;
+
 
         flex-direction:column;
 
-        min-height:auto;
 
     }
+
+
 
 
 
     .sidebar{
 
+
         width:100%;
+
 
         border-right:none;
 
+
         border-bottom:1px solid rgba(255,255,255,.08);
 
-        max-height:220px;
-
-        overflow-y:auto;
 
     }
+
+
 
 
 
     .editor{
 
+
         padding:25px;
 
-    }
-
-
-
-    .demo-header h1{
-
-        font-size:3rem;
 
     }
-
-
-
-    .automation-window{
-
-        height:auto;
-
-    }
-
-
-
-    #script{
-
-        min-height:120px;
-
-        max-height:150px;
-
-    }
-
 
 
 }
@@ -1230,8 +1463,12 @@ nav a:hover{
 
 
 
+
+
+
+
 /* ===========================
-   Mobile Layout
+   Responsive Mobile
 =========================== */
 
 
@@ -1284,7 +1521,7 @@ nav a:hover{
         text-align:center;
 
 
-        padding:60px 0 30px;
+        padding:50px 0 30px;
 
 
     }
@@ -1305,34 +1542,10 @@ nav a:hover{
 
 
 
-    .demo-header .subtitle{
-
-
-        font-size:1rem;
-
-
-    }
-
-
-
-
-
-    .automation-window{
-
-
-        border-radius:15px;
+    .window-header{
 
 
         height:auto;
-
-
-    }
-
-
-
-
-
-    .window-header{
 
 
         flex-direction:column;
@@ -1341,94 +1554,7 @@ nav a:hover{
         align-items:flex-start;
 
 
-        gap:15px;
-
-
-        padding:20px;
-
-
-    }
-
-
-
-
-
-    .studio-body{
-
-
-        min-height:auto;
-
-
-    }
-
-
-
-
-
-    .sidebar{
-
-
-        padding:18px;
-
-
-    }
-
-
-
-
-
-    .editor{
-
-
-        padding:18px;
-
-
-        gap:15px;
-
-
-    }
-
-
-
-
-
-    #keyword,
-
-
-    #script,
-
-
-    #triggerBox{
-
-
-        font-size:.9rem;
-
-
-    }
-
-
-
-
-
-    #script{
-
-
-        min-height:120px;
-
-
-        max-height:140px;
-
-
-    }
-
-
-
-
-
-    .actions{
-
-
-        gap:8px;
+        gap:12px;
 
 
     }
@@ -1455,9 +1581,6 @@ nav a:hover{
         flex-direction:column;
 
 
-        margin-bottom:20px;
-
-
     }
 
 
@@ -1471,8 +1594,6 @@ nav a:hover{
 
 
     }
-
-
 
 
 }
@@ -1518,18 +1639,6 @@ nav a:hover{
 
 
 
-    .sidebar{
-
-
-        padding:15px;
-
-
-    }
-
-
-
-
-
     .editor{
 
 
@@ -1545,186 +1654,10 @@ nav a:hover{
     #script{
 
 
-        min-height:100px;
-
-
-        max-height:120px;
-
-
-    }
-
-
-
-
-
-    .window-header h2{
-
-
-        font-size:1.2rem;
-
-
-    }
-
-
-
-
-
-    .status{
-
-
-        font-size:.9rem;
+        height:120px;
 
 
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-/* ===========================
-   Final Demo Containment Fix
-=========================== */
-
-
-/*
-    Prevent the Automation Studio
-    demo itself from creating a
-    second scrollbar.
-*/
-
-
-.automation-window{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.studio-body{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.sidebar{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.editor{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.preview{
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-#result{
-
-
-    max-height:100px;
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-/*
-    Keep everything visible inside
-    the demo window.
-*/
-
-
-.demo-section{
-
-
-    overflow:visible;
-
-
-}
-
-
-
-
-
-/*
-    Prevent browser from shrinking
-    buttons out of view.
-*/
-
-
-.buttons{
-
-
-    flex-shrink:0;
-
-
-}
-
-
-
-
-
-.save,
-.delete,
-.buttons button{
-
-
-    white-space:nowrap;
-
-
-}
-
-
-
-
-
-/* ===========================
-   End CSS
-=========================== */
