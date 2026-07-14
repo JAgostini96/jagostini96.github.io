@@ -1,0 +1,758 @@
+/* ===========================
+   Projects / Highlight
+=========================== */
+
+
+.highlight-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:28px;
+
+    align-items:stretch;
+
+}
+
+
+
+.highlight{
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:30px;
+
+    min-height:390px;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Project Titles */
+
+.highlight h3{
+
+    color:#38bdf8;
+
+    margin-bottom:18px;
+
+    font-size:1.35rem;
+
+}
+
+
+
+/* Project Text */
+
+.highlight p{
+
+    color:#cbd5e1;
+
+    margin-bottom:20px;
+
+    line-height:1.7;
+
+}
+
+
+/* Technology paragraph spacing */
+
+.highlight p:nth-of-type(2){
+
+    margin-top:10px;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.highlight strong{
+
+    color:white;
+
+}
+
+
+
+/* Keep button at bottom without covering text */
+
+.highlight .btn{
+
+    margin-top:auto;
+
+    align-self:flex-start;
+
+    flex-shrink:0;
+
+}
+
+
+
+/* Demo button sizing */
+
+.highlight .btn.primary{
+
+    min-width:165px;
+
+    padding:12px 24px;
+
+}
+
+
+
+/* Hover */
+
+.highlight:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.15);
+
+}
+
+/* ===========================
+   Technology Badges
+=========================== */
+
+
+.tech-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin-top:5px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.tech-list span{
+
+    background:#2563eb22;
+
+    color:#60a5fa;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    border:1px solid rgba(96,165,250,.25);
+
+}
+
+
+
+
+
+/* ===========================
+   Timeline
+=========================== */
+
+
+.timeline{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+
+.timeline-item{
+
+    padding:30px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+
+
+.timeline-item h3{
+
+    margin-bottom:5px;
+
+}
+
+
+
+.company{
+
+    display:block;
+
+    color:#38bdf8;
+
+    font-weight:600;
+
+    margin-top:8px;
+
+}
+
+
+
+.date{
+
+    display:block;
+
+    color:#94a3b8;
+
+    margin:8px 0 20px;
+
+}
+
+
+
+.timeline ul{
+
+    padding-left:20px;
+
+}
+
+
+
+.timeline li{
+
+    margin-bottom:12px;
+
+    color:#dbe4ef;
+
+}
+
+
+
+
+
+/* ===========================
+   Contact
+=========================== */
+
+
+.contact-card{
+
+    text-align:center;
+
+}
+
+
+
+.contact-card p{
+
+    color:#cbd5e1;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.contact-buttons{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+
+
+/* ===========================
+   Footer
+=========================== */
+
+
+footer{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+}
+
+
+
+
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#3b82f6;
+
+}
+
+
+
+
+
+/* ===========================
+   Scroll Animations
+=========================== */
+
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+        opacity .8s ease,
+
+        transform .8s ease;
+
+}
+
+
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+
+
+
+/* ===========================
+   Button Ripple
+=========================== */
+
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    animation:ripple .6s linear;
+
+    background:rgba(255,255,255,.35);
+
+    pointer-events:none;
+
+}
+
+
+
+@keyframes ripple{
+
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+/* ===========================
+   Scroll To Top
+=========================== */
+
+
+.scroll-top{
+
+    position:fixed;
+
+    bottom:25px;
+
+    right:25px;
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+
+
+.scroll-top.visible{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+
+
+.scroll-top:hover{
+
+    background:#3b82f6;
+
+    transform:translateY(-4px);
+
+}
+
+
+
+
+
+/* ===========================
+   Tablet
+=========================== */
+
+
+@media(max-width:900px){
+
+
+    .hero h1{
+
+        font-size:3rem;
+
+    }
+
+
+
+    .subtitle{
+
+        font-size:1.1rem;
+
+    }
+
+
+
+    nav{
+
+        gap:16px;
+
+    }
+
+
+
+    .highlight-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
+
+
+
+
+
+/* ===========================
+   Mobile
+=========================== */
+
+
+@media(max-width:700px){
+
+
+    .navbar .container{
+
+
+        flex-direction:column;
+
+
+        height:auto;
+
+
+        padding:18px 0;
+
+
+        gap:15px;
+
+
+    }
+
+
+
+    nav{
+
+
+        flex-wrap:wrap;
+
+
+        justify-content:center;
+
+
+        gap:15px;
+
+
+    }
+
+
+
+    .hero{
+
+
+        min-height:70vh;
+
+
+        text-align:center;
+
+
+    }
+
+
+
+    .hero-content{
+
+
+        justify-content:center;
+
+
+    }
+
+
+
+    .hero-buttons{
+
+
+        justify-content:center;
+
+
+    }
+
+
+
+    .hero h1{
+
+
+        font-size:2.5rem;
+
+
+    }
+
+
+
+    .subtitle{
+
+
+        font-size:1rem;
+
+
+    }
+
+
+
+    .section{
+
+
+        padding:70px 0;
+
+
+    }
+
+
+
+    .section h2{
+
+
+        font-size:2rem;
+
+
+    }
+
+
+
+    .btn{
+
+
+        width:100%;
+
+
+        max-width:320px;
+
+
+    }
+
+
+
+    .contact-buttons{
+
+
+        flex-direction:column;
+
+
+        align-items:center;
+
+
+    }
+
+
+
+    .card,
+    .skill-card,
+    .highlight,
+    .timeline-item{
+
+
+        padding:24px;
+
+
+    }
+
+
+
+    .highlight{
+
+
+        min-height:auto;
+
+
+    }
+
+
+}
+
+
+
+
+
+/* ===========================
+   Small Phones
+=========================== */
+
+
+@media(max-width:480px){
+
+
+    .container{
+
+        width:92%;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:2.1rem;
+
+    }
+
+
+
+    .logo{
+
+        font-size:1.5rem;
+
+    }
+
+
+
+    nav a{
+
+        font-size:.9rem;
+
+    }
+
+
+
+    .section h2{
+
+        font-size:1.8rem;
+
+    }
+
+
+
+    .scroll-top{
+
+        width:42px;
+
+        height:42px;
+
+        font-size:18px;
+
+        right:18px;
+
+        bottom:18px;
+
+    }
+
+
+}
