@@ -494,28 +494,179 @@ function searchSnippets(){
 =================================== */
 
 
-/* ==========================
-   COMMAND PROCESSOR
-========================== */
-
+// ===============================
+// SCRIPT EXECUTION ENGINE
+// ===============================
 
 function executeScript(script){
 
 
-    let output = script;
+    let result = script;
 
 
 
-    /*
-       DATE
-    */
+    // DATE
 
-    output =
-    output.replace(
-        /\{date\}/gi,
-        new Date()
-        .toLocaleDateString()
+    result = result.replace(
+        /\{date\}/g,
+        new Date().toLocaleDateString()
     );
+
+
+
+    // TIME
+
+    result = result.replace(
+        /\{time\}/g,
+        new Date().toLocaleTimeString()
+    );
+
+
+
+    // SLEEP
+
+    result = result.replace(
+        /\{sleep:(.*?)\}/g,
+        function(match, seconds){
+
+            return `[Waiting ${seconds} seconds]`;
+
+        }
+    );
+
+
+
+    // ENTER KEY
+
+    result = result.replace(
+        /\{enter\}/g,
+        "[Keyboard: ENTER]"
+    );
+
+
+
+    // TAB KEY
+
+    result = result.replace(
+        /\{tab\}/g,
+        "[Keyboard: TAB]"
+    );
+
+
+
+    // SPACE KEY
+
+    result = result.replace(
+        /\{space\}/g,
+        "[Keyboard: SPACE]"
+    );
+
+
+
+    // BACKSPACE
+
+    result = result.replace(
+        /\{backspace\}/g,
+        "[Keyboard: BACKSPACE]"
+    );
+
+
+
+    // COPY
+
+    result = result.replace(
+        /\{ctrl\+c\}/g,
+        "[Keyboard Shortcut: CTRL+C]"
+    );
+
+
+
+    // PASTE
+
+    result = result.replace(
+        /\{ctrl\+v\}/g,
+        "[Keyboard Shortcut: CTRL+V]"
+    );
+
+
+
+    // CUT
+
+    result = result.replace(
+        /\{ctrl\+x\}/g,
+        "[Keyboard Shortcut: CTRL+X]"
+    );
+
+
+
+    // SAVE
+
+    result = result.replace(
+        /\{ctrl\+s\}/g,
+        "[Keyboard Shortcut: CTRL+S]"
+    );
+
+
+
+    // MOUSE CLICK
+
+    result = result.replace(
+        /\{click:(.*?)\}/g,
+        function(match, location){
+
+            return `[Mouse Click: ${location}]`;
+
+        }
+    );
+
+
+
+    // DOUBLE CLICK
+
+    result = result.replace(
+        /\{doubleclick:(.*?)\}/g,
+        function(match, location){
+
+            return `[Double Click: ${location}]`;
+
+        }
+    );
+
+
+
+    // MOVE MOUSE
+
+    result = result.replace(
+        /\{move:(.*?)\}/g,
+        function(match, location){
+
+            return `[Move Mouse: ${location}]`;
+
+        }
+    );
+
+
+
+    // HOTKEY SUPPORT
+
+    result = result.replace(
+        /\{(ctrl|alt|shift)\+(.*?)\}/g,
+        function(match,key,value){
+
+            return `[Keyboard Shortcut: ${key.toUpperCase()}+${value}]`;
+
+        }
+    );
+
+
+
+    return result.replace(
+        /\n/g,
+        "<br>"
+    );
+
+
+}
 
 
 
