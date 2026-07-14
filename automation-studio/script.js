@@ -1,7 +1,9 @@
 /* =====================================================
    Automation Studio Web Version
    script.js
-   Part 1 - Core Engine
+
+   PART 1
+   Core App + Storage + Snippet Management
 ===================================================== */
 
 
@@ -19,6 +21,7 @@ JSON.parse(
 ) || {};
 
 
+
 let selectedScript = null;
 
 
@@ -26,6 +29,10 @@ let automationEnabled = true;
 
 
 let expansionCount = 0;
+
+
+
+let typedBuffer = "";
 
 
 
@@ -38,40 +45,61 @@ const keywordInput =
 document.getElementById("keyword");
 
 
+
 const editor =
 document.getElementById("script");
+
 
 
 const snippetList =
 document.getElementById("snippetList");
 
 
+
 const searchBox =
 document.getElementById("search");
+
+
+
+const triggerBox =
+document.getElementById("triggerBox");
+
 
 
 const saveButton =
 document.getElementById("saveSnippet");
 
 
+
 const deleteButton =
 document.getElementById("deleteSnippet");
+
 
 
 const newButton =
 document.getElementById("newSnippetButton");
 
 
+
+const testButton =
+document.getElementById("testRun");
+
+
+
 const result =
 document.getElementById("result");
+
 
 
 const statusText =
 document.getElementById("statusText");
 
 
+
 const statusDot =
 document.getElementById("statusDot");
+
+
 
 
 
@@ -92,6 +120,9 @@ function saveScripts(){
 
 
 
+
+
+
 /* ==========================
    INITIAL LOAD
 ========================== */
@@ -103,6 +134,11 @@ updateStatus();
 
 
 
+
+
+
+
+
 /* ==========================
    SNIPPET LIST
 ========================== */
@@ -111,7 +147,13 @@ updateStatus();
 function refreshScripts(filter=""){
 
 
+    if(!snippetList)
+        return;
+
+
+
     snippetList.innerHTML="";
+
 
 
     let keys =
@@ -131,7 +173,9 @@ function refreshScripts(filter=""){
                 filter.toLowerCase()
             )
         ){
+
             return;
+
         }
 
 
@@ -143,6 +187,15 @@ function refreshScripts(filter=""){
 
         button.textContent =
         keyword;
+
+
+
+        if(keyword === selectedScript){
+
+            button.style.background =
+            "#2563eb";
+
+        }
 
 
 
@@ -162,6 +215,8 @@ function refreshScripts(filter=""){
 
 
 
+
+
     if(snippetList.children.length===0){
 
 
@@ -169,11 +224,12 @@ function refreshScripts(filter=""){
         document.createElement("p");
 
 
-        empty.style.color="#94a3b8";
-
-
         empty.textContent =
         "No snippets yet";
+
+
+        empty.style.color =
+        "#94a3b8";
 
 
         snippetList.appendChild(empty);
@@ -182,7 +238,12 @@ function refreshScripts(filter=""){
     }
 
 
+
 }
+
+
+
+
 
 
 
@@ -201,7 +262,8 @@ function selectScript(keyword){
 
 
 
-    selectedScript = keyword;
+    selectedScript =
+    keyword;
 
 
 
@@ -212,6 +274,10 @@ function selectScript(keyword){
 
     editor.value =
     scripts[keyword].script;
+
+
+
+    refreshScripts();
 
 
 
@@ -227,6 +293,11 @@ function selectScript(keyword){
 
 
 
+
+
+
+
+
 /* ==========================
    NEW SCRIPT
 ========================== */
@@ -235,13 +306,23 @@ function selectScript(keyword){
 newButton.onclick=function(){
 
 
-    selectedScript=null;
+    selectedScript =
+    null;
 
 
-    keywordInput.value="";
+
+    keywordInput.value =
+    "";
 
 
-    editor.value="";
+
+    editor.value =
+    "";
+
+
+
+    refreshScripts();
+
 
 
     log(
@@ -250,6 +331,9 @@ newButton.onclick=function(){
 
 
 };
+
+
+
 
 
 
@@ -281,13 +365,15 @@ saveButton.onclick=function(){
 
 
         log(
-        "ERROR: Keyword required"
+            "ERROR: Keyword required"
         );
 
 
         return;
 
     }
+
+
 
 
 
@@ -295,7 +381,7 @@ saveButton.onclick=function(){
 
 
         log(
-        "ERROR: Script empty"
+            "ERROR: Script empty"
         );
 
 
@@ -307,17 +393,9 @@ saveButton.onclick=function(){
 
 
 
-    let oldData =
-    scripts[keyword] || {};
-
-
-
 
     /*
-       Rename support:
-       If user selects hello,
-       changes keyword to hi,
-       old hello gets removed
+       Handle rename
     */
 
 
@@ -327,9 +405,18 @@ saveButton.onclick=function(){
         scripts[selectedScript]
     ){
 
+
         delete scripts[selectedScript];
 
+
     }
+
+
+
+
+
+    let old =
+    scripts[keyword] || {};
 
 
 
@@ -342,19 +429,23 @@ saveButton.onclick=function(){
 
 
         uses:
-        oldData.uses || 0,
+        old.uses || 0,
 
 
         last_used:
-        oldData.last_used || null,
+        old.last_used || null,
 
 
         created:
-        oldData.created ||
-        new Date().toISOString()
+        old.created ||
+        new Date()
+        .toISOString()
 
 
     };
+
+
+
 
 
 
@@ -366,7 +457,12 @@ saveButton.onclick=function(){
     saveScripts();
 
 
+
     refreshScripts();
+
+
+
+    updateStatus();
 
 
 
@@ -377,11 +473,9 @@ saveButton.onclick=function(){
 
 
 
-    updateStatus();
-
-
-
 };
+
+
 
 
 
@@ -405,17 +499,20 @@ deleteButton.onclick=function(){
 
 
 
+
     if(!scripts[keyword]){
 
 
         log(
-        "Nothing selected"
+            "Nothing selected"
         );
 
 
         return;
 
+
     }
+
 
 
 
@@ -429,13 +526,18 @@ deleteButton.onclick=function(){
 
 
 
-    selectedScript=null;
+    selectedScript =
+    null;
 
 
 
-    keywordInput.value="";
+    keywordInput.value =
+    "";
 
-    editor.value="";
+
+
+    editor.value =
+    "";
 
 
 
@@ -443,11 +545,14 @@ deleteButton.onclick=function(){
 
 
 
+    updateStatus();
+
+
+
     log(
         "Deleted: "
         + keyword
     );
-
 
 
 };
@@ -458,9 +563,13 @@ deleteButton.onclick=function(){
 
 
 
+
 /* ==========================
    SEARCH
 ========================== */
+
+
+if(searchBox){
 
 
 searchBox.oninput=function(){
@@ -474,6 +583,11 @@ searchBox.oninput=function(){
 };
 
 
+}
+
+
+
+
 
 
 
@@ -485,6 +599,11 @@ searchBox.oninput=function(){
 
 
 function log(message){
+
+
+    if(!result)
+        return;
+
 
 
     result.textContent +=
@@ -509,6 +628,12 @@ function log(message){
 function updateStatus(){
 
 
+    if(!statusText)
+        return;
+
+
+
+
     if(automationEnabled){
 
 
@@ -516,6 +641,8 @@ function updateStatus(){
         "Active";
 
 
+
+        if(statusDot)
         statusDot.style.color =
         "#4ade80";
 
@@ -528,6 +655,8 @@ function updateStatus(){
         "Paused";
 
 
+
+        if(statusDot)
         statusDot.style.color =
         "#ef4444";
 
@@ -535,44 +664,15 @@ function updateStatus(){
     }
 
 
-}
-
-
-
-
-
-
-
-/* ==========================
-   PAUSE TOGGLE
-========================== */
-
-
-function toggleAutomation(){
-
-
-    automationEnabled =
-    !automationEnabled;
-
-
-    updateStatus();
-
-
-
-    log(
-        automationEnabled ?
-        "Automation enabled":
-        "Automation paused"
-    );
-
 
 }
 
 /* =====================================================
    Automation Studio Web Version
-   Part 2 - Script Engine
-===================================================== */
 
+   PART 2
+   Script Engine + Command Parser
+===================================================== */
 
 
 /* ==========================
@@ -591,6 +691,7 @@ const actions = {
     },
 
 
+
     time(command){
 
         return new Date()
@@ -598,33 +699,6 @@ const actions = {
 
     },
 
-
-    enter(command){
-
-        return "⌨ [Enter]";
-
-    },
-
-
-    tab(command){
-
-        return "⌨ [Tab]";
-
-    },
-
-
-    space(command){
-
-        return "⌨ [Space]";
-
-    },
-
-
-    backspace(command){
-
-        return "⌨ [Backspace]";
-
-    },
 
 
     sleep(command){
@@ -635,8 +709,9 @@ const actions = {
         .split(":")[1];
 
 
+
         return (
-            "⏱ Waiting "
+            "⏱ Wait "
             +
             seconds
             +
@@ -647,59 +722,104 @@ const actions = {
     },
 
 
+
     click(command){
 
 
-        let pos =
+        let position =
         command
         .split(":")[1];
+
 
 
         return (
             "🖱 Click "
             +
-            pos
+            position
         );
 
 
     },
+
 
 
     doubleclick(command){
 
 
-        let pos =
+        let position =
         command
         .split(":")[1];
+
 
 
         return (
             "🖱 Double Click "
             +
-            pos
+            position
         );
 
 
     },
 
 
+
     move(command){
 
 
-        let pos =
+        let position =
         command
         .split(":")[1];
+
 
 
         return (
             "🖱 Move Mouse "
             +
-            pos
+            position
         );
 
 
-    }
+    },
 
+
+
+    enter(command){
+
+        return "⌨ Enter";
+
+    },
+
+
+
+    tab(command){
+
+        return "⌨ Tab";
+
+    },
+
+
+
+    space(command){
+
+        return "⌨ Space";
+
+    },
+
+
+
+    backspace(command){
+
+        return "⌫ Backspace";
+
+    },
+
+
+
+    esc(command){
+
+        return "⎋ Escape";
+
+    }
 
 
 };
@@ -710,21 +830,33 @@ const actions = {
 
 
 
+
+
 /* ==========================
-   COMMAND HANDLER
+   COMMAND EXECUTION
 ========================== */
 
 
 function executeCommand(command){
 
 
+
     command =
-    command.toLowerCase();
+    command
+    .toLowerCase()
+    .trim();
+
+
+
 
 
 
     /*
-       Exact matches
+       Exact commands
+
+       {date}
+       {enter}
+
     */
 
 
@@ -738,15 +870,19 @@ function executeCommand(command){
 
 
 
+
+
     /*
        Prefix commands
 
-       sleep:1
-       click:200,300
+       {sleep:1}
+       {click:200,300}
+
     */
 
 
     for(let key in actions){
+
 
 
         if(
@@ -767,11 +903,15 @@ function executeCommand(command){
 
 
 
+
+
+
     /*
        Hotkeys
 
-       ctrl+c
-       alt+tab
+       {ctrl+c}
+       {alt+tab}
+
     */
 
 
@@ -794,14 +934,26 @@ function executeCommand(command){
 
 
 
+
+
+    /*
+       Normal key press
+
+       {a}
+       {backspace}
+
+    */
+
+
     return (
+
         "⌨ Key ["
         +
         command
         +
         "]"
-    );
 
+    );
 
 
 }
@@ -822,6 +974,7 @@ function executeCommand(command){
 function parseScript(script){
 
 
+
     let parts =
     script.split(
         /(\{.*?\})/
@@ -829,15 +982,20 @@ function parseScript(script){
 
 
 
-    let output="";
+    let output = "";
+
+
 
 
 
     parts.forEach(part=>{
 
 
+
         if(!part)
             return;
+
+
 
 
 
@@ -849,10 +1007,11 @@ function parseScript(script){
         ){
 
 
+
             let command =
             part.substring(
                 1,
-                part.length-1
+                part.length - 1
             );
 
 
@@ -878,10 +1037,13 @@ function parseScript(script){
 
 
 
+
     return output;
 
 
 }
+
+
 
 
 
@@ -894,8 +1056,8 @@ function parseScript(script){
 ========================== */
 
 
-const testButton =
-document.getElementById("testRun");
+
+if(testButton){
 
 
 
@@ -904,11 +1066,12 @@ testButton.onclick=function(){
 
 
     let script =
-    editor.value;
+    editor.value.trim();
 
 
 
-    if(!script){
+
+    if(script===""){
 
 
         log(
@@ -918,7 +1081,10 @@ testButton.onclick=function(){
 
         return;
 
+
     }
+
+
 
 
 
@@ -928,14 +1094,23 @@ testButton.onclick=function(){
 
 
 
+
+
+
     result.textContent =
+
     "TEST RUN\n\n"
+
     +
+
     preview;
 
 
 
 };
+
+}
+
 
 
 
@@ -945,18 +1120,26 @@ testButton.onclick=function(){
 
 
 /* ==========================
-   COMMAND BUTTON INSERTS
+   ACTION BUTTON INSERTS
 ========================== */
 
 
-document
-.querySelectorAll(
+
+let actionButtons =
+document.querySelectorAll(
     ".actions button"
-)
-.forEach(button=>{
+);
+
+
+
+
+
+actionButtons.forEach(button=>{
+
 
 
     button.onclick=function(){
+
 
 
         let command =
@@ -964,15 +1147,431 @@ document
 
 
 
-        editor.value +=
-        command;
+
+
+        if(command){
+
+
+            editor.value +=
+            command;
 
 
 
-        editor.focus();
+            editor.focus();
+
+
+        }
+
 
 
     };
 
 
+
 });
+
+/* =====================================================
+   Automation Studio Web Version
+
+   PART 3
+   Live Trigger Expansion Engine
+===================================================== */
+
+
+/* ==========================
+   KEYBOARD BUFFER SYSTEM
+
+   Mimics:
+
+   keyboard_worker()
+
+   from Python app
+
+========================== */
+
+
+let triggerBuffer = "";
+
+
+
+
+
+if(triggerBox){
+
+
+
+triggerBox.addEventListener(
+"input",
+function(){
+
+
+
+    if(!automationEnabled)
+        return;
+
+
+
+
+    triggerBuffer =
+    triggerBox.value;
+
+
+
+
+    checkForExpansion();
+
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   CHECK TRIGGERS
+========================== */
+
+
+function checkForExpansion(){
+
+
+
+    let currentText =
+    triggerBuffer.toLowerCase();
+
+
+
+
+
+
+    for(let keyword in scripts){
+
+
+
+        let compareKeyword =
+        keyword.toLowerCase();
+
+
+
+
+
+
+        if(
+            currentText.endsWith(
+                compareKeyword
+            )
+        ){
+
+
+
+            expandTrigger(keyword);
+
+
+
+            return;
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   EXPAND SNIPPET
+
+   Equivalent to:
+
+   backspace keyword
+   execute_script()
+
+========================== */
+
+
+function expandTrigger(keyword){
+
+
+
+    let data =
+    scripts[keyword];
+
+
+
+    if(!data)
+        return;
+
+
+
+
+
+
+
+    /*
+       Remove trigger word
+
+       Example:
+
+       hello
+
+       becomes:
+
+       ""
+
+    */
+
+
+    let remaining =
+
+    triggerBuffer.substring(
+
+        0,
+
+        triggerBuffer.length -
+        keyword.length
+
+    );
+
+
+
+
+
+
+
+    let expansion =
+    parseScript(
+        data.script
+    );
+
+
+
+
+
+
+    /*
+       Replace text
+
+    */
+
+
+    triggerBox.value =
+    remaining +
+    expansion;
+
+
+
+
+
+    triggerBuffer =
+    triggerBox.value;
+
+
+
+
+
+
+
+
+    /*
+       Update statistics
+
+    */
+
+
+    data.uses =
+    (data.uses || 0)+1;
+
+
+
+
+    data.last_used =
+    new Date()
+    .toISOString();
+
+
+
+
+
+    expansionCount++;
+
+
+
+
+
+    saveScripts();
+
+
+
+    updateStatus();
+
+
+
+
+
+
+    result.textContent =
+
+    "EXPANDED:\n\n"
+
+    +
+
+    expansion;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   STATUS UPDATE
+
+   Adds expansion count
+
+========================== */
+
+
+function updateStatus(){
+
+
+
+    if(!statusText)
+        return;
+
+
+
+
+
+    if(automationEnabled){
+
+
+
+        statusText.textContent =
+
+        "Active  •  "
+
+        +
+
+        Object.keys(scripts).length
+
+        +
+
+        " snippets  •  "
+
+        +
+
+        expansionCount
+
+        +
+
+        " expanded";
+
+
+
+
+
+
+        if(statusDot)
+
+        statusDot.style.color =
+        "#4ade80";
+
+
+
+    }
+
+    else{
+
+
+
+        statusText.textContent =
+        "Paused";
+
+
+
+        if(statusDot)
+
+        statusDot.style.color =
+        "#ef4444";
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   PAUSE BUTTON SUPPORT
+
+   Optional if button exists
+
+========================== */
+
+
+const pauseButton =
+document.getElementById("pauseAutomation");
+
+
+
+if(pauseButton){
+
+
+
+pauseButton.onclick=function(){
+
+
+
+    automationEnabled =
+    !automationEnabled;
+
+
+
+    updateStatus();
+
+
+
+
+
+};
+
+
+
+}
