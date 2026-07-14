@@ -1,75 +1,446 @@
-/* ===========================
-   Automation Studio Demo
-   CSS UPDATE PART 1
-=========================== */
+/* =====================================================
+   Automation Studio Web Version
+   style.css
+   Part 1 - Layout + App Frame
+===================================================== */
 
 
 /* ===========================
-   Demo Section
+   RESET
 =========================== */
 
-.demo-section{
 
-    padding:40px 0 80px;
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:#0f172a;
+
+    color:#f8fafc;
+
+    line-height:1.6;
+
+    overflow-x:hidden;
 
 }
 
 
 
 /* ===========================
-   Automation Window
+   BACKGROUND EFFECT
+=========================== */
+
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at top left,
+            rgba(37,99,235,.35),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            circle at bottom right,
+            rgba(6,182,212,.25),
+            transparent 40%
+        );
+
+    z-index:-1;
+
+}
+
+
+
+
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+
+.container{
+
+    width:min(1100px,92%);
+
+    margin:auto;
+
+}
+
+
+
+
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:
+
+        rgba(15,23,42,.75);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.navbar .container{
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+
+
+
+.logo{
+
+    color:#38bdf8;
+
+    font-size:1.7rem;
+
+    font-weight:800;
+
+}
+
+
+
+
+
+nav{
+
+    display:flex;
+
+    gap:25px;
+
+}
+
+
+
+nav a{
+
+    color:#e2e8f0;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+
+
+nav a:hover{
+
+    color:#38bdf8;
+
+}
+
+
+
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+
+.demo-header{
+
+    padding:
+
+        70px 0 35px;
+
+}
+
+
+
+.tag{
+
+    display:inline-block;
+
+    background:
+
+        rgba(37,99,235,.15);
+
+    color:#60a5fa;
+
+    padding:
+
+        7px 15px;
+
+    border-radius:
+
+        999px;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+.demo-header h1{
+
+    margin:
+
+        20px 0;
+
+    font-size:
+
+        3.3rem;
+
+    line-height:
+
+        1.1;
+
+}
+
+
+
+
+
+.subtitle{
+
+    max-width:700px;
+
+    color:#cbd5e1;
+
+    font-size:
+
+        1.1rem;
+
+}
+
+
+
+
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+
+.btn{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+
+        12px 25px;
+
+    border-radius:
+
+        12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+
+
+.primary{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.primary:hover{
+
+    background:#3b82f6;
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+
+
+
+
+.secondary{
+
+    border:
+
+        1px solid #334155;
+
+    color:white;
+
+}
+
+
+
+.secondary:hover{
+
+    background:#1e293b;
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+
+
+
+
+/* ===========================
+   DEMO SECTION
+=========================== */
+
+
+.demo-section{
+
+    padding:
+
+        30px 0 80px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+
+
+/* ===========================
+   MAIN APP WINDOW
 =========================== */
 
 
 .automation-window{
 
-    width:900px;
+    width:
 
-    max-width:100%;
+        950px;
 
-    margin:auto;
+    max-width:
 
-    background:#111827;
+        100%;
 
-    border-radius:22px;
+    background:
+
+        #111827;
+
+    border-radius:
+
+        22px;
 
     overflow:hidden;
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+
+        1px solid rgba(255,255,255,.1);
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.35);
+
+        0 25px 70px rgba(0,0,0,.45);
 
 }
 
 
 
+
+
 /* ===========================
-   Window Header
+   WINDOW HEADER
 =========================== */
 
 
 .window-header{
 
-    display:flex;
+    height:
 
-    justify-content:space-between;
+        75px;
+
+    padding:
+
+        0 25px;
+
+    display:flex;
 
     align-items:center;
 
-    padding:18px 25px;
+    justify-content:space-between;
 
-    background:#16213b;
+    background:
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+        #16213b;
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
 
 }
 
 
 
+
+
 .window-header h2{
 
-    font-size:1.25rem;
+    font-size:
+
+        1.35rem;
 
 }
 
@@ -77,16 +448,57 @@
 
 .window-header p{
 
-    font-size:.9rem;
+    color:
 
-    color:#94a3b8;
+        #94a3b8;
+
+    font-size:
+
+        .9rem;
 
 }
 
 
 
+
+
 /* ===========================
-   Studio Body Layout
+   STATUS
+=========================== */
+
+
+.status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#4ade80;
+
+    font-weight:600;
+
+}
+
+
+
+#statusDot{
+
+    font-size:18px;
+
+}
+
+/* =====================================================
+   Automation Studio Web Version
+   style.css
+   Part 2 - Studio Layout + Editor
+===================================================== */
+
+
+
+/* ===========================
+   STUDIO BODY
 =========================== */
 
 
@@ -94,7 +506,7 @@
 
     display:flex;
 
-    height:520px;
+    height:540px;
 
     overflow:hidden;
 
@@ -102,20 +514,24 @@
 
 
 
+
+
 /* ===========================
-   Sidebar
+   SIDEBAR
 =========================== */
 
 
 .sidebar{
 
-    width:240px;
+    width:250px;
 
     flex-shrink:0;
 
     background:#0b1220;
 
-    border-right:1px solid rgba(255,255,255,.08);
+    border-right:
+
+        1px solid rgba(255,255,255,.08);
 
     padding:20px;
 
@@ -125,8 +541,200 @@
 
 
 
+
+
+.sidebar-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+
+
+
+
+.sidebar-title h3{
+
+    font-size:
+
+        1.1rem;
+
+}
+
+
+
+
+
+.sidebar-title button{
+
+    width:34px;
+
+    height:34px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+
+
+.sidebar-title button:hover{
+
+    background:#3b82f6;
+
+    transform:
+
+        translateY(-2px);
+
+}
+
+
+
+
+
 /* ===========================
-   Editor Area
+   SEARCH
+=========================== */
+
+
+#search{
+
+    width:100%;
+
+    padding:
+
+        11px 14px;
+
+    margin-bottom:18px;
+
+    background:#16213b;
+
+    border:
+
+        1px solid rgba(255,255,255,.1);
+
+    border-radius:10px;
+
+    color:white;
+
+    outline:none;
+
+}
+
+
+
+
+
+#search:focus{
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
+/* ===========================
+   SNIPPET LIST
+=========================== */
+
+
+#snippetList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+
+
+
+#snippetList button{
+
+    width:100%;
+
+    padding:
+
+        11px 14px;
+
+    text-align:left;
+
+    background:#16213b;
+
+    color:#e2e8f0;
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+
+
+#snippetList button:hover{
+
+    background:#1e293b;
+
+    border-color:#38bdf8;
+
+    transform:
+
+        translateX(3px);
+
+}
+
+
+
+
+
+#snippetList p{
+
+    color:#94a3b8;
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+
+
+
+
+/* ===========================
+   EDITOR AREA
 =========================== */
 
 
@@ -140,7 +748,7 @@
 
     flex-direction:column;
 
-    gap:15px;
+    gap:14px;
 
     overflow-y:auto;
 
@@ -148,8 +756,10 @@
 
 
 
+
+
 /* ===========================
-   Keyword Input
+   KEYWORD INPUT
 =========================== */
 
 
@@ -157,11 +767,15 @@
 
     width:100%;
 
-    padding:12px 15px;
+    padding:
+
+        13px 16px;
 
     background:#16213b;
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+
+        1px solid rgba(255,255,255,.1);
 
     border-radius:10px;
 
@@ -169,12 +783,26 @@
 
     outline:none;
 
+    font-size:1rem;
+
 }
 
 
 
+
+
+#keyword:focus{
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
 /* ===========================
-   Script Editor
+   SCRIPT EDITOR
 =========================== */
 
 
@@ -192,68 +820,38 @@
 
     background:#020617;
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+
+        1px solid rgba(255,255,255,.1);
 
     border-radius:12px;
 
-    color:white;
+    color:#f8fafc;
 
     font-family:monospace;
 
-}
+    font-size:.9rem;
 
-
-
-/* ===========================
-   Preview Box
-=========================== */
-
-
-.preview{
-
-    margin-top:5px;
-
-    padding:18px;
-
-    background:#16213b;
-
-    border-radius:15px;
-
-    border:1px solid rgba(255,255,255,.08);
+    outline:none;
 
 }
 
 
 
-/* ===========================
-   Trigger Box
-=========================== */
 
 
-#triggerBox{
+#script:focus{
 
-    height:70px;
-
-    padding:12px;
-
-    background:#020617;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    color:white;
+    border-color:#38bdf8;
 
 }
 
-/* ===========================
-   CSS UPDATE PART 2
-   Buttons + Output + Scrolling
-=========================== */
+
+
 
 
 /* ===========================
-   Command Buttons
+   COMMAND BUTTON AREA
 =========================== */
 
 
@@ -269,13 +867,19 @@
 
 
 
+
+
 .actions button{
 
-    padding:8px 14px;
+    padding:
 
-    border-radius:8px;
+        8px 13px;
 
-    border:1px solid rgba(255,255,255,.1);
+    border-radius:9px;
+
+    border:
+
+        1px solid rgba(255,255,255,.1);
 
     background:#1e293b;
 
@@ -291,6 +895,8 @@
 
 
 
+
+
 .actions button:hover{
 
     background:#2563eb;
@@ -302,329 +908,23 @@
 
 
 /* ===========================
-   Bottom Buttons
-=========================== */
-
-
-.buttons{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:10px;
-
-    margin-top:10px;
-
-    padding-top:10px;
-
-    padding-bottom:5px;
-
-    flex-shrink:0;
-
-}
-
-
-
-.buttons button{
-
-    padding:10px 20px;
-
-    border-radius:10px;
-
-    border:none;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    font-size:.9rem;
-
-    transition:.3s;
-
-}
-
-
-
-
-
-/* Delete */
-
-.delete{
-
-    background:#7f1d1d;
-
-    color:white;
-
-}
-
-
-
-.delete:hover{
-
-    background:#dc2626;
-
-}
-
-
-
-
-
-/* Test Button */
-
-.buttons button:not(.delete):not(.save){
-
-    background:#334155;
-
-    color:white;
-
-}
-
-
-
-.buttons button:not(.delete):not(.save):hover{
-
-    background:#475569;
-
-}
-
-
-
-
-
-/* Save */
-
-.save{
-
-    background:#2563eb;
-
-    color:white;
-
-}
-
-
-
-.save:hover{
-
-    background:#3b82f6;
-
-}
-
-
-
-
-
-/* ===========================
-   Result Output
-=========================== */
-
-
-#result{
-
-    margin-top:10px;
-
-    min-height:55px;
-
-    max-height:90px;
-
-    overflow-y:auto;
-
-    padding:12px;
-
-    background:#020617;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    color:#38bdf8;
-
-    font-family:monospace;
-
-    font-size:.85rem;
-
-    white-space:pre-wrap;
-
-}
-
-
-
-
-
-/* ===========================
-   Make Editor Scroll Correctly
-=========================== */
-
-
-.editor::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-
-
-.editor::-webkit-scrollbar-thumb{
-
-    background:#2563eb;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-.sidebar::-webkit-scrollbar{
-
-    width:7px;
-
-}
-
-
-
-.sidebar::-webkit-scrollbar-thumb{
-
-    background:#2563eb;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-/* ===========================
-   Prevent Page Stretch
-=========================== */
-
-
-.demo-section{
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-
-
-.automation-window{
-
-    max-height:600px;
-
-}
-
-
-
-
-
-/* ===========================
-   Mobile Adjustments
-=========================== */
-
-
-@media(max-width:900px){
-
-
-    .automation-window{
-
-        width:100%;
-
-    }
-
-
-
-    .studio-body{
-
-        height:auto;
-
-        flex-direction:column;
-
-    }
-
-
-
-    .sidebar{
-
-        width:100%;
-
-        max-height:220px;
-
-    }
-
-
-
-    .editor{
-
-        overflow:visible;
-
-    }
-
-
-}
-
-
-
-
-
-@media(max-width:650px){
-
-
-    .buttons{
-
-        flex-direction:column;
-
-    }
-
-
-
-    .buttons button{
-
-        width:100%;
-
-    }
-
-
-
-    .window-header{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:10px;
-
-    }
-
-
-
-}
-
-/* ===========================
-   CSS UPDATE PART 3
-   Trigger + Live Expansion UI
-=========================== */
-
-
-/* ===========================
-   Preview Container
+   PREVIEW PANEL
 =========================== */
 
 
 .preview{
 
-    margin-top:10px;
+    padding:
 
-    padding:20px;
+        18px;
 
-    background:#111827;
+    background:#16213b;
 
-    border-radius:16px;
+    border-radius:15px;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+
+        1px solid rgba(255,255,255,.08);
 
 }
 
@@ -634,11 +934,11 @@
 
 .preview h3{
 
-    font-size:1.1rem;
-
     margin-bottom:8px;
 
 }
+
+
 
 
 
@@ -657,7 +957,7 @@
 
 
 /* ===========================
-   Trigger Input Area
+   TRIGGER TEST BOX
 =========================== */
 
 
@@ -667,11 +967,15 @@
 
     height:55px;
 
-    padding:14px 16px;
+    padding:
+
+        13px 15px;
 
     background:#020617;
 
-    border:1px solid rgba(255,255,255,.12);
+    border:
+
+        1px solid rgba(255,255,255,.12);
 
     border-radius:12px;
 
@@ -679,19 +983,7 @@
 
     font-size:1rem;
 
-    font-family:Inter,sans-serif;
-
     outline:none;
-
-    transition:.25s;
-
-}
-
-
-
-#triggerBox::placeholder{
-
-    color:#64748b;
 
 }
 
@@ -703,40 +995,50 @@
 
     border-color:#38bdf8;
 
-    box-shadow:
-
-        0 0 0 3px rgba(56,189,248,.15);
-
 }
 
-
+/* =====================================================
+   Automation Studio Web Version
+   style.css
+   Part 3 - Output + Buttons + Final Polish
+===================================================== */
 
 
 
 /* ===========================
-   Expansion Result
+   EXPANSION RESULT
 =========================== */
 
 
-.expansion-result{
+#result{
 
-    margin-top:15px;
+    margin-top:10px;
 
-    padding:15px;
+    min-height:60px;
 
-    min-height:70px;
+    max-height:90px;
+
+    overflow-y:auto;
+
+    padding:14px;
 
     background:#020617;
 
-    border-radius:12px;
+    border:
 
-    border:1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:12px;
 
     color:#38bdf8;
 
     font-family:monospace;
 
+    font-size:.85rem;
+
     white-space:pre-wrap;
+
+    overflow-wrap:break-word;
 
 }
 
@@ -745,19 +1047,23 @@
 
 
 /* ===========================
-   App Status Area
+   BOTTOM ACTION BUTTONS
 =========================== */
 
 
-.status{
+.buttons{
 
-    padding:6px 12px;
+    display:flex;
 
-    border-radius:999px;
+    justify-content:flex-end;
 
-    background:#052e16;
+    align-items:center;
 
-    border:1px solid rgba(74,222,128,.2);
+    gap:10px;
+
+    padding-top:5px;
+
+    margin-top:auto;
 
 }
 
@@ -765,17 +1071,102 @@
 
 
 
-#statusDot{
+.buttons button{
 
-    display:inline-block;
+    padding:
 
-    width:10px;
+        10px 20px;
 
-    height:10px;
+    border:none;
 
-    border-radius:50%;
+    border-radius:10px;
 
-    background:#4ade80;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+
+
+/* SAVE */
+
+
+.save{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.save:hover{
+
+    background:#3b82f6;
+
+    transform:
+
+        translateY(-2px);
+
+}
+
+
+
+
+
+/* DELETE */
+
+
+.delete{
+
+    background:#7f1d1d;
+
+    color:white;
+
+}
+
+
+
+.delete:hover{
+
+    background:#dc2626;
+
+    transform:
+
+        translateY(-2px);
+
+}
+
+
+
+
+
+/* TEST BUTTON */
+
+
+.buttons button:not(.save):not(.delete){
+
+    background:#334155;
+
+    color:white;
+
+}
+
+
+
+.buttons button:not(.save):not(.delete):hover{
+
+    background:#475569;
+
+    transform:
+
+        translateY(-2px);
 
 }
 
@@ -784,7 +1175,7 @@
 
 
 /* ===========================
-   Fake Desktop App Frame
+   APP BOTTOM GLOW
 =========================== */
 
 
@@ -794,19 +1185,15 @@
 
     display:block;
 
-    height:8px;
+    height:5px;
 
     background:
 
-    linear-gradient(
-
-        90deg,
-
-        #2563eb,
-
-        #38bdf8
-
-    );
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #38bdf8
+        );
 
 }
 
@@ -815,31 +1202,23 @@
 
 
 /* ===========================
-   Better Spacing For Demo
+   STATUS ANIMATION
 =========================== */
 
 
-.demo-header{
+#statusDot{
 
-    padding-top:60px;
+    width:10px;
 
-}
+    height:10px;
 
+    border-radius:50%;
 
+    display:inline-block;
 
-.demo-header h1{
+    background:#4ade80;
 
-    font-size:3.2rem;
-
-}
-
-
-
-
-
-.demo-header .subtitle{
-
-    font-size:1.05rem;
+    animation:pulse 2s infinite;
 
 }
 
@@ -847,74 +1226,26 @@
 
 
 
-/* ===========================
-   App-Like Empty States
-=========================== */
+@keyframes pulse{
 
 
-#snippetList p{
+    0%{
 
-    text-align:center;
+        opacity:1;
 
-    padding:20px 0;
-
-    font-size:.9rem;
-
-}
+    }
 
 
+    50%{
+
+        opacity:.35;
+
+    }
 
 
+    100%{
 
-/* ===========================
-   Smooth Hover Effects
-=========================== */
-
-
-#snippetList button{
-
-    transform:translateX(0);
-
-}
-
-
-
-#snippetList button:hover{
-
-    transform:translateX(4px);
-
-}
-
-
-
-
-
-/* ===========================
-   Prevent Text Overflow
-=========================== */
-
-
-#script,
-#triggerBox,
-#result{
-
-    overflow-wrap:break-word;
-
-}
-
-
-
-/* ===========================
-   Final Desktop Size Control
-=========================== */
-
-
-@media(min-width:1200px){
-
-
-    .automation-window{
-
-        width:950px;
+        opacity:1;
 
     }
 
@@ -923,20 +1254,265 @@
 
 
 
-@media(max-width:500px){
+
+
+/* ===========================
+   SCROLLBARS
+=========================== */
+
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#3b82f6;
+
+}
+
+
+
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+
+footer{
+
+    padding:
+
+        30px 0;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    border-top:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+
+
+/* ===========================
+   TABLET
+=========================== */
+
+
+@media(max-width:900px){
+
+
+    .studio-body{
+
+        height:auto;
+
+        flex-direction:column;
+
+    }
+
+
+
+    .sidebar{
+
+        width:100%;
+
+        max-height:220px;
+
+        border-right:none;
+
+        border-bottom:
+
+            1px solid rgba(255,255,255,.08);
+
+    }
+
+
+
+    .editor{
+
+        overflow:visible;
+
+    }
+
+
+
+    .automation-window{
+
+        width:100%;
+
+    }
+
+
+}
+
+
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+
+@media(max-width:650px){
+
+
+    .navbar .container{
+
+        height:auto;
+
+        flex-direction:column;
+
+        gap:15px;
+
+        padding:15px 0;
+
+    }
+
+
+
+    nav{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+
+
+    .demo-header{
+
+        text-align:center;
+
+    }
+
 
 
     .demo-header h1{
 
-        font-size:2rem;
+        font-size:2.2rem;
 
     }
 
 
 
-    .automation-window{
+    .window-header{
 
-        border-radius:12px;
+        height:auto;
+
+        padding:18px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+
+    }
+
+
+
+    .editor{
+
+        padding:18px;
+
+    }
+
+
+
+    .actions button{
+
+        width:100%;
+
+    }
+
+
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .buttons button{
+
+        width:100%;
+
+    }
+
+
+}
+
+
+
+
+
+/* ===========================
+   SMALL PHONES
+=========================== */
+
+
+@media(max-width:420px){
+
+
+    .sidebar{
+
+        padding:15px;
+
+    }
+
+
+
+    .editor{
+
+        padding:15px;
+
+    }
+
+
+
+    #script{
+
+        height:110px;
+
+        min-height:110px;
 
     }
 
