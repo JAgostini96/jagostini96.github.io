@@ -1,21 +1,23 @@
 // ===================================
 // AUTOMATION STUDIO WEB DEMO ENGINE
-// PART 1
+// PART 1 - SNIPPETS + STORAGE
 // ===================================
 
 
 
 // ===============================
-// SNIPPET STORAGE
+// LOAD SAVED SNIPPETS
 // ===============================
 
 
 let snippets =
 
 JSON.parse(
+
     localStorage.getItem(
         "automationSnippets"
     )
+
 )
 
 ||
@@ -31,14 +33,12 @@ JSON.parse(
     },
 
 
-
     email: {
 
         script:
         "Hello,\n\nI wanted to follow up regarding our previous conversation.\n\nThank you."
 
     },
-
 
 
     meeting: {
@@ -49,8 +49,56 @@ JSON.parse(
     }
 
 
-
 };
+
+
+
+
+
+// ===============================
+// CLEAN OLD INVALID SNIPPETS
+// ===============================
+
+
+Object.keys(snippets).forEach(key=>{
+
+
+    if(
+
+        !key ||
+
+        key.trim()==="" ||
+
+        !snippets[key] ||
+
+        typeof snippets[key].script !== "string"
+
+    ){
+
+
+        delete snippets[key];
+
+
+    }
+
+
+});
+
+
+
+
+
+// Save cleaned version
+
+localStorage.setItem(
+
+    "automationSnippets",
+
+    JSON.stringify(snippets)
+
+);
+
+
 
 
 
@@ -68,8 +116,10 @@ let triggerRunning = false;
 
 
 
+
+
 // ===============================
-// SAVE DATA
+// SAVE SNIPPETS
 // ===============================
 
 
@@ -120,16 +170,23 @@ function loadSnippet(keyword){
 
 
 
-    document.getElementById("keyword").value = keyword;
+    document.getElementById(
+
+        "keyword"
+
+    ).value = keyword;
 
 
 
 
 
-    document.getElementById("script").value =
 
-        snippets[keyword].script;
 
+    document.getElementById(
+
+        "script"
+
+    ).value = snippets[keyword].script;
 
 
 
@@ -172,6 +229,22 @@ function newSnippet(){
 
 
 
+
+    name = name.trim();
+
+
+
+
+
+    if(name==="")
+
+        return;
+
+
+
+
+
+
     snippets[name] = {
 
 
@@ -179,6 +252,13 @@ function newSnippet(){
 
 
     };
+
+
+
+
+
+
+    currentKeyword = name;
 
 
 
@@ -200,8 +280,9 @@ function newSnippet(){
 
 
 
-}
 
+
+}
 
 
 
@@ -227,7 +308,11 @@ function saveSnippet(){
 
     let keyword =
 
-    document.getElementById("keyword")
+    document.getElementById(
+
+        "keyword"
+
+    )
 
     .value
 
@@ -239,9 +324,14 @@ function saveSnippet(){
 
 
 
+
     let script =
 
-    document.getElementById("script")
+    document.getElementById(
+
+        "script"
+
+    )
 
     .value;
 
@@ -251,11 +341,13 @@ function saveSnippet(){
 
 
 
+    if(keyword===""){
 
-    if(keyword === "")
 
         return;
 
+
+    }
 
 
 
@@ -267,14 +359,10 @@ function saveSnippet(){
     snippets[keyword] = {
 
 
-
         script:script
 
 
-
     };
-
-
 
 
 
@@ -288,6 +376,7 @@ function saveSnippet(){
 
 
 
+
     saveSnippets();
 
 
@@ -295,8 +384,6 @@ function saveSnippet(){
 
 
     refreshSnippetList();
-
-
 
 
 
@@ -325,7 +412,6 @@ function saveSnippet(){
 
 
 
-
 // ===============================
 // DELETE SNIPPET
 // ===============================
@@ -336,13 +422,9 @@ function deleteSnippet(){
 
 
 
-    let keyword = currentKeyword;
 
 
-
-
-
-    if(!snippets[keyword])
+    if(!currentKeyword)
 
         return;
 
@@ -350,7 +432,22 @@ function deleteSnippet(){
 
 
 
-    delete snippets[keyword];
+
+
+
+    if(!snippets[currentKeyword])
+
+        return;
+
+
+
+
+
+
+
+
+    delete snippets[currentKeyword];
+
 
 
 
@@ -362,7 +459,9 @@ function deleteSnippet(){
 
 
 
+
     currentKeyword = null;
+
 
 
 
@@ -378,6 +477,8 @@ function deleteSnippet(){
 
 
 
+
+
     document.getElementById(
 
         "script"
@@ -388,7 +489,11 @@ function deleteSnippet(){
 
 
 
+
+
+
     refreshSnippetList();
+
 
 
 
@@ -402,9 +507,10 @@ function deleteSnippet(){
 
 
 
+
+
+
 }
-
-
 
 
 
@@ -428,7 +534,11 @@ function searchSnippets(){
 
     let query =
 
-    document.getElementById("search")
+    document.getElementById(
+
+        "search"
+
+    )
 
     .value
 
@@ -448,7 +558,6 @@ function searchSnippets(){
         "#snippetList button"
 
     );
-
 
 
 
@@ -500,6 +609,7 @@ function searchSnippets(){
 
 
 
+
 }
 
 
@@ -535,7 +645,9 @@ function refreshSnippetList(){
 
 
 
+
     container.innerHTML="";
+
 
 
 
@@ -545,8 +657,9 @@ function refreshSnippetList(){
 
     Object.keys(snippets)
 
-    .forEach(keyword=>{
+    .sort()
 
+    .forEach(keyword=>{
 
 
 
@@ -565,9 +678,7 @@ function refreshSnippetList(){
 
 
 
-        button.innerText =
-
-        keyword;
+        button.innerText = keyword;
 
 
 
@@ -591,8 +702,9 @@ function refreshSnippetList(){
 
 
 
-
     });
+
+
 
 
 
@@ -632,7 +744,10 @@ function insertCommand(command){
 
 
 
+
+
     editor.value += command;
+
 
 
 
@@ -648,8 +763,7 @@ function insertCommand(command){
 
 // ===================================
 // AUTOMATION STUDIO WEB DEMO ENGINE
-// PART 2
-// SCRIPT ENGINE + TRIGGER SYSTEM
+// PART 2 - TRIGGER + SCRIPT ENGINE
 // ===================================
 
 
@@ -674,6 +788,7 @@ function checkTrigger(){
 
 
 
+
     let box =
 
     document.getElementById(
@@ -681,6 +796,17 @@ function checkTrigger(){
         "triggerBox"
 
     );
+
+
+
+
+
+    if(!box)
+
+        return;
+
+
+
 
 
 
@@ -729,9 +855,7 @@ function checkTrigger(){
         ){
 
 
-
             matched = keyword;
-
 
 
         }
@@ -753,7 +877,11 @@ function checkTrigger(){
 
 
 
+
+
         triggerRunning = true;
+
+
 
 
 
@@ -774,12 +902,13 @@ function checkTrigger(){
 
 
 
+        let resultBox =
 
         document.getElementById(
 
             "result"
 
-        ).innerHTML = output;
+        );
 
 
 
@@ -787,11 +916,48 @@ function checkTrigger(){
 
 
 
+        if(resultBox){
+
+
+
+            resultBox.innerHTML = output;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        // Track usage
 
 
         snippets[matched].uses =
 
-        (snippets[matched].uses || 0) + 1;
+        (
+
+            snippets[matched].uses || 0
+
+        ) + 1;
+
+
+
+
+
+
+
+        snippets[matched].last_used =
+
+        new Date()
+
+        .toISOString();
+
+
 
 
 
@@ -808,34 +974,14 @@ function checkTrigger(){
 
 
         /*
-            Remove only the trigger word
-            instead of destroying the text
+            Keep trigger box text.
+            This allows testing
+            and editing after expansion.
         */
 
 
 
-
-
-
-        let removeLength =
-
-        matched.length;
-
-
-
-
-
-
-
-        box.value =
-
-        value.substring(
-
-            0,
-
-            value.length-removeLength
-
-        );
+        box.value = value;
 
 
 
@@ -848,7 +994,8 @@ function checkTrigger(){
         setTimeout(()=>{
 
 
-            triggerRunning=false;
+            triggerRunning = false;
+
 
 
         },300);
@@ -858,7 +1005,6 @@ function checkTrigger(){
 
 
     }
-
 
 
 
@@ -874,9 +1020,8 @@ function checkTrigger(){
 
 
 
-
 // ===============================
-// LIVE TYPING LISTENER
+// CONNECT TRIGGER BOX
 // ===============================
 
 
@@ -886,6 +1031,8 @@ document.addEventListener(
 "DOMContentLoaded",
 
 ()=>{
+
+
 
 
 
@@ -901,7 +1048,10 @@ document.addEventListener(
 
 
 
+
     if(box){
+
+
 
 
 
@@ -915,7 +1065,13 @@ document.addEventListener(
 
 
 
+
+
     }
+
+
+
+
 
 
 
@@ -932,7 +1088,7 @@ document.addEventListener(
 
 
 // ===============================
-// SIMULATED SCRIPT ENGINE
+// SCRIPT EXECUTION ENGINE
 // ===============================
 
 
@@ -943,7 +1099,7 @@ function executeScript(script){
 
 
 
-    let result = script;
+    let output = script;
 
 
 
@@ -951,13 +1107,14 @@ function executeScript(script){
 
 
 
-    // DATE COMMAND
 
 
+    // DATE
 
-    result =
 
-    result.replace(
+    output =
+
+    output.replace(
 
         /\{date\}/g,
 
@@ -975,13 +1132,12 @@ function executeScript(script){
 
 
 
-    // TIME COMMAND
+    // TIME
 
 
+    output =
 
-    result =
-
-    result.replace(
+    output.replace(
 
         /\{time\}/g,
 
@@ -999,15 +1155,12 @@ function executeScript(script){
 
 
 
+    // WAIT
 
 
-    // WAIT COMMAND
+    output =
 
-
-
-    result =
-
-    result.replace(
+    output.replace(
 
         /\{sleep:(.*?)\}/g,
 
@@ -1026,12 +1179,11 @@ function executeScript(script){
     // HOTKEYS
 
 
+    output =
 
-    result =
+    output.replace(
 
-    result.replace(
-
-        /\{(ctrl|alt|shift)\+(.*?)\}/g,
+        /\{(ctrl|alt|shift)\+(.*?)\}/gi,
 
         "[Keyboard: $1+$2]"
 
@@ -1045,15 +1197,14 @@ function executeScript(script){
 
 
 
-    // MOUSE ACTIONS
+    // MOUSE
 
 
+    output =
 
-    result =
+    output.replace(
 
-    result.replace(
-
-        /\{(click|doubleclick|move):(.*?)\}/g,
+        /\{(click|doubleclick|move):(.*?)\}/gi,
 
         "[Mouse Action: $1 $2]"
 
@@ -1067,15 +1218,14 @@ function executeScript(script){
 
 
 
-    // KEYS
+    // SPECIAL KEYS
 
 
+    output =
 
-    result =
+    output.replace(
 
-    result.replace(
-
-        /\{(enter|tab|space|backspace)\}/g,
+        /\{(enter|tab|space|backspace)\}/gi,
 
         "[Keyboard: $1]"
 
@@ -1088,8 +1238,7 @@ function executeScript(script){
 
 
 
-
-    return result.replace(
+    return output.replace(
 
         /\n/g,
 
@@ -1109,8 +1258,10 @@ function executeScript(script){
 
 
 
+
+
 // ===============================
-// TEST RUN BUTTON
+// TEST RUN
 // ===============================
 
 
@@ -1135,13 +1286,30 @@ function testRun(){
 
 
 
+    let resultBox =
+
     document.getElementById(
 
         "result"
 
-    ).innerHTML =
+    );
 
-    executeScript(script);
+
+
+
+
+
+    if(resultBox){
+
+
+
+        resultBox.innerHTML =
+
+        executeScript(script);
+
+
+
+    }
 
 
 
@@ -1160,7 +1328,7 @@ function testRun(){
 
 
 // ===============================
-// CLEAR EXECUTION LOG
+// CLEAR OUTPUT LOG
 // ===============================
 
 
@@ -1171,13 +1339,31 @@ function clearLog(){
 
 
 
+    let resultBox =
+
     document.getElementById(
 
         "result"
 
-    ).innerHTML =
+    );
 
-    "Waiting...";
+
+
+
+
+
+
+    if(resultBox){
+
+
+
+        resultBox.innerHTML =
+
+        "Waiting...";
+
+
+
+    }
 
 
 
@@ -1208,11 +1394,11 @@ function showMessage(text){
 
 
 
-    let result =
+    let messageBox =
 
     document.getElementById(
 
-        "result"
+        "message"
 
     );
 
@@ -1220,7 +1406,162 @@ function showMessage(text){
 
 
 
-    result.innerHTML=text;
+
+
+    if(messageBox){
+
+
+
+        messageBox.innerHTML = text;
+
+
+
+        setTimeout(()=>{
+
+
+            messageBox.innerHTML="";
+
+
+        },2000);
+
+
+
+    }
+
+    else{
+
+
+
+        let resultBox =
+
+        document.getElementById(
+
+            "result"
+
+        );
+
+
+
+
+
+        if(resultBox){
+
+
+
+            resultBox.innerHTML=text;
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+}
+
+// ===================================
+// AUTOMATION STUDIO WEB DEMO ENGINE
+// PART 3 - TRIGGER + EXECUTION SYSTEM
+// ===================================
+
+
+// ===============================
+// AUTOMATIC TRIGGER EXPANSION
+// ===============================
+
+
+function checkTrigger(){
+
+
+    const box = document.getElementById(
+        "triggerBox"
+    );
+
+
+    if(!box)
+        return;
+
+
+
+    let value = box.value;
+
+
+
+    let matched = null;
+
+
+
+    Object.keys(snippets).forEach(keyword=>{
+
+
+        // ignore empty keywords
+
+        if(
+            keyword.trim() === ""
+        )
+            return;
+
+
+
+        if(
+            value
+            .toLowerCase()
+            .endsWith(
+                keyword.toLowerCase()
+            )
+        ){
+
+            matched = keyword;
+
+        }
+
+
+
+    });
+
+
+
+
+    if(matched){
+
+
+        let expansion = executeScript(
+            snippets[matched].script
+        );
+
+
+
+        // replace ONLY the keyword
+
+        let newText =
+        value.substring(
+            0,
+            value.length - matched.length
+        )
+        +
+        expansion;
+
+
+
+        box.value = newText;
+
+
+
+        updateOutput(
+            "Expanded: " + matched
+        );
+
+
+
+    }
+
+
+}
 
 
 
@@ -1228,23 +1569,221 @@ function showMessage(text){
 
 
 
-    setTimeout(()=>{
+// ===============================
+// LIVE INPUT LISTENER
+// ===============================
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    const triggerBox =
+    document.getElementById(
+        "triggerBox"
+    );
+
+
+
+    if(triggerBox){
+
+
+        triggerBox.addEventListener(
+            "input",
+            checkTrigger
+        );
+
+
+    }
+
+
+
+});
 
 
 
 
 
-        result.innerHTML =
-
-        "Waiting...";
 
 
 
+// ===============================
+// EXECUTION ENGINE
+// ===============================
 
 
-    },2000);
+function executeScript(script){
 
 
+
+    let output = script;
+
+
+
+    // DATE
+
+
+    output =
+    output.replace(
+        /\{date\}/g,
+
+        new Date()
+        .toLocaleDateString()
+
+    );
+
+
+
+
+
+    // TIME
+
+
+    output =
+    output.replace(
+        /\{time\}/g,
+
+        new Date()
+        .toLocaleTimeString()
+
+    );
+
+
+
+
+
+
+
+    // SLEEP COMMAND
+
+
+    output =
+    output.replace(
+
+        /\{sleep:(.*?)\}/g,
+
+        function(match,time){
+
+            return (
+                "[Waiting "
+                +
+                time
+                +
+                " seconds]"
+            );
+
+        }
+
+    );
+
+
+
+
+
+
+
+    // KEYBOARD COMMANDS
+
+
+    output =
+    output.replace(
+
+        /\{(enter|tab|space|backspace)\}/gi,
+
+        function(match,key){
+
+
+            return (
+                "[Keyboard: "
+                +
+                key
+                +
+                "]"
+            );
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+    // HOTKEYS
+
+
+    output =
+    output.replace(
+
+        /\{(ctrl|alt|shift)\+(.*?)\}/gi,
+
+        function(match,key,value){
+
+
+            return (
+                "[Hotkey: "
+                +
+                key
+                +
+                "+"
+                +
+                value
+                +
+                "]"
+            );
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+    // MOUSE COMMANDS
+
+
+    output =
+    output.replace(
+
+        /\{(click|doubleclick|move):(.*?)\}/gi,
+
+        function(match,type,pos){
+
+
+            return (
+                "[Mouse "
+                +
+                type
+                +
+                ": "
+                +
+                pos
+                +
+                "]"
+            );
+
+
+        }
+
+    );
+
+
+
+
+
+
+    return output.replace(
+        /\n/g,
+        "<br>"
+    );
 
 
 
@@ -1258,335 +1797,53 @@ function showMessage(text){
 
 
 
-
-
-
 // ===============================
-// BUTTON CONNECTIONS
+// TEST RUN
 // ===============================
 
 
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
+function testRun(){
 
 
 
-
-
-    let clearButton =
-
+    const editor =
     document.getElementById(
-
-        "clearLog"
-
+        "script"
     );
 
 
 
+    if(!editor.value.trim()){
 
 
-
-    if(clearButton){
-
-
-        clearButton.onclick =
-
-        clearLog;
-
-
-    }
-
-
-
-
-
-
-
-});
-
-
-// ===================================
-// AUTOMATION STUDIO WEB DEMO ENGINE
-// PART 3
-// STARTUP + BUTTON CONNECTIONS
-// ===================================
-
-
-
-
-
-// ===============================
-// BUTTON CONNECTIONS
-// ===============================
-
-
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
-
-
-
-
-
-
-
-    // -------------------------------
-    // SAVE BUTTON
-    // -------------------------------
-
-
-    let saveButton =
-
-    document.getElementById(
-
-        "saveSnippet"
-
-    );
-
-
-
-
-    if(saveButton){
-
-
-        saveButton.onclick =
-
-        saveSnippet;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    // -------------------------------
-    // DELETE BUTTON
-    // -------------------------------
-
-
-
-    let deleteButton =
-
-    document.getElementById(
-
-        "deleteSnippet"
-
-    );
-
-
-
-
-
-    if(deleteButton){
-
-
-        deleteButton.onclick =
-
-        deleteSnippet;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    // -------------------------------
-    // NEW BUTTON
-    // -------------------------------
-
-
-
-    let newButton =
-
-    document.getElementById(
-
-        "newSnippetButton"
-
-    );
-
-
-
-
-
-    if(newButton){
-
-
-
-        newButton.onclick =
-
-        newSnippet;
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    // -------------------------------
-    // TEST BUTTON
-    // -------------------------------
-
-
-
-    let testButton =
-
-    document.getElementById(
-
-        "testRun"
-
-    );
-
-
-
-
-
-
-    if(testButton){
-
-
-        testButton.onclick =
-
-        testRun;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    // -------------------------------
-    // SEARCH BOX
-    // -------------------------------
-
-
-
-    let search =
-
-    document.getElementById(
-
-        "search"
-
-    );
-
-
-
-
-
-    if(search){
-
-
-
-        search.addEventListener(
-
-            "input",
-
-            searchSnippets
-
+        updateOutput(
+            "Nothing to test"
         );
 
 
+        return;
+
+
     }
 
 
 
 
 
-
-
-
-
-    // -------------------------------
-    // COMMAND BUTTONS
-    // -------------------------------
-
-
-
-    let commands =
-
-    document.querySelectorAll(
-
-        ".actions button"
-
+    let result =
+    executeScript(
+        editor.value
     );
 
 
 
+    updateOutput(
+        result
+    );
 
 
 
-
-    commands.forEach(button=>{
-
-
-
-
-
-        button.addEventListener(
-
-            "click",
-
-            ()=>{
-
-
-
-
-
-                let command =
-
-                button.dataset.command;
-
-
-
-
-
-                insertCommand(
-
-                    command
-
-                );
-
-
-
-
-
-
-            }
-
-        );
-
-
-
-
-
-    });
+}
 
 
 
@@ -1596,6 +1853,110 @@ document.addEventListener(
 
 
 
+// ===============================
+// OUTPUT HANDLER
+// ===============================
+
+
+function updateOutput(message){
+
+
+
+    const output =
+    document.getElementById(
+        "result"
+    );
+
+
+
+    if(!output)
+        return;
+
+
+
+    output.innerHTML =
+    message;
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// CLEAR OUTPUT BUTTON
+// ===============================
+
+
+function clearOutput(){
+
+
+
+    const output =
+    document.getElementById(
+        "result"
+    );
+
+
+
+    if(output){
+
+
+        output.innerHTML =
+        "Waiting...";
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// COMMAND BUTTON INSERTS
+// ===============================
+
+
+document
+.querySelectorAll(
+    ".actions button"
+)
+.forEach(button=>{
+
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+
+            const editor =
+            document.getElementById(
+                "script"
+            );
+
+
+            editor.value +=
+            button.dataset.command;
+
+
+
+            editor.focus();
+
+
+        }
+    );
 
 
 });
@@ -1607,43 +1968,28 @@ document.addEventListener(
 
 
 
-
 // ===============================
-// START APPLICATION
+// INITIAL LOAD
 // ===============================
-
 
 
 document.addEventListener(
-
 "DOMContentLoaded",
-
 ()=>{
-
-
-
 
 
     refreshSnippetList();
 
 
-
-
-
-    if(snippets.hello){
-
+    if(
+        snippets.hello
+    ){
 
         loadSnippet(
-
             "hello"
-
         );
 
-
     }
-
-
-
 
 
 
