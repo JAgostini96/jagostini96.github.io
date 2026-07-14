@@ -1,100 +1,16 @@
 /* ===========================
    Automation Studio Demo
-   Updated App Style
+   CSS UPDATE PART 1
 =========================== */
-
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-
-body{
-
-    font-family:'Inter',sans-serif;
-
-    background:#0f172a;
-
-    color:#f8fafc;
-
-}
-
-
-/* Background */
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle at top left,
-        rgba(37,99,235,.25),
-        transparent 40%
-    ),
-    radial-gradient(
-        circle at bottom right,
-        rgba(14,165,233,.18),
-        transparent 40%
-    );
-
-    z-index:-1;
-
-}
-
 
 
 /* ===========================
-   Container
+   Demo Section
 =========================== */
 
+.demo-section{
 
-.container{
-
-    width:min(1100px,92%);
-
-    margin:auto;
-
-}
-
-
-
-/* ===========================
-   Header
-=========================== */
-
-
-.demo-header{
-
-    padding:55px 0 30px;
-
-}
-
-
-
-.demo-header h1{
-
-    font-size:3rem;
-
-    line-height:1.1;
-
-}
-
-
-
-.demo-header .subtitle{
-
-    margin-top:15px;
-
-    max-width:650px;
-
-    color:#94a3b8;
+    padding:40px 0 80px;
 
 }
 
@@ -105,14 +21,6 @@ body::before{
 =========================== */
 
 
-.demo-section{
-
-    padding-bottom:70px;
-
-}
-
-
-
 .automation-window{
 
     width:900px;
@@ -121,19 +29,16 @@ body::before{
 
     margin:auto;
 
-
     background:#111827;
 
-    border-radius:18px;
-
-    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
 
     overflow:hidden;
 
+    border:1px solid rgba(255,255,255,.1);
 
     box-shadow:
-
-    0 25px 80px rgba(0,0,0,.45);
+        0 20px 60px rgba(0,0,0,.35);
 
 }
 
@@ -146,18 +51,15 @@ body::before{
 
 .window-header{
 
-    height:70px;
-
-    padding:18px 25px;
-
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
 
+    padding:18px 25px;
 
-    background:#151b2d;
+    background:#16213b;
 
     border-bottom:1px solid rgba(255,255,255,.08);
 
@@ -175,7 +77,7 @@ body::before{
 
 .window-header p{
 
-    font-size:.85rem;
+    font-size:.9rem;
 
     color:#94a3b8;
 
@@ -183,18 +85,8 @@ body::before{
 
 
 
-.status{
-
-    color:#30d158;
-
-    font-weight:600;
-
-}
-
-
-
 /* ===========================
-   Main Studio
+   Studio Body Layout
 =========================== */
 
 
@@ -202,116 +94,39 @@ body::before{
 
     display:flex;
 
-    height:560px;
+    height:520px;
+
+    overflow:hidden;
 
 }
 
 
 
 /* ===========================
- Sidebar
+   Sidebar
 =========================== */
 
 
 .sidebar{
 
-    width:230px;
+    width:240px;
+
+    flex-shrink:0;
 
     background:#0b1220;
 
-    padding:18px;
-
     border-right:1px solid rgba(255,255,255,.08);
 
-}
+    padding:20px;
 
-
-
-.sidebar-title{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:15px;
-
-}
-
-
-
-.sidebar-title button{
-
-    width:28px;
-
-    height:28px;
-
-    border-radius:8px;
-
-    border:none;
-
-    background:#0a84ff;
-
-    color:white;
-
-}
-
-
-
-#search{
-
-    width:100%;
-
-    padding:10px;
-
-    border-radius:10px;
-
-    background:#151c31;
-
-    border:none;
-
-    color:white;
-
-}
-
-
-
-/* Snippets */
-
-
-#snippetList button{
-
-    width:100%;
-
-    margin-top:8px;
-
-    padding:10px;
-
-
-    border-radius:9px;
-
-    border:0;
-
-    background:#151c31;
-
-    color:#e5e7eb;
-
-    text-align:left;
-
-    cursor:pointer;
-
-}
-
-
-#snippetList button:hover{
-
-    background:#2563eb;
+    overflow-y:auto;
 
 }
 
 
 
 /* ===========================
- Editor
+   Editor Area
 =========================== */
 
 
@@ -319,58 +134,67 @@ body::before{
 
     flex:1;
 
-    padding:22px;
+    padding:25px;
 
     display:flex;
 
     flex-direction:column;
 
+    gap:15px;
+
+    overflow-y:auto;
+
 }
 
 
 
-/* Keyword */
+/* ===========================
+   Keyword Input
+=========================== */
 
 
 #keyword{
 
-    height:38px;
+    width:100%;
 
-    padding:10px;
+    padding:12px 15px;
+
+    background:#16213b;
+
+    border:1px solid rgba(255,255,255,.1);
 
     border-radius:10px;
 
-    background:#151c31;
-
-    border:none;
-
     color:white;
+
+    outline:none;
 
 }
 
 
 
-/* Script */
+/* ===========================
+   Script Editor
+=========================== */
 
 
 #script{
 
-    margin-top:15px;
+    width:100%;
 
-    flex:1;
+    height:130px;
+
+    min-height:130px;
 
     resize:none;
 
+    padding:15px;
 
     background:#020617;
 
-    border-radius:12px;
-
     border:1px solid rgba(255,255,255,.1);
 
-
-    padding:15px;
-
+    border-radius:12px;
 
     color:white;
 
@@ -381,7 +205,55 @@ body::before{
 
 
 /* ===========================
- Actions
+   Preview Box
+=========================== */
+
+
+.preview{
+
+    margin-top:5px;
+
+    padding:18px;
+
+    background:#16213b;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+/* ===========================
+   Trigger Box
+=========================== */
+
+
+#triggerBox{
+
+    height:70px;
+
+    padding:12px;
+
+    background:#020617;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:white;
+
+}
+
+/* ===========================
+   CSS UPDATE PART 2
+   Buttons + Output + Scrolling
+=========================== */
+
+
+/* ===========================
+   Command Buttons
 =========================== */
 
 
@@ -389,11 +261,9 @@ body::before{
 
     display:flex;
 
-    gap:8px;
-
     flex-wrap:wrap;
 
-    margin-top:15px;
+    gap:8px;
 
 }
 
@@ -405,13 +275,17 @@ body::before{
 
     border-radius:8px;
 
-    border:none;
+    border:1px solid rgba(255,255,255,.1);
 
     background:#1e293b;
 
     color:white;
 
     cursor:pointer;
+
+    font-size:.85rem;
+
+    transition:.25s;
 
 }
 
@@ -425,73 +299,10 @@ body::before{
 
 
 
-/* ===========================
- Trigger Test
-=========================== */
-
-
-.preview{
-
-    margin-top:15px;
-
-    background:#151c31;
-
-    padding:15px;
-
-    border-radius:12px;
-
-}
-
-
-
-#triggerBox{
-
-    width:100%;
-
-    height:40px;
-
-    margin-top:10px;
-
-
-    background:#020617;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    color:white;
-
-    padding:10px;
-
-}
-
-
-
-/* Output */
-
-
-#result{
-
-    margin-top:12px;
-
-    min-height:50px;
-
-    background:#020617;
-
-    border-radius:10px;
-
-    padding:12px;
-
-    color:#38bdf8;
-
-    font-family:monospace;
-
-}
-
 
 
 /* ===========================
- Buttons
+   Bottom Buttons
 =========================== */
 
 
@@ -499,9 +310,17 @@ body::before{
 
     display:flex;
 
+    justify-content:flex-end;
+
     gap:10px;
 
-    margin-top:15px;
+    margin-top:10px;
+
+    padding-top:10px;
+
+    padding-bottom:5px;
+
+    flex-shrink:0;
 
 }
 
@@ -509,9 +328,7 @@ body::before{
 
 .buttons button{
 
-    flex:1;
-
-    height:38px;
+    padding:10px 20px;
 
     border-radius:10px;
 
@@ -519,9 +336,19 @@ body::before{
 
     cursor:pointer;
 
+    font-weight:600;
+
+    font-size:.9rem;
+
+    transition:.3s;
+
 }
 
 
+
+
+
+/* Delete */
 
 .delete{
 
@@ -533,9 +360,21 @@ body::before{
 
 
 
-.save{
+.delete:hover{
 
-    background:#0a84ff;
+    background:#dc2626;
+
+}
+
+
+
+
+
+/* Test Button */
+
+.buttons button:not(.delete):not(.save){
+
+    background:#334155;
 
     color:white;
 
@@ -543,38 +382,563 @@ body::before{
 
 
 
+.buttons button:not(.delete):not(.save):hover{
+
+    background:#475569;
+
+}
+
+
+
+
+
+/* Save */
+
+.save{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.save:hover{
+
+    background:#3b82f6;
+
+}
+
+
+
+
+
 /* ===========================
- Responsive
+   Result Output
+=========================== */
+
+
+#result{
+
+    margin-top:10px;
+
+    min-height:55px;
+
+    max-height:90px;
+
+    overflow-y:auto;
+
+    padding:12px;
+
+    background:#020617;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#38bdf8;
+
+    font-family:monospace;
+
+    font-size:.85rem;
+
+    white-space:pre-wrap;
+
+}
+
+
+
+
+
+/* ===========================
+   Make Editor Scroll Correctly
+=========================== */
+
+
+.editor::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+
+.editor::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+.sidebar::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+/* ===========================
+   Prevent Page Stretch
+=========================== */
+
+
+.demo-section{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.automation-window{
+
+    max-height:600px;
+
+}
+
+
+
+
+
+/* ===========================
+   Mobile Adjustments
 =========================== */
 
 
 @media(max-width:900px){
 
 
-.automation-window{
+    .automation-window{
+
+        width:100%;
+
+    }
+
+
+
+    .studio-body{
+
+        height:auto;
+
+        flex-direction:column;
+
+    }
+
+
+
+    .sidebar{
+
+        width:100%;
+
+        max-height:220px;
+
+    }
+
+
+
+    .editor{
+
+        overflow:visible;
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:650px){
+
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .buttons button{
+
+        width:100%;
+
+    }
+
+
+
+    .window-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+
+    }
+
+
+
+}
+
+/* ===========================
+   CSS UPDATE PART 3
+   Trigger + Live Expansion UI
+=========================== */
+
+
+/* ===========================
+   Preview Container
+=========================== */
+
+
+.preview{
+
+    margin-top:10px;
+
+    padding:20px;
+
+    background:#111827;
+
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+
+
+.preview h3{
+
+    font-size:1.1rem;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.preview p{
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+
+    margin-bottom:12px;
+
+}
+
+
+
+
+
+/* ===========================
+   Trigger Input Area
+=========================== */
+
+
+#triggerBox{
 
     width:100%;
 
+    height:55px;
+
+    padding:14px 16px;
+
+    background:#020617;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:12px;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-family:Inter,sans-serif;
+
+    outline:none;
+
+    transition:.25s;
+
 }
 
 
 
-.studio-body{
+#triggerBox::placeholder{
 
-    height:auto;
-
-    flex-direction:column;
+    color:#64748b;
 
 }
 
 
 
-.sidebar{
 
-    width:100%;
+
+#triggerBox:focus{
+
+    border-color:#38bdf8;
+
+    box-shadow:
+
+        0 0 0 3px rgba(56,189,248,.15);
 
 }
 
+
+
+
+
+/* ===========================
+   Expansion Result
+=========================== */
+
+
+.expansion-result{
+
+    margin-top:15px;
+
+    padding:15px;
+
+    min-height:70px;
+
+    background:#020617;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#38bdf8;
+
+    font-family:monospace;
+
+    white-space:pre-wrap;
+
+}
+
+
+
+
+
+/* ===========================
+   App Status Area
+=========================== */
+
+
+.status{
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    background:#052e16;
+
+    border:1px solid rgba(74,222,128,.2);
+
+}
+
+
+
+
+
+#statusDot{
+
+    display:inline-block;
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#4ade80;
+
+}
+
+
+
+
+
+/* ===========================
+   Fake Desktop App Frame
+=========================== */
+
+
+.automation-window::after{
+
+    content:"";
+
+    display:block;
+
+    height:8px;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        #2563eb,
+
+        #38bdf8
+
+    );
+
+}
+
+
+
+
+
+/* ===========================
+   Better Spacing For Demo
+=========================== */
+
+
+.demo-header{
+
+    padding-top:60px;
+
+}
+
+
+
+.demo-header h1{
+
+    font-size:3.2rem;
+
+}
+
+
+
+
+
+.demo-header .subtitle{
+
+    font-size:1.05rem;
+
+}
+
+
+
+
+
+/* ===========================
+   App-Like Empty States
+=========================== */
+
+
+#snippetList p{
+
+    text-align:center;
+
+    padding:20px 0;
+
+    font-size:.9rem;
+
+}
+
+
+
+
+
+/* ===========================
+   Smooth Hover Effects
+=========================== */
+
+
+#snippetList button{
+
+    transform:translateX(0);
+
+}
+
+
+
+#snippetList button:hover{
+
+    transform:translateX(4px);
+
+}
+
+
+
+
+
+/* ===========================
+   Prevent Text Overflow
+=========================== */
+
+
+#script,
+#triggerBox,
+#result{
+
+    overflow-wrap:break-word;
+
+}
+
+
+
+/* ===========================
+   Final Desktop Size Control
+=========================== */
+
+
+@media(min-width:1200px){
+
+
+    .automation-window{
+
+        width:950px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:500px){
+
+
+    .demo-header h1{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .automation-window{
+
+        border-radius:12px;
+
+    }
 
 
 }
