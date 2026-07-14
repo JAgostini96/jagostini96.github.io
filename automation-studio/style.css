@@ -80,7 +80,7 @@ body::before{
 
 .container{
 
-    width:min(1100px,92%);
+    width:min(1100px,100%);
 
     margin:auto;
 
