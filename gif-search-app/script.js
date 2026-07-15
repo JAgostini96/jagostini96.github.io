@@ -11,7 +11,7 @@
 // ===============================
 
 
-const API_KEY = "YOUR_GIPHY_API_KEY";
+const API_KEY = "1CMawfWOQqtNnV2sXv5ljDTj87h9iAO3";
 
 
 const GIF_LIMIT = 12;
