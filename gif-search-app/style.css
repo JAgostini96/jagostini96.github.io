@@ -79,7 +79,7 @@ body {
 
 
 /* ==========================
-   MAIN WINDOW
+   MAIN APP WINDOW
 ========================== */
 
 
@@ -234,7 +234,7 @@ body {
 
 
 /* ==========================
-   SEARCH AREA
+   SEARCH PANEL
 ========================== */
 
 
@@ -306,10 +306,6 @@ body {
 
 
 
-
-/* RESULTS TITLE */
-
-
 .gif-results-container h4 {
 
 
@@ -320,7 +316,6 @@ body {
 
 
 }
-
 
 
 
@@ -371,7 +366,7 @@ body {
 
 
 /* ==========================
-   GIF CARD
+   GIF CARDS
 ========================== */
 
 
@@ -404,6 +399,8 @@ body {
 
 
 
+
+
 .gif-card:hover {
 
 
@@ -414,7 +411,6 @@ body {
 
 
 }
-
 
 
 
@@ -464,7 +460,7 @@ body {
 
 
 /* ==========================
-   PREVIEW AREA
+   PREVIEW PANEL
 ========================== */
 
 
@@ -568,7 +564,7 @@ body {
 
 
 /* ==========================
-   BUTTONS
+   ACTION BUTTONS
 ========================== */
 
 
@@ -677,6 +673,7 @@ body {
 
 
 
+
 #favoritesList {
 
 
@@ -706,10 +703,10 @@ body {
     height:70px;
 
 
-    overflow:hidden;
-
-
     border-radius:10px;
+
+
+    overflow:hidden;
 
 
     cursor:pointer;
@@ -719,6 +716,8 @@ body {
 
 
 }
+
+
 
 
 
@@ -834,7 +833,6 @@ body {
 
 
 }
-
 
 
 
