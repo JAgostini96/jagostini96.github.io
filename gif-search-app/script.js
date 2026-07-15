@@ -11,13 +11,10 @@
 // ===============================
 
 
-// PUT YOUR GIPHY API KEY HERE
-
-const API_KEY = "1CMawfWOQqtNnV2sXv5ljDTj87h9iAO3";
+const API_KEY = "YOUR_GIPHY_API_KEY";
 
 
 const GIF_LIMIT = 12;
-
 
 
 
@@ -40,7 +37,6 @@ let searchTimer = null;
 
 
 
-
 // ===============================
 // START APP
 // ===============================
@@ -54,7 +50,9 @@ document.addEventListener(
 
 
     console.log(
-        "GIF Search App Loaded"
+
+    "GIF Search App Loaded"
+
     );
 
 
@@ -80,12 +78,11 @@ document.addEventListener(
 
 
 // ===============================
-// SEARCH BOX
+// SEARCH INPUT
 // ===============================
 
 
 function setupSearch(){
-
 
 
     const input = document.getElementById(
@@ -98,19 +95,15 @@ function setupSearch(){
 
     if(!input){
 
-
         console.error(
 
-        "gifSearch input not found"
+        "Search box missing"
 
         );
 
-
         return;
 
-
     }
-
 
 
 
@@ -122,7 +115,6 @@ function setupSearch(){
     "keyup",
 
     ()=>{
-
 
 
         clearTimeout(
@@ -138,8 +130,7 @@ function setupSearch(){
         searchTimer = setTimeout(()=>{
 
 
-
-            let query = input.value.trim();
+            const query = input.value.trim();
 
 
 
@@ -190,9 +181,7 @@ function setupSearch(){
 async function searchGifs(query){
 
 
-
     try{
-
 
 
         updateStatus(
@@ -205,25 +194,11 @@ async function searchGifs(query){
 
 
 
-        const url =
+        const response = await fetch(
 
-        `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=${GIF_LIMIT}`;
-
-
-
-        console.log(
-
-        "Request URL:",
-
-        url
+        `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=${GIF_LIMIT}`
 
         );
-
-
-
-
-
-        const response = await fetch(url);
 
 
 
@@ -237,7 +212,7 @@ async function searchGifs(query){
 
         console.log(
 
-        "Search Response:",
+        "Search Results",
 
         data
 
@@ -247,9 +222,7 @@ async function searchGifs(query){
 
 
 
-
-
-        const results = data.data.map(gif=>({
+        const gifs = data.data.map(gif=>({
 
 
 
@@ -260,6 +233,7 @@ async function searchGifs(query){
 
 
             url:gif.images.fixed_height.url,
+
 
             original:gif.images.original.url
 
@@ -272,8 +246,7 @@ async function searchGifs(query){
 
 
 
-        displayGifs(results);
-
+        displayGifs(gifs);
 
 
 
@@ -294,13 +267,7 @@ async function searchGifs(query){
 
 
 
-        console.error(
-
-        "Search Error:",
-
-        error
-
-        );
+        console.error(error);
 
 
 
@@ -334,9 +301,7 @@ async function searchGifs(query){
 async function loadTrending(){
 
 
-
     try{
-
 
 
         updateStatus(
@@ -349,16 +314,12 @@ async function loadTrending(){
 
 
 
-        const url =
+        const response = await fetch(
 
-        `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=${GIF_LIMIT}`;
+        `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=${GIF_LIMIT}`
 
+        );
 
-
-
-
-
-        const response = await fetch(url);
 
 
 
@@ -372,7 +333,7 @@ async function loadTrending(){
 
         console.log(
 
-        "Trending Response:",
+        "Trending Results",
 
         data
 
@@ -383,25 +344,31 @@ async function loadTrending(){
 
 
 
+        const gifs = data.data.map(gif=>({
 
-        const results = data.data.map(gif=>({
+
 
             id:gif.id,
 
+
             title:gif.title,
+
 
             url:gif.images.fixed_height.url,
 
+
             original:gif.images.original.url
 
-}));
+
+
+        }));
 
 
 
 
 
 
-        displayGifs(results);
+        displayGifs(gifs);
 
 
 
@@ -423,13 +390,8 @@ async function loadTrending(){
 
 
 
-        console.error(
+        console.error(error);
 
-        "Trending Error:",
-
-        error
-
-        );
 
 
         updateStatus(
@@ -455,23 +417,11 @@ async function loadTrending(){
 
 
 // ===============================
-// DISPLAY GIF CARDS
+// DISPLAY GIFS
 // ===============================
 
 
-function displayGifs(list){
-
-
-
-    console.log(
-
-    "Displaying GIFs:",
-
-    list
-
-    );
-
-
+function displayGifs(gifs){
 
 
 
@@ -485,20 +435,9 @@ function displayGifs(list){
 
 
 
-    if(!container){
-
-
-        console.error(
-
-        "gifResults container missing"
-
-        );
-
+    if(!container)
 
         return;
-
-
-    }
 
 
 
@@ -514,31 +453,7 @@ function displayGifs(list){
 
 
 
-    if(list.length === 0){
-
-
-
-        container.innerHTML = `
-
-        <p>No GIFs found</p>
-
-        `;
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-
-
-    list.forEach(gif=>{
+    gifs.forEach(gif=>{
 
 
 
@@ -547,6 +462,7 @@ function displayGifs(list){
             "div"
 
         );
+
 
 
 
@@ -560,10 +476,9 @@ function displayGifs(list){
 
 
 
-
         card.innerHTML = `
 
-
+        
         <img
 
         src="${gif.url}"
@@ -572,11 +487,9 @@ function displayGifs(list){
 
         loading="lazy"
 
-
         >
 
-
-
+        
         `;
 
 
@@ -588,7 +501,6 @@ function displayGifs(list){
         card.onclick = ()=>{
 
 
-
             selectGif(
 
                 gif,
@@ -598,9 +510,7 @@ function displayGifs(list){
             );
 
 
-
         };
-
 
 
 
@@ -641,9 +551,8 @@ function selectGif(gif,card){
 
 
 
-    document
 
-    .querySelectorAll(
+    document.querySelectorAll(
 
         ".gif-card"
 
@@ -654,12 +563,13 @@ function selectGif(gif,card){
 
         item.classList.remove(
 
-            "selected"
+        "selected"
 
         );
 
 
     });
+
 
 
 
@@ -678,7 +588,6 @@ function selectGif(gif,card){
 
 
 
-
     document.getElementById(
 
         "selectedGif"
@@ -686,14 +595,11 @@ function selectGif(gif,card){
     ).innerHTML = `
 
 
+        <img
 
-    <img
+        src="${gif.url}"
 
-    src="${gif.url}"
-
-    >
-
-
+        >
 
     `;
 
@@ -710,18 +616,21 @@ function selectGif(gif,card){
 
 
 // ===============================
-// COPY GIF TO CLIPBOARD
+// COPY GIF URL
 // ===============================
 
 
 async function copyGif(){
 
 
+
     if(!selectedGif){
 
 
         showMessage(
+
         "Select a GIF first"
+
         );
 
 
@@ -732,10 +641,13 @@ async function copyGif(){
 
 
 
+
+
+
     try{
 
 
-        const response = await fetch(
+        await navigator.clipboard.writeText(
 
             selectedGif.original
 
@@ -743,44 +655,12 @@ async function copyGif(){
 
 
 
-        const blob = await response.blob();
-
-
-
-        const gifBlob = new Blob(
-
-            [blob],
-
-            {
-                type:"image/gif"
-            }
-
-        );
-
-
-
-
-        const clipboardItem = new ClipboardItem({
-
-            "image/gif": gifBlob
-
-        });
-
-
-
-
-        await navigator.clipboard.write([
-
-            clipboardItem
-
-        ]);
-
 
 
 
         showMessage(
 
-        "GIF copied ✓"
+        "GIF link copied ✓"
 
         );
 
@@ -793,9 +673,8 @@ async function copyGif(){
     catch(error){
 
 
-        console.error(
 
-        "Clipboard Error:",
+        console.error(
 
         error
 
@@ -805,13 +684,14 @@ async function copyGif(){
 
         showMessage(
 
-        "Browser blocked GIF copy"
+        "Copy failed"
 
         );
 
 
 
     }
+
 
 
 }
@@ -825,7 +705,7 @@ async function copyGif(){
 
 
 // ===============================
-// SAVE FAVORITE
+// FAVORITES
 // ===============================
 
 
@@ -834,7 +714,6 @@ function favoriteGif(){
 
 
     if(!selectedGif){
-
 
 
         showMessage(
@@ -880,11 +759,11 @@ function favoriteGif(){
         );
 
 
+
         return;
 
 
     }
-
 
 
 
@@ -970,8 +849,9 @@ function displayFavorites(){
 
 
 
-    container.innerHTML = "";
 
+
+    container.innerHTML = "";
 
 
 
@@ -1026,14 +906,11 @@ function displayFavorites(){
         item.innerHTML = `
 
 
-
         <img
 
         src="${gif.url}"
 
         >
-
-
 
         `;
 
@@ -1046,16 +923,13 @@ function displayFavorites(){
         item.onclick = ()=>{
 
 
-
             selectedGif = gif;
-
-
 
 
 
             document.getElementById(
 
-                "selectedGif"
+            "selectedGif"
 
             ).innerHTML = `
 
@@ -1066,9 +940,7 @@ function displayFavorites(){
 
             >
 
-
             `;
-
 
 
         };
@@ -1105,7 +977,6 @@ function displayFavorites(){
 function showMessage(text){
 
 
-
     updateStatus(text);
 
 
@@ -1114,9 +985,10 @@ function showMessage(text){
 
     clearTimeout(
 
-        window.statusTimer
+    window.statusTimer
 
     );
+
 
 
 
@@ -1125,13 +997,11 @@ function showMessage(text){
     window.statusTimer = setTimeout(()=>{
 
 
-
         updateStatus(
 
         "Connected"
 
         );
-
 
 
     },2000);
@@ -1163,9 +1033,7 @@ function updateStatus(text){
     if(status){
 
 
-
         status.innerHTML = text;
-
 
 
     }
