@@ -8,7 +8,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta http-equiv="Permissions-Policy" content="clipboard-write=(self)">
+
 <title>GIF Search App Demo | Jonathan Agostini</title>
 
 
@@ -108,9 +108,10 @@ GIF Search App
 
 <p class="subtitle">
 
-A Microsoft Teams inspired GIF picker built with Python and the Giphy API.
+A Microsoft Teams inspired GIF picker built with JavaScript and the Giphy API.
 
-Search GIFs, preview animations, copy GIFs, and save favorites.
+Search GIFs, preview animations before selecting, copy GIF links,
+and save your favorite reactions.
 
 </p>
 
@@ -207,7 +208,7 @@ Connected
 
 
 
-<!-- LEFT SIDE SEARCH -->
+<!-- SEARCH AREA -->
 
 <div class="search-panel">
 
@@ -237,8 +238,6 @@ placeholder="Search GIFs..."
 
 
 
-<!-- THIS IS WHERE SEARCH RESULTS APPEAR -->
-
 <div class="gif-results-container">
 
 
@@ -247,6 +246,7 @@ placeholder="Search GIFs..."
 Results
 
 </h4>
+
 
 
 <div id="gifResults" class="gif-grid">
@@ -276,7 +276,7 @@ Search for a GIF...
 
 
 
-<!-- RIGHT SIDE PREVIEW -->
+<!-- PREVIEW AREA -->
 
 
 <div class="preview-panel">
@@ -284,7 +284,7 @@ Search for a GIF...
 
 <h3>
 
-Preview
+GIF Preview
 
 </h3>
 
@@ -315,7 +315,7 @@ Select a GIF
 
 <button onclick="copyGif()">
 
-📋 Copy GIF
+🔗 Copy GIF Link
 
 </button>
 
